@@ -1,0 +1,22 @@
+.btn-change{
+  color: black;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  width: fit-content;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  border: 1 px solid #8e90a7;
+  background-color: #dee0e7 !important;
+  transition: 0.3s linear !important;
+  margin-right: 20px;
+  &:hover {
+    color: white;
+    background-color: #8e90a7 !important;
+  }
+}

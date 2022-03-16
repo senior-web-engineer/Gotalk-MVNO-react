@@ -1,0 +1,17 @@
+@import 'src/assets/styles/index.scss';
+
+.account-edit-form__save-btn {
+  @include button-red();
+
+  width: 254px;
+  height: 56px;
+  font-family: 'Roboto-bold';
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: calc(24px + (44 - 24) * ((100vw - 375px) / (1920 - 375)));
+
+  @include below-breakpoint(xs) {
+    max-width: 327px;
+    width: 100%;
+  }
+}

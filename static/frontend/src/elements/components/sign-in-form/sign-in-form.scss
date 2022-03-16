@@ -1,0 +1,86 @@
+@import 'src/assets/styles/index.scss';
+@import '../../../assets/styles/mixins/button.scss';
+@import '../../../assets/styles/mixins/media.scss';
+
+.sign-in-form {
+  width: 100%;
+  max-width: 491px;
+  margin-bottom: 122px;
+}
+
+.sign-in-form__sign-up-suggestion {
+  font-family: "Roboto-Normal", sans-serif;
+  font-size: 1.125rem;
+  align-self: end;
+  margin-bottom: 44px;
+
+  @include below-breakpoint(xs) {
+    align-self: center;
+  }
+}
+
+.sign-in-form__sign-up-link {
+  color: $light-dark-grey;
+
+  &:hover {
+    color: $light-red;
+  }
+}
+
+.sign-in-form__submit {
+  @include button-red($padding: 20px 48px);
+}
+
+.sign-in-form__email {
+  margin-bottom: 48px;
+}
+
+.sign-in-form__password {
+  margin-bottom: 24px;
+}
+
+.sign-in-form__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+  }
+}
+
+.sign-in-form__restore-password {
+  font-family: "Roboto-Regular", sans-serif;
+  vertical-align: middle;
+  font-size: 1.125rem;
+
+  &:hover {
+    color: $light-red;
+  }
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 24px;
+  }
+}
+
+.sign-in-form__error-message {
+  font-family: "Roboto-Medium", sans-serif;
+  font-size: 1.5rem;
+  color: $primary-red;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.sign-in-form__services {
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.sign-in-form__error-message {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 24px;
+  color: $primary-red;
+}

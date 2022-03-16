@@ -1,0 +1,27 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.plans-screen {
+  @include content-container();
+}
+
+.plans-screen__nav-back {
+}
+
+.plans-screen__header {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 48px;
+  margin-bottom: 80px;
+
+  @include below-breakpoint(xs) {
+    font-size: 2rem;
+    margin-bottom: 48px;
+  }
+}
+
+.plans-screen__cards-container {
+  margin-bottom: calc(40px + (250 - 40) * ((100vw - 375px) / (1920 - 375)));
+}

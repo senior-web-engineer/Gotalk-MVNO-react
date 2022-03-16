@@ -1,0 +1,26 @@
+@import '../colors.scss';
+
+@mixin link-red() {
+  position: relative;
+  font-family: 'Roboto-Bold', sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.25px;
+  color: $primary-red;
+
+  &::before {
+    content: '';
+    width: 0;
+    transition: width 0.3s linear;
+    height: 1px;
+    background-color: $primary-red;
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    z-index: 1;
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}

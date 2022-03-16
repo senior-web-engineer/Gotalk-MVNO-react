@@ -1,0 +1,175 @@
+@import '../../../assets/styles/index.scss';
+@import '../../../assets/styles/mixins/container.scss';
+@import '../../../assets/styles/mixins/media.scss';
+
+.footer {
+  @include content-container();
+  padding-top: calc(48px + (80 - 48) * ((100vw - 375px) / (1920 - 375)));
+  padding-bottom: calc(48px + (80 - 48) * ((100vw - 375px) / (1920 - 375)));
+  background: $primary-dark-blue;
+}
+
+.footer-block {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  align-items: baseline;
+  @media (max-width: 1000px) {
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+}
+
+.footer-up-heder {
+  background-color: inherit;
+  width: fit-content;
+  font-family: 'Roboto-Medium';
+  line-height: 36px;
+  @media (max-width: 1000px) {
+    margin-top: 35px;
+  }
+  @include below-breakpoint(xs) {
+    display: block;
+    margin-top: 10px;
+    margin-left: -11px;
+  }
+}
+
+.footer-block-logo {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+  @media (max-width: 1000px) {
+    flex-direction: column-reverse;
+    margin: 0 auto;
+  }
+  @include below-breakpoint(xs) {
+    margin: 0;
+    align-items: flex-start;
+  }
+}
+
+.footer-logo {
+  margin-top: 36px;
+  width: 156px;
+  height: 54px;
+  @include below-breakpoint(xs) {
+    margin: 0;
+  }
+}
+
+.footer-navigation {
+  font-family: 'Roboto-Medium';
+  color: $label;
+  width: fit-content;
+  margin-left: auto;
+  @media (max-width: 1200px) {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    text-align: center;
+  }
+  @media (max-width: 1000px) {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  @include below-breakpoint(xs) {
+    margin: 0;
+    text-align: start;
+  }
+}
+.footer-link-nav {
+  transition: 0.2s linear;
+  line-height: 36px;
+  font-size: 16px;
+  padding-left: 48px;
+  color: $label;
+  &:hover {
+    cursor: pointer;
+    font-weight: 900;
+    color: $label;
+  }
+  &:active {
+    cursor: pointer;
+    font-weight: 900;
+    color: $label;
+  }
+  @media (max-width: 1200px) {
+    padding-left: 0;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+    padding-left: 0;
+  }
+  &:first-child {
+    padding-left: 0;
+  }
+}
+
+.footer-link {
+  transition: 0.2s linear;
+  line-height: 36px;
+  font-size: 16px;
+  padding-left: calc(15px + (48 - 15) * ((100vw - 375px) / (1920 - 375)));
+  &:hover {
+    cursor: pointer;
+    font-weight: 900;
+    color: $label;
+  }
+  &:active {
+    cursor: pointer;
+    font-weight: 900;
+    color: $label;
+  }
+  @media (max-width: 1200px) {
+    display: block;
+    padding-left: 0;
+    margin: 0 auto;
+  }
+  @media (max-width: 500px) {
+    width: 100%;
+    display: block;
+    padding-left: 0;
+    margin: 0 auto;
+  }
+}
+
+.footer-block-link__policy {
+  margin-top: calc(24px + (56 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.footer-block-link {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  @media (max-width: 1000px) {
+    margin-right: auto;
+  }
+  @include below-breakpoint(xs) {
+    margin: 0 auto;
+  }
+  @media (max-width: 500px) {
+    margin: 0;
+  }
+}
+
+.footer-link-go {
+  color: $label;
+  transition: 0.2s linear;
+  font-family: 'Roboto-Medium';
+  font-size: 16px;
+  margin-left: auto;
+  width: fit-content;
+  margin-top: 24px;
+  @media (max-width: 1000px) {
+    margin: 24px auto 0 auto;
+  }
+  @include below-breakpoint(xs) {
+    margin: 24px 0;
+  }
+}

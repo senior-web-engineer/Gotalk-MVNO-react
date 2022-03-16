@@ -1,0 +1,25 @@
+@import 'src/assets/styles/index.scss';
+
+.text-account__title {
+  @include header-two();
+  font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(32px + (44 - 32) * ((100vw - 375px) / (1920 - 375)));
+  font-weight: 700;
+  margin-bottom: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.text-account__list {
+  list-style: decimal;
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: calc(16px + (18 - 16) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(24px + (32 - 24) * ((100vw - 375px) / (1920 - 375)));
+  color: $grey-line;
+  margin-left: 20px;
+}
+
+.text-account__list-item {
+  margin: 24px 0;
+  @media (max-width: 400px) {
+    max-width: 300px;
+  }
+}

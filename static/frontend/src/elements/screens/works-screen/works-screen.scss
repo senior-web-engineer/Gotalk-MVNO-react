@@ -1,0 +1,20 @@
+@import 'src/assets/styles/index';
+@import  'src/assets/styles/mixins/media';
+@import  'src/assets/styles/mixins/container';
+
+.how-it-works-screen {
+  @include content-container();
+}
+
+.how-it-works-screen__header {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 4rem;
+  margin-bottom: 80px;
+  margin-top: 24px;
+  text-align: center;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 48px;
+    font-size: 2rem;
+  }
+}

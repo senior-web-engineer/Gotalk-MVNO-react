@@ -1,0 +1,11 @@
+@import 'src/assets/styles/index.scss';
+
+.account-screen-header {
+  padding: 24px 0 calc(24px + (80 - 24) * ((100vw - 375px) / (1980 - 375))) 0;
+}
+
+.account-screen-header__title {
+  @include header-two();
+  text-align: center;
+  margin-top: 24px;
+}

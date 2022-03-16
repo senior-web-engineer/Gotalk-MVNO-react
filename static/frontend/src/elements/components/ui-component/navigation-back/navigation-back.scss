@@ -1,0 +1,26 @@
+@import 'src/assets/styles/index.scss';
+
+.navigation-back {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 0.875rem;
+  display: inline-block;
+  align-self: start;
+  margin-left: 5px;
+
+  &:hover {
+    color: $light-red;
+
+    svg path {
+      fill: $light-red;
+    }
+  }
+}
+
+.navigation-back__arrow-back {
+  margin-right: 13px;
+  display: inline;
+}
+
+.navigation-back__nav-back-text {
+  display: inline;
+}

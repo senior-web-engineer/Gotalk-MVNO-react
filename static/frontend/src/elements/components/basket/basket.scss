@@ -1,0 +1,114 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.basket {
+  margin-top: 61px;
+  margin-bottom: 125px;
+}
+
+.basket__title {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+}
+
+.basket__products-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 100px;
+
+  @include below-breakpoint(md) {
+    gap: 30px;
+  }
+
+  @include below-breakpoint(sm) {
+    gap: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.basket__products {}
+
+.basket__products-list {
+  flex-basis: 70%;
+}
+
+.basket__products-list-item {
+  margin-bottom: 48px;
+
+  @include below-breakpoint(sm) {
+    margin-bottom: 24px;
+  }
+}
+
+.basket__basket-item {
+  margin-bottom: 48px;
+
+  @include below-breakpoint(sm) {
+    margin-bottom: 24px;
+  }
+}
+
+.basket__price-container {
+  width: 100%;
+  max-height: 344px;
+  max-width: 362px;
+  padding: 48px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  background-color: $basket-price;
+
+  @include below-breakpoint(md) {
+    width: 50%;
+  }
+
+  @include below-breakpoint(sm) {
+    width: 100%;
+  }
+}
+
+.basket__price-row {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+.basket__price-row.total {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.basket__price-row.taxes {
+  display: block;
+}
+
+.basket__price-row__taxes-text {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 0.8rem;
+  text-align: end;
+}
+
+.basket__price-col {
+  display: flex;
+  flex-direction: column;
+  height: 32px;
+}
+
+.basket__price-col.sum {
+  font-family: "Roboto-Bold", sans-serif;
+}
+
+.basket__button-next {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}

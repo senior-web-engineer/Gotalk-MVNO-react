@@ -1,0 +1,43 @@
+@import '../../../assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media';
+
+.up-header {
+  font-family: 'Roboto-Regular', sans-serif;
+  color: $label;
+  position: relative;
+  @media (max-width: 500px) {
+    display: none;
+  }
+}
+
+.up-header-block {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.up-header_item {
+  color: $label;
+  line-height: 32px;
+  padding: 6px 12px;
+  transition: 0.3s linear;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+    font-weight: 900;
+  }
+}
+
+.up-header_item.active {
+  font-weight: 700;
+}
+
+.up-header-modal {
+  display: none;
+  @include below-breakpoint(xs) {
+    display: block;
+  }
+}

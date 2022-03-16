@@ -1,0 +1,15 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.faq {
+  @include content-container();
+  margin-bottom: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.faq__header {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: calc(48px + (80 - 48) * ((100vw - 375px) / (1920 - 375)));
+}

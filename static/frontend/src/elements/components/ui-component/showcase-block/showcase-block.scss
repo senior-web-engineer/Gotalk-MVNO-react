@@ -1,0 +1,60 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/button';
+@import 'src/assets/styles/mixins/media';
+
+.showcase-block {
+  position: relative;
+  font-family: "Raleway-Bold", sans-serif;
+  max-height: 800px;
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: $primary-dark-blue;
+  height: 100%;
+
+  @include below-breakpoint(sm) {
+    display: block;
+  }
+}
+
+.showcase-block.reversed {
+  flex-direction: row;
+}
+
+.showcase-block__content-container {
+  flex-basis: 40%;
+  position: relative;
+  align-self: center;
+  color: $label;
+
+  @include below-breakpoint(sm) {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: transparentize($primary-dark-blue, 0.4);
+  }
+}
+
+.showcase-block__image-container {
+  flex-basis: 60%;
+}
+
+.showcase-block__image {
+  max-height: 800px;
+  height: 100%;
+  clip-path: polygon(0 0, 80% 0, 100% 100%, 0% 100%);
+
+  @include below-breakpoint(sm) {
+    clip-path: polygon(0 0, 46% 0, 56% 100%, 0% 100%);
+  }
+}
+
+.showcase-block__image.reversed {
+  // clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 34% 100%);
+  @include below-breakpoint(sm) {
+    clip-path: polygon(46% 0, 100% 0, 100% 100%, 56% 100%);
+  }
+}

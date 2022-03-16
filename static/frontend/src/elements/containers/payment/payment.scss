@@ -1,0 +1,8 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.payment {
+  @include content-container();
+  margin-bottom: 125px;
+}

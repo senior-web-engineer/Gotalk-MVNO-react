@@ -1,0 +1,56 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sign-up__form {
+  width: 100%;
+  max-width: 877px;
+  margin-bottom: 125px;
+}
+
+.sign-up__sign-in-suggestion {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  align-self: end;
+  margin-bottom: 44px;
+
+  @include below-breakpoint(xs) {
+    align-self: center;
+  }
+}
+
+.sign-up__sign-in-text {
+  display: inline;
+  margin-right: 4px;
+}
+
+.sign-up__sign-in-link {
+  color: $light-dark-grey;
+
+  &:hover {
+    color: $light-red;
+  }
+}
+
+.sign-up__error-message {
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: $primary-red;
+  margin-bottom: 15px;
+  margin-top: 24px;
+}
+
+.sign-up__submit {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}
+

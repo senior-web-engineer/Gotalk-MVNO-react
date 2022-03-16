@@ -1,0 +1,13 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+
+.bag-screen {
+  @include content-container();
+  font-family: "Roboto-Regular", sans-serif;
+}
+
+.bag-screen__header {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: 4rem;
+  text-align: center;
+}

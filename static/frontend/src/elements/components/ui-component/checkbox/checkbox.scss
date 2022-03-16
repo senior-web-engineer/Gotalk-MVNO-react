@@ -1,0 +1,66 @@
+@import "../../../../assets/styles/index.scss";
+
+.checkbox {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox__input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox__checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: $label;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $input-border;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:after {
+    display: none;
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    object-fit: contain;
+    background-image: url('../../../../assets/images/icons/checkmark.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    content: '';
+  }
+}
+
+.checkbox__input:checked ~ .checkbox__checkmark:after {
+  display: block;
+}
+
+.checkbox__input:checked ~ .checkbox__checkmark {
+  background-color: $primary-dark-blue;
+  border: none;
+}
+
+.checkbox__input:focus-visible ~ .checkbox__checkmark {
+  outline: 2px solid $primary-dark-blue;
+}
+
+.checkbox__input:disabled ~ .checkbox__checkmark {
+  background-color: $light-grey;
+}
+
+.checkbox__label {
+  margin-left: 34px;
+}

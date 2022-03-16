@@ -1,0 +1,73 @@
+@import '../../../../assets/styles/index.scss';
+@import '../../../../assets/styles/mixins/button.scss';
+
+.present-main-block {
+  width: 100%;
+  margin-bottom: calc(48px + (157 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.present-main-content__information_text {
+  font-family: 'Raleway-Bold';
+  width: 45%;
+  font-size: calc(32px + (48 - 32) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  color: $label;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+.button {
+  margin-top: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+  @include button-red($padding: 18px 48px);
+  text-transform: uppercase;
+  @media (max-width: 800px) {
+    margin: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375))) auto 0 auto;
+  }
+  @media (max-width: 400px) {
+    margin: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375))) auto 0 auto;
+    width: 100%;
+  }
+}
+
+.present-main-technologies {
+  padding: 0 calc(4px + (200 - 4) * ((100vw - 375px) / (1920 - 375)));
+  margin: calc(33px + (90 - 33) * ((100vw - 375px) / (1920 - 375))) 0;
+  font-family: 'Raleway-Bold';
+  font-size: calc(18px + (24 - 18) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(24px + (32 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.present-main-technologies_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+  }
+}
+
+.technologies_block-item {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-width: 362px;
+  padding: 0 20px;
+  width: 33.333%;
+  @media (max-width: 800px) {
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+.technologies_block-image {
+  width: 66px;
+  height: 66px;
+  @media (max-width: 800px) {
+    margin-top: 48px;
+  }
+}
+
+.technologies_block-text {
+  margin-top: 24px;
+}

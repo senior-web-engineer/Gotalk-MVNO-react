@@ -1,0 +1,81 @@
+@import '../colors.scss';
+@import '../mixins/media.scss';
+
+@mixin button-red($padding: 20px 48px) {
+  background-color: $primary-red;
+  color: $label;
+  cursor: pointer;
+  padding: $padding;
+  border-radius: 30px;
+  font-family: 'Roboto-Black', sans-serif;
+  font-size: 16px;
+  transition: 0.3s linear;
+  text-transform: uppercase;
+  &:hover {
+    background-color: $light-button-red;
+  }
+  &:disabled {
+    background-color: $light-grey;
+    color: $light-dark-grey;
+  }
+  &:active {
+    background-color: $primary-dark-red;
+  }
+
+  @include below-breakpoint(xs) {
+    width: 100%;
+  }
+}
+
+@mixin button-blue($padding: 20px 48px) {
+  background-color: $primary-dark-blue;
+  color: $label;
+  cursor: pointer;
+  padding: $padding;
+  border-radius: 30px;
+  font-family: 'Roboto-Black', sans-serif;
+  font-size: 16px;
+  transition: 0.3s linear;
+  text-transform: uppercase;
+  &:hover {
+    background-color: $dark-blue;
+  }
+  &:disabled {
+    background-color: $light-grey;
+    color: $light-dark-grey;
+  }
+  &:active {
+    background-color: $black-dark-blue;
+  }
+}
+
+@mixin button-white-blue($padding: 20px 48px) {
+  background-color: $label;
+  color: $primary-dark-blue;
+  cursor: pointer;
+  padding: $padding;
+  border-radius: 30px;
+  border: 1px solid $primary-dark-blue;
+  font-family: 'Roboto-Black', sans-serif;
+  font-size: 16px;
+  transition: 0.3s linear;
+  opacity: 1;
+  text-transform: uppercase;
+  &:hover {
+    color: $primary-dark-blue;
+    border: 1px solid $primary-dark-blue;
+    opacity: 0.65;
+    background-color: $label;
+  }
+  &:disabled {
+    border: 1px solid $light-dark-grey;
+    color: $light-dark-grey;
+    background-color: $label;
+  }
+  &:active {
+    color: $primary-dark-blue;
+    border: 1px solid $primary-dark-blue;
+    opacity: 1;
+    background-color: $label;
+  }
+}

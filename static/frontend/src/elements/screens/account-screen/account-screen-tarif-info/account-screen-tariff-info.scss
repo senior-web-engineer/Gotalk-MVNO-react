@@ -1,0 +1,39 @@
+@import 'src/assets/styles/index.scss';
+
+.account-screen-tariff-info {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+
+  padding-bottom: calc(48px + (246 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-screen-tariff-info__container {
+  flex-basis: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.account-tariff-info__card {
+  max-width: 747px;
+  width: 100%;
+}
+
+.account-tariff-info__balance {
+  margin-left: 24px;
+
+  @include below-breakpoint(fh) {
+    width: 100%;
+    max-width: 747px;
+    margin-left: 0;
+    margin-top: calc(24px + (40 - 24) * ((100vw - 375px) / (1920 - 375)));
+  }
+}
+
+.account-tariff-info-transfer__device {
+  max-width: 747px;
+  width: 100%;
+  margin-top: calc(24px + (40 - 24) * ((100vw - 375px) / (1920 - 375)));
+}

@@ -1,0 +1,20 @@
+@import 'src/assets/styles/index.scss';
+
+.section-activity-card {
+  margin-bottom: calc(48px + (80 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+.activate-title {
+  @include header-two();
+  font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(32px + (44 - 32) * ((100vw - 375px) / (1920 - 375)));
+  font-weight: 700;
+  margin-bottom: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-delivery__spinner-container {
+  margin: 0 auto;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  width: calc(300px + (500 - 300) * ((100vw - 375px) / (1920 - 375)));
+}

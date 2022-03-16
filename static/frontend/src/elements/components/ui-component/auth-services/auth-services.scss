@@ -1,0 +1,15 @@
+@import 'src/assets/styles/index.scss';
+
+.services {
+  &__header {
+    font-family: "Raleway-Bold", sans-serif;
+    font-size: 1.125rem;
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+}

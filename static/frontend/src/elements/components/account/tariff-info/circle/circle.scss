@@ -1,0 +1,85 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-plan-circle {
+  position: relative;
+
+  min-width: 145px;
+  width: 11.5vw;
+  max-width: 217px;
+
+  min-height: 145px;
+  height: 11.5vw;
+  max-height: 217px;
+
+  @include below-breakpoint(sm) {
+    min-width: 105px;
+    min-height: 105px;
+  }
+
+  @include below-breakpoint(xs) {
+    min-width: 95px;
+    min-height: 95px;
+  }
+}
+
+.account-tariff-info-plan-circle__pie {
+  fill: $white-grey;
+}
+
+.recharts-layer.recharts-pie-sector:first-child {
+  .recharts-sector.account-tariff-info-plan-circle__pie {
+    fill: $primary-red;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.account-tariff-info-plan-circle__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+
+  @include below-breakpoint(sm) {
+    padding: 10px;
+  }
+}
+
+.account-tariff-info-plan-circle__unit-wrapper,
+.account-tariff-info-plan-circle__max-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.account-tariff-info-plan-circle__count {
+  font-family: 'Raleway-Bold';
+  font-size: calc(14px + (32 - 14) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(16px + (40 - 16) * ((100vw - 375px) / (1920 - 375)));
+  color: $light-black;
+  margin-right: 4px;
+}
+
+.account-tariff-info-plan-circle__unit {
+  font-family: 'Raleway-Bold';
+  font-size: calc(12px + (24 - 12) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(16px + (32 - 16) * ((100vw - 375px) / (1920 - 375)));
+  color: $light-black;
+}
+
+.account-tariff-info-plan-circle__from {
+  font-family: 'Roboto-Regular';
+  font-size: calc(12px + (20 - 12) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(16px + (32 - 16) * ((100vw - 375px) / (1920 - 375)));
+  color: $light-darkness-grey;
+  margin-right: 4px;
+}
+
+.account-tariff-info-plan-circle__max {
+  font-family: 'Roboto-Regular';
+  font-size: calc(12px + (20 - 12) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(16px + (32 - 16) * ((100vw - 375px) / (1920 - 375)));
+  color: $light-darkness-grey;
+}

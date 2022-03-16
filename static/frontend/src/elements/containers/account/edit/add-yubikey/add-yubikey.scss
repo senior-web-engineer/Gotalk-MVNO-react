@@ -1,0 +1,58 @@
+@import 'src/assets/styles/index.scss';
+
+.edit-add-yubikey {
+  min-width: 327px;
+  width: 100%;
+  max-width: 629px;
+  min-height: 525px;
+
+  @include below-breakpoint(sm) {
+    max-width: 450px;
+  }
+
+  @include below-breakpoint(xs) {
+    max-width: 327px;
+  }
+}
+
+.account-edit-add-yubikey__container {
+  padding: 0 calc(61.5 * ((100vw - 375px) / (1920 - 375)));
+  border-radius: 10px;
+}
+
+.account-edit-add-yubikey__title {
+  text-align: center;
+  font-family: 'Raleway-Bold';
+  font-size: calc(20px + (28 - 20) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (36 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-dark-blue;
+
+  @include below-breakpoint(xs) {
+    padding: 0 5px;
+  }
+}
+
+.account-edit-add-yubikey__loader-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  height: 410px;
+}
+
+.account-edit-add-yubikey__form {
+  margin-top: 68px;
+}
+
+.account-edit-add-yubikey__input {
+  &:not(:first-child) {
+    margin-top: 44px;
+  }
+}
+
+.account-edit-add-yubikey__btn {
+  @include button-red();
+
+  margin: 24px auto 0;
+}

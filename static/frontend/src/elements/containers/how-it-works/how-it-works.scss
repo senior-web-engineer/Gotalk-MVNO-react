@@ -1,0 +1,55 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/media';
+
+.how-it-works {
+  max-width: 1260px;
+  width: 100%;
+  margin: 0 auto 125px auto;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  line-height: 2rem;
+}
+
+.how-it-works__article {
+  margin-bottom: 80px;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 48px;
+  }
+}
+
+.how-it-works__title {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+  }
+}
+
+.how-it-works__subtitle {}
+
+.how-it-works__instructions {
+  margin-top: 48px;
+  background-color: $beige;
+  border-radius: 10px;
+  padding: 24px;
+
+  @include below-breakpoint(xs) {
+    margin-top: 24px;
+  }
+}
+
+.how-it-works__instruction {
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+
+  @include below-breakpoint(xs) {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+}

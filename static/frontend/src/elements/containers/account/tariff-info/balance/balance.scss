@@ -1,0 +1,64 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-balance {
+  @include content-container-shadow();
+
+  min-width: 362px;
+  max-width: 362px;
+  max-height: 264px;
+}
+
+.account-tariff-info-balance__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: 'Raleway-Bold';
+  font-size: calc(18px + (24 - 18) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(24px + (32 - 24) * ((100vw - 375px) / (1920 - 375)));
+  color: $label-reverse;
+}
+
+.account-tariff-info-balance__main {
+  margin-top: 12px;
+}
+
+.account-tariff-info-balance__date {
+  font-family: 'Roboto-Regular';
+  font-size: 18px;
+  line-height: 32px;
+  color: $grey-line;
+}
+
+.account-tariff-info-balance-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.account-tariff-info-balance-form__btn {
+  @include button-red();
+
+  width: 128px;
+  height: 56px;
+}
+
+.account-tariff-info-balance__limit {
+  font-family: 'Roboto-Regular';
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  color: $grey-line;
+  margin-top: 12px;
+}
+
+.account-tariff-info-balance__history-link {
+  @include link-red();
+
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+}

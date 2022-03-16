@@ -1,0 +1,47 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-plan-header__number {
+  font-family: 'Raleway-Bold', 'sans-serif';
+  font-size: calc(22px + (32 - 22) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (40 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-dark-blue;
+}
+
+.account-tariff-info-plan-header__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.account-tariff-info-plan-header__tariff {
+  font-family: 'Raleway-Bold', 'sans-serif';
+  font-size: calc(22px + (32 - 22) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(22px + (40 - 22) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-red;
+}
+
+.account-tariff-info-plan-header__condition {
+  font-family: 'Roboto-Regular', 'sans-serif';
+  font-size: 18px;
+  line-height: 32px;
+  line-height: calc(20px + (32 - 20) * ((100vw - 375px) / (1920 - 375)));
+  color: $label-reverse;
+
+  @include below-breakpoint(xs) {
+    margin-top: 10px;
+  }
+}
+
+.account-tariff-info-plan-header__condition-summ {
+  font-family: 'Raleway-Bold', 'sans-serif';
+  font-size: calc(22px + (32 - 22) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (40 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-dark-blue;
+  margin-right: 8px;
+}

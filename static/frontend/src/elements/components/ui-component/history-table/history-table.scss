@@ -1,0 +1,57 @@
+@import 'src/assets/styles/index';
+
+.history-table__container {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.25rem;
+  width: 100%;
+}
+
+.history-table {
+  width: 100%;
+  background: $label;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  @include above-breakpoint(xs) {
+    width: 100%;
+  }
+}
+
+.history-table__th {
+  font-family: "Roboto-Medium", sans-serif;
+  padding: 24px 24px 18px;
+  text-align: start;
+
+  &:nth-child(3) {
+    text-align: end;
+  }
+
+  &:nth-child(4) {
+    text-align: end;
+  }
+}
+
+.history-table--compact {
+  width: 100%;
+}
+
+.history-table__th--compact {
+  font-family: "Roboto-Medium", sans-serif;
+  padding: 16px 0;
+
+  &:nth-child(1) {
+    text-align: start;
+  }
+
+  &:nth-child(2) {
+    text-align: end;
+  }
+}
+
+.history-table__tr--compact {
+
+}
+
+.history-table__td--compact {
+
+}

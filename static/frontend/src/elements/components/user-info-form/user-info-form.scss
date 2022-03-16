@@ -1,0 +1,58 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.user-info-form__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 48px;
+  }
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.user-info-form__row.submit {
+  justify-content: center;
+}
+
+.user-info-form__col {
+  width: 100%;
+  max-width: 362px;
+
+  &:not(:last-child) {
+    margin-right: 48px;
+  }
+
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+    margin-bottom: 44px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.user-info-form__input {
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 68px;
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 44px;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+@import 'src/assets/styles/index.scss';
+
+.popup-successful {
+  min-width: 327px;
+  width: 100%;
+  max-width: 629px;
+  min-height: 268px;
+
+  @include below-breakpoint(sm) {
+    max-width: 450px;
+  }
+
+  @include below-breakpoint(xs) {
+    max-width: 327px;
+  }
+}
+
+.popup-successful__icon-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
+}

@@ -1,0 +1,68 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info__container {
+  width: 100%;
+  text-align: center;
+}
+
+.account-tariff-info__circles-wrapper,
+.account-tariff-info__params-wrapper {
+  width: 100%;
+  display: flex;
+  padding-top: 48px;
+
+  @include below-breakpoint(sm) {
+    padding-top: 24px;
+  }
+}
+
+.account-tariff-info__circles-wrapper {
+  justify-content: center;
+  gap: 0 24px;
+
+  @include below-breakpoint(sm) {
+    gap: 0 18px;
+  }
+
+  @include below-breakpoint(xs) {
+    gap: 0 14px;
+  }
+}
+
+.account-tariff-info__params-wrapper {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+
+  @include below-breakpoint(sm) {
+    gap: 12px 18px;
+  }
+
+  @include below-breakpoint(xs) {
+    justify-content: flex-start;
+    padding-left: 7px;
+  }
+}
+
+.account-tariff-info__params-item {
+  width: 217px;
+}
+
+.account-tariff-info__options-link {
+  @include link-red();
+  display: inline-block;
+  text-transform: uppercase;
+  margin-top: 24px;
+}
+
+.account-tariff-info__change-btn {
+  @include button-red();
+  margin: auto;
+  margin-top: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-tariff-info__spinner-container {
+  flex-basis: 100%;
+  text-align: center;
+  width: 100%;
+}

@@ -1,0 +1,24 @@
+<SOAP-ENV:Envelope
+        xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header>
+        <hdr:COMMUNICATION_METHOD>1</hdr:COMMUNICATION_METHOD>
+        <hdr:CHANNEL_REFERENCE>CARE</hdr:CHANNEL_REFERENCE>
+        <hdr:ENTITY><%= entity %></hdr:ENTITY>
+        <hdr:TRANSACTION_ID><%= transaction_id %></hdr:TRANSACTION_ID>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <ACTIVATE_SIM_WITH_BUNDLE_REQUEST>
+            <ALLOCATION>
+                <ICC_ID><%= icc_id %></ICC_ID>
+                <ALLOCATION_TYPE>A</ALLOCATION_TYPE>
+                <ZIP_CODE><%= zip_code %></ZIP_CODE>
+            </ALLOCATION>
+            <WITH_BUNDLE_FLAG>1</WITH_BUNDLE_FLAG>
+            <BUNDLE_SUBSCRIPTION>
+                <BUNDLE_CODE><%= bundle_code %></BUNDLE_CODE>
+                <AMOUNT_IND>2</AMOUNT_IND>
+                <AUTO_RENEWAL_DISABLE>0</AUTO_RENEWAL_DISABLE>
+            </BUNDLE_SUBSCRIPTION>
+        </ACTIVATE_SIM_WITH_BUNDLE_REQUEST>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

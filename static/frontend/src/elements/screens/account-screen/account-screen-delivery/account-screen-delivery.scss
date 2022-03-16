@@ -1,0 +1,25 @@
+@import 'src/assets/styles/index.scss';
+
+.account-screen-delivery-container {
+  display: flex;
+  flex-direction: column;
+  padding-right: calc(0px + (129 - 0) * ((100vw - 375px) / (1920 - 375)));
+  margin-bottom: calc(48px + (126 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-title {
+  @include header-two();
+  font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(32px + (44 - 32) * ((100vw - 375px) / (1920 - 375)));
+  font-weight: 700;
+  margin-bottom: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+  margin: 15% auto;
+  background-color: $beige;
+  border-radius: 10px;
+  padding: 20px 40px;
+  width: fit-content;
+  text-align: center;
+  @media (min-width: 1600px) {
+    margin-left: 16%;
+  }
+}

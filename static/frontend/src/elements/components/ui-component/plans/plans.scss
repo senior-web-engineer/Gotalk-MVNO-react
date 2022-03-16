@@ -1,0 +1,23 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.plans__cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  @include below-breakpoint(md) {
+    justify-content: center;
+  }
+}
+
+.plans__card-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: calc(320px + (362 - 320) * ((100vw - 375px) / (1920 - 375)));
+  margin-bottom: 56px;
+
+  @include below-breakpoint(sm) {
+    margin-bottom: 0;
+  }
+}

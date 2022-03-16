@@ -1,0 +1,56 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/button';
+@import 'src/assets/styles/mixins/media';
+
+.plans-main-banner__content-wrapper {
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 0 0 calc(20px + (200 - 20) * ((100vw - 375px) / (1920 - 375)));
+
+  @include below-breakpoint(sm) {
+    top: 50%;
+    text-align: center;
+    padding: 0 24px;
+  }
+}
+
+.plans-main-banner__title {
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 12px;
+
+  @include below-breakpoint(md) {
+    font-size: 2rem;
+    line-height: 2rem;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+  }
+}
+
+.plans-main-banner__subtitle {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(md) {
+    font-size: 1.5rem;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+}
+
+.plans-main-banner__content-button {
+  @include button-red($padding: 20px 48px);
+  font-family: 'Roboto-Black', sans-serif;
+  color: $label;
+
+  @include below-breakpoint(xs) {
+    width: 100%;
+  }
+}

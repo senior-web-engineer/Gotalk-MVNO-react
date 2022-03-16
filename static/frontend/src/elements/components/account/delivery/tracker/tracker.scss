@@ -1,0 +1,182 @@
+@import 'src/assets/styles/index.scss';
+
+.tracker-title {
+  @include header-two();
+  font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(32px + (44 - 32) * ((100vw - 375px) / (1920 - 375)));
+  font-weight: 700;
+  @media (max-width: 400px) {
+    margin-left: 14px;
+  }
+}
+
+.tracker-content {
+  margin-top: calc(20px + (48 - 20) * ((100vw - 375px) / (1920 - 375)));
+  margin-bottom: calc(48px + (80 - 48) * ((100vw - 375px) / (1920 - 375)));
+  @media (max-width: 1000px) {
+    justify-content: center;
+  }
+}
+
+.tracker-item {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tracker-item__text {
+  @include text-raleway-bold($color: $label-reverse);
+  font-size: calc(12px + (18 - 12) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(16px + (24 - 16) * ((100vw - 375px) / (1920 - 375)));
+  margin-top: calc(8px + (16 - 8) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.tracker-item__image {
+  width: fit-content;
+  padding: calc(14px + (25 - 14) * ((100vw - 375px) / (1920 - 375)))
+    calc(12px + (21 - 12) * ((100vw - 375px) / (1920 - 375)));
+  border-radius: 100%;
+  background-color: $light-gray;
+  transition: all 0.3s linear;
+}
+
+.tracker-active {
+  width: fit-content;
+  padding: calc(14px + (25 - 14) * ((100vw - 375px) / (1920 - 375)))
+    calc(12px + (21 - 12) * ((100vw - 375px) / (1920 - 375)));
+  border-radius: 100%;
+  background-color: $light-button-red;
+  transition: all 0.3s linear;
+  .tracker-img {
+    stroke: $label-reverse;
+  }
+}
+
+.tracker-img {
+  width: calc(23px + (46 - 23) * ((100vw - 375px) / (1920 - 375)));
+  height: calc(18px + (37 - 18) * ((100vw - 375px) / (1920 - 375)));
+  stroke: $input-description;
+}
+.track-indemnificator {
+  display: flex;
+  margin-right: 16px;
+  @media (max-width: 1600px) {
+    display: none;
+  }
+}
+
+.track-indemnificator-mini {
+  display: none;
+  @media (max-width: 1600px) {
+    display: flex;
+    margin-right: calc(5px + (16 - 5) * ((100vw - 375px) / (1920 - 375)));
+  }
+}
+
+.tracker-stack {
+  width: 15px;
+  height: 2px;
+  background-color: $label-reverse;
+  margin: 0px 5px 10px 5px;
+  &:first-child {
+    width: calc(5px + (10 - 5) * ((100vw - 375px) / (1920 - 375)));
+  }
+  &:last-child {
+    width: calc(5px + (10 - 5) * ((100vw - 375px) / (1920 - 375)));
+  }
+}
+
+.tracker-stack-color {
+  width: 15px;
+  height: 2px;
+  background-color: $primary-red;;
+  margin: 0px 5px 10px 5px;
+  &:first-child {
+    width: calc(5px + (10 - 5) * ((100vw - 375px) / (1920 - 375)));
+  }
+  &:last-child {
+    width: calc(5px + (10 - 5) * ((100vw - 375px) / (1920 - 375)));
+  }
+}
+
+.tracker-stack-load {
+  width: 15px;
+  height: 2px;
+  background-color: $primary-red;
+  margin: 0px 5px 10px 5px;
+  &:first-child {
+    width: 10px;
+  }
+  &:last-child {
+    width: 10px;
+  }
+}
+
+
+.tracker-stack-no-load {
+  width: 15px;
+  height: 2px;
+  background-color: $primary-red;
+  margin: 0px 5px 10px 5px;
+  &:first-child {
+    width: 10px;
+  }
+  &:last-child {
+    width: 10px;
+  }
+  &:nth-child(4) {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      background-color: $primary-red;
+      right: -11px;
+      top: -5px;
+      border-radius: 50%;
+    }
+  }
+  &:nth-child(5) {
+    background-color: $label-reverse;
+  }
+  &:nth-child(6) {
+    background-color: $label-reverse;
+  }
+  &:nth-child(7) {
+    background-color: $label-reverse;
+  }
+  &:nth-child(8) {
+    background-color: $label-reverse;
+  }
+
+  @media (max-width: 1600px) {
+    &:nth-child(1) {
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        background-color: $primary-red;
+        right: -11px;
+        top: -5px;
+        border-radius: 50%;
+      }
+    }
+    &:nth-child(2) {
+      background-color: $label-reverse;
+    }
+  }
+}
+.tracker-content {
+  display: flex;
+  align-items: center;
+}
+
+.tracker-content__item {
+  display: flex;
+  align-items: center;
+}

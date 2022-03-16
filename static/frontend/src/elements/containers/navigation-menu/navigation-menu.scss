@@ -1,0 +1,41 @@
+@import '../../../assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media';
+
+.navigation-menu {
+  width: calc(200px + (500 - 200) * ((100vw - 375px) / (1920 - 375)));
+  display: flex;
+  justify-content: space-between;
+  color: $label-reverse;
+  margin-left: -3%;
+  @media (max-width: 1800px) {
+    width: 40%;
+  }
+  @media (max-width: 1450px) {
+    margin-left: 0;
+    width: 46%;
+  }
+  @media (max-width: 1200px) {
+    margin-left: 0;
+    width: 46%;
+  }
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.header-link-navigation {
+  text-align: center;
+  display: inline;
+  transition: 0.2s linear;
+
+  &:hover {
+    color: $light-red;
+  }
+  &:active {
+    color: $primary-red;
+  }
+  @media (max-width: 1200px) {
+    text-align: start;
+  }
+}

@@ -1,0 +1,21 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-plan__parameter {
+  display: flex;
+  align-items: center;
+}
+
+.account-tariff-info-plan__parameter-point {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: $primary-red;
+}
+
+.account-tariff-info-plan__parameter-text {
+  font-family: 'Roboto-Regular';
+  font-size: 18px;
+  line-height: 25px;
+  color: $label-reverse;
+  margin-left: 8px;
+}

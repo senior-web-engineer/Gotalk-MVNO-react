@@ -1,0 +1,83 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/button';
+@import 'src/assets/styles/mixins/media';
+
+.plans-banner__content-wrapper {
+  position: absolute;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 20px;
+
+  @include below-breakpoint(sm) {
+    top: 50%;
+    text-align: center;
+    padding: 0 24px;
+  }
+}
+
+.plans-banner__title {
+  font-family: 'Raleway-Bold';
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 12px;
+
+  @include below-breakpoint(md) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  @include below-breakpoint(sm) {
+    font-size: 2.5rem;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+  }
+}
+
+.plans-banner__subtitle {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(md) {
+    font-size: 1.2rem;
+  }
+
+  @include below-breakpoint(sm) {
+    font-size: 1.5rem;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+}
+
+.plans-banner__subtitle--big {
+  font-family: 'Roboto-Medium', sans-serif;
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+
+  @include below-breakpoint(md) {
+    font-size: 1.5rem;
+  }
+
+  @include below-breakpoint(sm) {
+    font-size: 2.5rem;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1.4rem;
+  }
+}
+
+.plans-banner__content-button {
+  @include button-red($padding: 20px 48px);
+  font-family: 'Roboto-Black', sans-serif;
+  color: $label;
+
+  @include below-breakpoint(xs) {
+    width: 100%;
+  }
+}

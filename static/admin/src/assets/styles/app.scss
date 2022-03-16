@@ -1,0 +1,21 @@
+@import 'colors';
+.MuiAppBar-colorSecondary {
+  background-color: $primary-header !important;
+}
+
+.MuiListItem-button:hover {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.068) !important;
+}
+
+.MuiButton-containedPrimary {
+  background-color: $primary-button !important;
+  transition: 0.3s linear !important;
+  &:hover {
+    background-color: $primary-button-hover !important;
+  }
+}
+
+.MuiFormControl-marginDense {
+  width: 100%;
+}

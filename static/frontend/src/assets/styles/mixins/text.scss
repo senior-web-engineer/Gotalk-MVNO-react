@@ -1,0 +1,23 @@
+@import '../colors.scss';
+
+@mixin text-card() {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 18px;
+  line-height: 32px;
+}
+
+@mixin text($color: $label-reverse) {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: calc(18px + (20 - 18) * ((100vw - 375px) / (1920 - 375)));
+  line-height: 32px;
+  color: $color;
+  letter-spacing: 0.25px;
+}
+
+@mixin text-raleway-bold($color: $primary-red) {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: calc(18px + (24 - 18) * ((100vw - 375px) / (1920 - 375)));
+  line-height: 32px;
+  font-weight: 700;
+  color: $color;
+}

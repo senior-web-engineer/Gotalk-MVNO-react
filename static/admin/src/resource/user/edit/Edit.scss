@@ -1,0 +1,47 @@
+.button-edit-some {
+  margin-right: 20px !important;
+}
+.block-flex {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.user-edit__item {
+  width: 40%;
+}
+
+.title-change {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-size:24px;
+  font-weight: 400;
+}
+
+.button {
+  color: #fff;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 500;
+  line-height: 1.75;
+  border-radius: 4px;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  font-size: 0.875rem;
+  min-width: 64px;
+  box-sizing: border-box;
+  background-color: #d75f5c !important;
+  transition: 0.3s linear !important;
+  margin-right: 20px;
+  &:hover {
+    background-color: #cf413d !important;
+  }
+}
+
+
+.disabled{
+  margin-right: 20px !important;
+  pointer-events: none;
+  background-color: #777777 !important;
+}

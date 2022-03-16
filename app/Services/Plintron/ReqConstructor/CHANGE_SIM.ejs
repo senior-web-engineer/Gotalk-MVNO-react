@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hdr="http://www.plintron.com/hdr/">
+   <soapenv:Header>
+      <hdr:COMMUNICATION_METHOD>1</hdr:COMMUNICATION_METHOD>
+      <hdr:CHANNEL_REFERENCE>CARE</hdr:CHANNEL_REFERENCE>
+      <hdr:ENTITY><%= entity %></hdr:ENTITY>
+      <hdr:TRANSACTION_ID><%= transaction_id %></hdr:TRANSACTION_ID>
+   </soapenv:Header>
+   <soapenv:Body>
+      <CHANGE_SIM_REQUEST>
+         <MSISDN>1<%= msisdn %></MSISDN>
+         <NEW_ICC_ID><%= new_iccid %></NEW_ICC_ID>
+      </CHANGE_SIM_REQUEST>
+   </soapenv:Body>
+</soapenv:Envelope>

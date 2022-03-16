@@ -1,0 +1,109 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.billing-form__form {
+  margin: 80px 0;
+}
+
+.billing-form__row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 80px;
+
+  @include below-breakpoint(md) {
+    flex-direction: column;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+}
+
+.billing-form__row.payment {
+  display: block;
+}
+
+.billing-form__form-container {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.billing-form__form-container.user {
+  max-width: 970px;
+  flex-basis: 70%;
+}
+
+.billing-form__form-content {
+  padding: 48px;
+
+  @include below-breakpoint(xs) {
+    padding: 48px 24px 24px 24px;
+  }
+}
+
+.billing-form__form-container--wide {
+  max-width: 970px;
+  width: 100%;
+}
+
+.billing-form__form-header-container {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  background-color: $beige;
+  padding: 48px;
+  text-align: start;
+  border-radius: 10px 10px 0 0;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+    padding: 24px;
+  }
+}
+
+.billing-form__form-header {
+  white-space: nowrap;
+}
+
+.billing-form__ship-to-address {
+  margin-top: 70px;
+  text-align: start;
+
+  @include below-breakpoint(xs) {
+    margin-top: 48px;
+  }
+}
+
+.billing-form__payment-container {
+  width: 745px;
+
+  @include below-breakpoint(md) {
+    width: 645px;
+  }
+
+  @include below-breakpoint(sm) {
+    width: 100%
+  }
+}
+
+.billing-form__controls-container {
+  margin-top: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+  }
+}
+
+.billing-form__receipt-checkbox {
+  align-self: start;
+  @include below-breakpoint(sm) {
+    margin-bottom: 24px;
+  }
+}
+
+.billing-form__submit {
+  @include button-red($padding: 20px 48px);
+  align-self: start;
+}

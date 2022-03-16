@@ -1,0 +1,33 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/media';
+
+.faq-list {
+}
+
+.faq-list__list {
+  columns: 2;
+  height: 100%;
+
+  @include below-breakpoint(sm) {
+    columns: 1;
+  }
+}
+
+.faq-list__search {
+  margin-bottom: 48px;
+}
+
+.faq-list__list-item {
+  display: inline-block;
+  margin-bottom: 24px;
+  max-width: 618px;
+  width: 100%;
+}
+
+.faq-list__list--empty {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  vertical-align: middle;
+}

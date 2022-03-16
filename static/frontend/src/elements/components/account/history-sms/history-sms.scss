@@ -1,0 +1,16 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/media';
+
+.history-sms {}
+
+.history-sms__title {
+  text-align: center;
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    text-align: start;
+    margin-bottom: 24px;
+  }
+}

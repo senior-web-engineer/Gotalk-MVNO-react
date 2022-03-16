@@ -1,0 +1,49 @@
+@import 'src/assets/styles/index.scss';
+
+.accordion {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 1.125rem;
+  line-height: 2rem;
+  height: 100%;
+}
+
+.accordion[open] > .accordion__summary::after {
+  transform: rotate(90deg) translateX(-80%);
+}
+
+.accordion[open] > .accordion__summary {
+  border-radius: 10px 10px 0 0;
+}
+
+.accordion__summary {
+  position: relative;
+  list-style: none;
+  padding: 16px 58px 16px 24px;
+  border-radius: 10px;
+  background-color: $beige;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 26px;
+    top: 50%;
+    display: block;
+    width: 12px;
+    height: 20px;
+    background-image: url('../../../../assets/images/icons/arrow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: rotate(-90deg) translateX(80%);
+  }
+}
+
+.accordion__details {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0 0 10px 10px;
+  padding: 16px 24px;
+}

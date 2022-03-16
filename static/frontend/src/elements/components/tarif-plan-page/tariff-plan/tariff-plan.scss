@@ -1,0 +1,128 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/text';
+@import 'src/assets/styles/mixins/heading';
+@import 'src/assets/styles/mixins/button.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.tariff-plan {
+  position: relative;
+  width: 100%;
+}
+
+.tariff-back {
+  color: $label;
+  font-size: 14px;
+  position: absolute;
+  top: -60px;
+  @media (max-width: 1700px) {
+    top: -30px;
+  }
+  @media (max-width: 1520px) {
+    left: 20px;
+    top: 10px;
+  }
+  @media (max-width: 1520px) {
+    top: -60px;
+    left: calc(24px + (170 - 24) * ((100vw - 375px) / (1920 - 375)));
+  }
+  @media (max-width: 1300px) {
+    top: -36px;
+    left: calc(15px + (170 - 15) * ((100vw - 375px) / (1920 - 375)));
+  }
+  @media (max-width: 1000px) {
+    top: 30px;
+    left: calc(15px + (170 - 15) * ((100vw - 375px) / (1920 - 375)));
+  }
+}
+
+.tariff-plan-image {
+  @media (max-width: 1600px) {
+    padding-bottom: 50%;
+  }
+  @media (max-width: 1300px) {
+    padding-bottom: 50%;
+  }
+  @media (max-width: 1200px) {
+    padding-bottom: 55%;
+  }
+  @media (max-width: 1000px) {
+    padding-bottom: 70%;
+  }
+  @media (max-width: 800px) {
+    padding-bottom: 80%;
+  }
+  @media (max-width: 700px) {
+    padding-bottom: 100%;
+  }
+  @media (max-width: 600px) {
+    padding-bottom: 120%;
+  }
+  @media (max-width: 500px) {
+    padding-bottom: 150%;
+  }
+}
+
+.tariff-plan-information{
+  @media (max-width: 500px) {
+    padding-bottom: 20px;
+  }
+}
+
+.tariff-plan-information__title {
+  font-family: 'Roboto-Bold';
+  font-size: calc(28px + (44 - 28) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(36px + (56 - 36) * ((100vw - 375px) / (1920 - 375)));
+  color: $label;
+}
+
+.tariff-plan-information__description {
+  font-family: 'Roboto-Bold';
+  font-size: calc(20px + (28 - 20) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (36 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $label;
+  width: 67%;
+  margin-top: 24px;
+  margin-bottom: 48px;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.tariff-plan-information-list__characteristics {
+  @include text-raleway-bold($color: $label);
+  width: fit-content;
+  text-align: left;
+  margin-bottom: 48px;
+}
+
+.tariff-plan-information__characteristics {
+  margin-bottom: 12px;
+  color: $label;
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: $primary-red;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+
+.tariff-plan-information__price {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: calc(32px + (56 - 32) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  color: $label;
+  @media (max-width: 450px) {
+    margin-top: -20px;
+  }
+}
+
+.tariff-plan-information__split-price {
+  @include text-card();
+  margin-left: 8px;
+}

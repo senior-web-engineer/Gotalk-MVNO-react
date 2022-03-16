@@ -1,0 +1,7 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-plan-card {
+  @include content-container-shadow();
+
+  width: 100%;
+}

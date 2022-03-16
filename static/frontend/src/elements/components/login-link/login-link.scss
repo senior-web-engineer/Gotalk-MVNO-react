@@ -1,0 +1,80 @@
+@import '../../../assets/styles/index.scss';
+
+.login-link-block {
+  display: flex;
+  align-items: center;
+  width: 15%;
+  @media(max-width:1200px){
+    width: 50%;
+  }
+}
+
+.login-link__image {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.login-link__image-item {
+  margin: -4px 12px 0px 24px;
+  width: 20px;
+  height: 24px;
+}
+
+.login-link__text {
+  vertical-align: middle;
+  display: inline;
+
+  @media (max-width: 650px) {
+    display: none;
+  }
+}
+
+.login-link__item {
+  display: flex;
+  align-items: center;
+  color: $label-reverse;
+  transition: 0.2s linear;
+  &:hover {
+    color: $light-red;
+
+    .login-link__basket-items {
+      color: $label-reverse;
+    }
+  }
+  &:active {
+    color: $primary-red;
+  }
+}
+
+.login-link__item.bag {
+  position: relative;
+}
+
+.login-link__basket-items {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 0.75rem;
+  display: inline;
+  position: absolute;
+  top: -40%;
+  left: 40%;
+  border-radius: 50%;
+  text-align: center;
+  background-color: $light-red;
+  line-height: 18px;
+  width: 18px;
+  height: 18px;
+
+  @media (max-width: 650px) {
+    left: 65%;
+  }
+}
+
+.login-link__image-item_mobile {
+  width: 20px;
+  height: 22px;
+  margin-left: 10px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}

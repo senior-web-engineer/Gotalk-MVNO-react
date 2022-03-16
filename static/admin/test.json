@@ -1,0 +1,77 @@
+{
+  "id":4,
+  "status":"not_active",
+  "simType":null,
+  "PlintronSim":{
+    "ICCID":"8901260842140007007",
+    "IMSI":"310260851115022",
+    "MSISDN":"26849114000700",
+    "status":"NOT_ACTIVATED"
+  },
+  "PlintronPlan":{
+    "id":3,
+    "name":"Plan 3",
+    "costPerMonth":25,
+    "minuteCount":"4000",
+    "SMSCount":"3000",
+    "internetCount":"4294967296",
+    "expiry":"30",
+    "planID":6102,
+    "autoRenewal":false,
+    "midcycleRateChange":false
+  },
+  "plan":{
+    "id":3,
+    "name":"Busines Regular",
+    "costPerMonth":25,
+    "costBuyPlan":25,
+    "minuteCount":"4000",
+    "SMSCount":"3000",
+    "internetCount":"4294967296",
+    "isCompany":true,
+    "hotspot":true,
+    "description":null,
+    "props":{
+      "info":["Full management for you and your staff","3FA account safety","Data privacy","Yubikey support","Dedicated business account manager","Hardware support and discounts"]
+      },
+      "rating":1
+    },
+  "WholesalePlan":{
+    "id":1,
+    "planName":"Plan 2",
+    "planType":"Voice/MB/SMS",
+    "unitCap":1500,
+    "overage":0.0075
+  },
+  "Delivery":{
+    "id":19,
+    "firstName":"Qwerty",
+    "lastName":"Qwerty",
+    "status":"processed",
+    "country":"test",
+    "city":"test",
+    "street":"test",
+    "apartment":"test",
+    "zip":"12345",
+    "deliveryType":"site",
+    "deliveryId":"299fa45f-173c-4ef7-a223-951ecdb4857c",
+    "createdAt":"2022-02-03T15:27:17.396Z",
+    "updatedAt":"2022-02-03T15:27:17.396Z"
+  },
+  "User":{
+    "id":9,
+    "firstName":"Qwerty",
+    "lastName":"Qwerty",
+    "email":"debosch.additional@gmail.com",
+    "role":"Customer",
+    "status":"active",
+    "phone":"123456789",
+    "country":"",
+    "city":null,
+    "street":"test",
+    "apartment":"",
+    "zip":"12345",
+    "balance":0,
+    "Company":null
+  }
+}

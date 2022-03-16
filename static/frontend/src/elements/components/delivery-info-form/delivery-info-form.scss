@@ -1,0 +1,56 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.delivery-info-form__input {
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 68px;
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 44px;
+    }
+  }
+}
+
+.delivery-info-form__input--wide {
+  max-width: 360px;
+  width: 100%;
+
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+  }
+};
+
+.delivery-info-form__form-content {
+  padding: 48px;
+
+  @include below-breakpoint(xs) {
+    padding: 48px 24px 24px 24px;
+  }
+}
+
+.delivery-info-form__form-content--wide {
+  display: flex;
+  justify-content: space-between;
+  max-width: 970px;
+  width: 100%;
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+  }
+}
+
+.delivery-info-form__col {
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: 68px;
+    margin-right: 48px;
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 44px;
+    }
+  }
+}

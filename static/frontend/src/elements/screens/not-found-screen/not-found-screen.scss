@@ -1,0 +1,72 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/media';
+@import 'src/assets/styles/mixins/container';
+
+.not-found-screen {
+  @include content-container();
+  font-family: "Raleway-Bold", sans-serif;
+}
+
+.not-found-screen__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1520px;
+
+  @include below-breakpoint(md) {
+    flex-direction: column;
+
+  }
+}
+
+.not-found-screen__info {
+  flex-basis: 70%;
+  margin-top: 120px;
+
+  @include below-breakpoint(md) {
+    margin-bottom: 48px;
+    text-align: center;
+  }
+
+  @include below-breakpoint(xs) {
+    margin-top: 48px;
+  }
+}
+
+.not-found-screen__header {
+  font-size: 4rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(md) {
+    text-align: center;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 2rem;
+    margin-bottom: 24px;
+  }
+}
+
+.not-found-screen__subtitle {
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.not-found-screen__button {
+  @include button-red($padding: 20px 48px);
+}
+
+.not-found-screen__image {
+  flex-basis: 30%;
+  display: block;
+  width: 100%;
+  max-width: 515px;
+  height: auto;
+  max-height: 600px;
+  margin: 0 auto;
+}

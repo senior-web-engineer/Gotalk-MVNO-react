@@ -1,0 +1,77 @@
+@import '../../../assets/styles/index.scss';
+
+.base-header {
+  width: 100%;
+  font-family: 'Roboto-Medium', sans-serif;
+  line-height: 16px;
+  color: $label-reverse;
+  background-color: $label;
+}
+.header-logo-block {
+  width: 20%;
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin-left: 30px;
+  }
+  @media (max-width: 800px) {
+    width: 62%;
+  }
+  @media (max-width: 500px) {
+    width: 53%;
+    // margin-left: -30px;
+  }
+}
+
+.header-container {
+  padding: 24px calc(22px + (200 - 22) * ((100vw - 375px) / (1920 - 375)));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $label;
+}
+
+.header-container__sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 7;
+  width: 100%;
+  font-family: 'Roboto-Medium', sans-serif;
+  line-height: 16px;
+  color: $label-reverse;
+  background-color: $label;
+}
+
+.header-logo {
+  width: calc(130px + (250 - 130) * ((100vw - 375px) / (1920 - 375)));
+  height: calc(60px + (100 - 60) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.header-burger {
+  display: none;
+  @media (max-width: 1200px) {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.header-burger {
+  width: 32px;
+  height: 32px;
+}
+
+.base-header-up-header {
+  background-color: $primary-red;
+  width: 100%;
+  height: 44px;
+  transition: all 0.2s linear;
+}
+
+.base-header-up-header__height {
+  background-color: $primary-red;
+  width: 100%;
+  pointer-events: none;
+  height: 0;
+  opacity: 0;
+}

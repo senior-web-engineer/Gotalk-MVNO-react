@@ -1,0 +1,213 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.payment__form {
+  max-width: 745px;
+}
+
+.payment-form__header-container {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  max-width: 362px;
+  width: 100%;
+  padding-top: 24px;
+  margin-bottom: 48px;
+}
+
+.payment-form__header {
+}
+
+.payment-form__total-price-container {
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.payment-form__total-price-text {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.75rem;
+  margin-right: 24px;
+}
+
+.payment-form__total-price-price {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.75rem;
+}
+
+.payment-form__card-side {
+  padding: 48px;
+  border-radius: 20px;
+
+  @include below-breakpoint(sm) {
+    padding: 0;
+  }
+}
+
+.payment-form__card-side.front {
+  background-color: $beige;
+  max-width: 565px;
+
+  @include below-breakpoint(sm) {
+    background-color: $transparent;
+    max-width: 100%;
+  }
+}
+
+.payment-form__card-side.back {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+
+  @include below-breakpoint(md) {
+    top: 170px;
+    right: -60px;
+  }
+
+  @include below-breakpoint(sm) {
+    display: block;
+    height: fit-content;
+    max-width: 100%;
+  }
+}
+
+.payment-form__card-container {
+  position: relative;
+  max-width: 565px;
+
+  @include below-breakpoint(md) {
+    height: 470px;
+  }
+
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+    height: fit-content;
+  }
+}
+
+.payment-form__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 70px;
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.payment-form__field-container {
+  .StripeElement {
+    background-color: $label;
+    padding: 18px 16px;
+    border-radius: 10px;
+    border: 1px solid $input-border;
+  }
+
+  .StripeElement--focus {
+    border-color: $primary-dark-blue;
+  }
+
+  .StripeElement--invalid {
+    border-color: $primary-red;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 30px;
+  }
+
+  @include below-breakpoint(sm) {
+    margin-bottom: 24px;
+  }
+}
+
+.payment-form__field-container.invalid {
+  border-color: $primary-red;
+}
+
+.payment-form__field-container.cvv {
+  position: absolute;
+  z-index: 1;
+  right: -140px;
+  bottom: 0;
+  max-width: 120px;
+  width: 100%;
+
+  @include below-breakpoint(md) {
+    bottom: 60px;
+    right: -40px;
+  }
+
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+    position: static;
+  }
+}
+
+.payment-form__cvv-background {
+  position: absolute;
+  height: 295px;
+  border-radius: 20px;
+  z-index: -100;
+  background-color: $card-back-side;
+  width: 100%;
+  top: 80px;
+  right: -180px;
+
+  @include below-breakpoint(md) {
+    top: 140px;
+    right: -80px;
+  }
+
+  @include below-breakpoint(sm) {
+    display: none;
+  }
+}
+
+.payment-form__field-container.holder {
+  flex-basis: 60%;
+  margin-bottom: 0;
+
+  @include below-breakpoint(sm) {
+    margin-bottom: 24px;
+  }
+}
+
+.payment-form__input {
+  background-color: $label;
+  border-radius: 10px;
+}
+
+.payment-form__field-label {
+  font-family: "Roboto-Medium", sans-serif;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.payment-form__checkbox {
+  margin-top: 80px;
+
+  @include below-breakpoint(xs) {
+    margin-top: 24px;
+  }
+}
+
+.payment-form__controls-container {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+    gap: 28px;
+  }
+}
+
+.payment-form__button-back {
+  @include button-white-blue($padding: 20px 48px)
+}
+
+.payment-form__button-pay {
+  @include button-red($padding: 20px 48px)
+}

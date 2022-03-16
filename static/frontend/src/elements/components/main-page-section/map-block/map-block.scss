@@ -1,0 +1,66 @@
+@import '../../../../assets/styles/index.scss';
+@import '../../../../assets/styles/mixins/container.scss';
+@import '../../../../assets/styles/mixins/button.scss';
+@import '../../../../assets/styles/mixins/media.scss';
+
+.section-map {
+  @include content-container();
+  padding-top: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)));
+  padding-bottom: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+.map-block__title {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: calc(36px + (100 - 36) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(44px + (120 - 44) * ((100vw - 375px) / (1920 - 375)));
+  text-align: center;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(sm) {
+    font-family: 'Raleway-Extra-Bold', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.25px;
+  }
+}
+
+.map-block-iframe-container {
+  width: 100%;
+}
+
+.map-block-redirect-element {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin: 24px 0 0 0;
+  @include below-breakpoint(sm) {
+    flex-wrap: wrap;
+  }
+}
+
+.map-block__link {
+  @include button-red($padding: 20px 48px);
+  text-align: center;
+  display: block;
+  white-space: nowrap;
+}
+
+.map-block__link-container {
+  text-align: center;
+  width: 100%;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  justify-content: center;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+.map-block__link-label {
+  margin-bottom: 12px;
+}
+
+

@@ -1,0 +1,41 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.basket-success-popup {
+  font-family: 'Roboto-Black', sans-serif;
+  font-size: 1rem;
+  max-width: 565px;
+  width: 100%;
+}
+
+.basket-success-popup__smile-icon {
+  margin: 8px auto;
+  width: 48px;
+  height: 48px;
+}
+
+.basket-success-popup__text {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.75rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.basket-success-popup__controls {
+  display: flex;
+  justify-content: space-between;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.basket-success-popup__continue-button {
+  @include button-white-blue($padding: 20px 48px);
+  flex-basis: 60%;
+}
+
+.basket-success-popup__bag-button {
+  @include button-red($padding: 20px 48px);
+}

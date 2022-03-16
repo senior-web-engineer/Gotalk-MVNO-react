@@ -1,0 +1,11 @@
+@import 'src/assets/styles/index';
+
+.sims-out-error__error-container {
+  margin-bottom: 24px;
+}
+
+.sims-out-error__error-message {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.25rem;
+  color: $primary-red;
+}

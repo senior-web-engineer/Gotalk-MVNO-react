@@ -1,0 +1,41 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/button.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.payment-popup {
+
+}
+
+.payment-popup__icon {
+  text-align: center;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 8px auto;
+}
+
+.payment-popup__title {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.75rem;
+  margin-bottom: 24px;
+  text-align: center;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.25rem;
+  }
+}
+
+.payment-popup__subtitle {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  text-align: center;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.125rem;
+  }
+}
+
+.payment-popup__submit {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}

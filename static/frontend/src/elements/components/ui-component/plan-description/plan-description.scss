@@ -1,0 +1,79 @@
+@import 'src/assets/styles/index';
+
+.plans-description {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 1.125rem;
+}
+
+.plans-description__price-container {
+  margin-bottom: 24px;
+}
+
+.plans-description__price {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: 1.75rem;
+  line-height: 1.75rem;
+  margin-right: 8px;
+}
+
+.plans-description__description {
+  margin-bottom: 24px;
+}
+
+.plans-description__list {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
+
+  @include below-breakpoint(lg) {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+
+  @include below-breakpoint(xs) {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+.plans-description__list-item {
+  margin-bottom: 12px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: $primary-red;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+}
+
+.card__conditions-plan {
+  font-family: 'Roboto-Regular';
+  font-size: 18px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin: 24px 0;
+}
+
+.card__conditions_item {
+  font-family: 'Raleway-Bold', sans-serif;
+  font-size: calc(24px + (32 - 24) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(32px + (40 - 32) * ((100vw - 375px) / (1920 - 375)));
+}
+.infinity-symbol {
+  font-size: 32px;
+  line-height: 32px;
+  padding-top: 5px;
+}
+
+.card__conditions_item-plan {
+  margin-right: 10px;
+}

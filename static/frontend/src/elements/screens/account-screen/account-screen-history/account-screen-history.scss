@@ -1,0 +1,14 @@
+@import 'src/assets/styles/index';
+
+.account-screen-history {
+  margin-bottom: 200px;
+
+  @include below-breakpoint(md) {
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  @include above-breakpoint(md) {
+    flex-basis: 80%;
+  }
+}

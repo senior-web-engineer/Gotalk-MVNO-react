@@ -1,0 +1,33 @@
+@import 'src/assets/styles/index.scss';
+
+// Form
+.account-screen-form__wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: calc(44px + (64 - 44) * ((100vw - 375px) / (1920 - 375)));
+
+  @include below-breakpoint(sm) {
+    justify-content: center;
+  }
+}
+
+.account-screen__checkbox {
+  min-width: 314px;
+  margin-bottom: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  font-size: calc(16px + (18 - 16) * ((100vw - 375px) / (1920 - 375)));
+}
+
+// Auth
+.account-screen-auth__section {
+  margin-top: calc(36px + (68 - 36) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-screen-auth-form__wrapper {
+  flex-direction: column;
+  margin-top: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+
+  @include below-breakpoint(sm) {
+    align-items: center;
+  }
+}

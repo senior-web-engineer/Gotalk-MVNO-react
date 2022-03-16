@@ -1,0 +1,18 @@
+@import "../colors.scss";
+
+@mixin header-two($color: $primary-dark-blue) {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: calc(32px + (56 - 32) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  color: $color;
+  letter-spacing: 1px;
+}
+
+
+@mixin header-three($color: $primary-dark-blue) {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: calc(20px + (26 - 20) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (36 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $color;
+  letter-spacing: 1px;
+}

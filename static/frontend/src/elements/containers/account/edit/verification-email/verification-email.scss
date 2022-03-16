@@ -1,0 +1,108 @@
+@import 'src/assets/styles/index.scss';
+
+.account-edit-verification-email {
+  min-width: 327px;
+  width: 100%;
+  max-width: 640px;
+
+  @include below-breakpoint(sm) {
+    max-width: 450px;
+  }
+
+  @include below-breakpoint(xs) {
+    max-width: 327px;
+  }
+}
+
+.account-edit-verification-email__title {
+  font-family: 'Raleway-Bold';
+  font-size: calc(20px + (28 - 20) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(28px + (36 - 28) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-dark-blue;
+  text-align: center;
+}
+
+.account-edit-verification-email__desc {
+  font-family: 'Roboto-Regular';
+  font-size: 18px;
+  line-height: 32px;
+  color: $label-reverse;
+  text-align: center;
+}
+
+.account-edit-verification-email__info-desc {
+  margin-top: 28px;
+}
+
+.account-edit-verification-email__step-desc {
+  margin-top: 48px;
+}
+
+.account-edit-verification-email__link {
+  @include link-red;
+
+  text-transform: uppercase;
+}
+
+.account-edit-verification-email__loader-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-edit-verification-email__form {
+  max-width: 458px;
+  width: 100%;
+  margin: 44px auto 0;
+}
+
+.account-edit-verification-email__form-error {
+  color: $primary-red;
+  font-size: calc(18px + (24 - 18) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.account-edit-verification-email-form__desc-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 24px;
+  margin-top: 24px;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+    gap: 12px 0;
+    align-items: flex-start;
+  }
+}
+
+.account-edit-verification-email-form__footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0 24px;
+  margin-top: 24px;
+
+  @include below-breakpoint(xs) {
+    flex-direction: column;
+    gap: 24px 0;
+    align-items: flex-start;
+  }
+}
+
+.account-edit-verification-email-form__btn-cancel {
+  @include button-white-blue;
+
+  @include below-breakpoint(xs) {
+    width: 100%;
+  }
+}
+
+.account-edit-verification-email-form__btn-confirm {
+  @include button-red;
+
+  @include below-breakpoint(xs) {
+    width: 100%;
+  }
+}

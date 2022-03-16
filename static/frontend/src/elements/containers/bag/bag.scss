@@ -1,0 +1,30 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/button.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.bag-screen__empty {
+  margin-top: 80px;
+  margin-bottom: 280px;
+  text-align: center;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 48px;
+    margin-top: 48px;
+  }
+}
+
+.bag-screen__empty-header {
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.bag-screen__empty-button {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}

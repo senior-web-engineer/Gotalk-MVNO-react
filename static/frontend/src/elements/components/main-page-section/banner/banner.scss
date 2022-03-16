@@ -1,0 +1,39 @@
+@import '../../../../assets/styles/index.scss';
+@import '../../../../assets/styles/mixins/heading.scss';
+@import '../../../../assets/styles/mixins/button.scss';
+
+.section-banner {
+  padding: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375))) 0;
+  font-family: 'Raleway-Extra-Bold';
+  font-size: calc(32px + (56 - 32) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  color: $primary-dark-blue;
+  background-color: $light-white-grey;
+  &__title {
+    margin-bottom: calc(24px + (58 - 24) * ((100vw - 375px) / (1920 - 375)));
+    text-align: center;
+    color: $primary-red;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+  &__sub-title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: fit-content;
+    @media (max-width: 650px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+  &__sub-logo {
+    width: 211px;
+    height: 67px;
+    margin-left: 30px;
+    @media (max-width: 650px) {
+      margin-top: 12px;
+      margin-left: 0;
+    }
+  }
+}

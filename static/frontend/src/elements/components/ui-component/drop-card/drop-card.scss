@@ -1,0 +1,85 @@
+@import '../../../../assets/styles/index.scss';
+@import '../../../../assets/styles/mixins/text.scss';
+
+.drop-card {
+  background-color: $label;
+  padding: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+  max-width: 491px;
+  border-radius: 9px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 12px;
+
+  &__text {
+    @include text-card();
+    word-wrap: break-word;
+    margin: 24px 0;
+    transition: all 0.3s linear;
+    @media (max-width: 650px) {
+      display: -webkit-box;
+      overflow: hidden;
+      word-break: break-word;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icons-item {
+    width: 156px;
+    height: 48px;
+  }
+
+  &__icons-arrow {
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid $grey-line;
+    border-right: 2px solid $grey-line;
+    transform: rotate(135deg);
+    transition: all 0.3s linear;
+    cursor: pointer;
+    display: none;
+    @media (max-width: 650px) {
+      display: block;
+    }
+  }
+  @media (max-width: 700px) {
+    margin: 12px auto;
+  }
+}
+
+.drop-card-open {
+  background-color: $label;
+  padding: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
+  max-width: 491px;
+  border-radius: 9px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin: 12px;
+  @media (max-width: 700px) {
+    margin: 12px auto;
+  }
+}
+
+.isopen-card {
+  transform: rotate(-45deg);
+}
+
+.open-card-text {
+  @include text-card();
+  word-wrap: break-word;
+  margin: 24px 0;
+  @media (max-width: 650px) {
+    display: block;
+    overflow: visible;
+    word-break: break-word;
+  }
+}
+
+.drop-card__icons {
+  margin-left: auto;
+  width: fit-content;
+}

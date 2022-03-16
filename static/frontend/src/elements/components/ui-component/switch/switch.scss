@@ -1,0 +1,73 @@
+@import "../../../../assets/styles/index.scss";
+
+.switch {
+  position: relative;
+  display: flex;
+  line-height: 24px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.switch__input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch__label {
+  margin-left: 52px;
+}
+
+.switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  height: 24px;
+  background-color: $label;
+  border: 1px solid $input-border;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch__slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: $label;
+  border: 1px solid $input-border;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.switch__input:checked + .switch__slider {
+  background-color: $primary-red;
+  border-color: $transparent;
+}
+
+.switch__input:focus-visible ~ .switch__slider {
+  outline: 2px solid $primary-dark-blue;
+}
+
+.switch__input:checked + .switch__slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+  border-color: $transparent;
+}
+
+.switch__slider {
+  border-radius: 34px;
+}
+
+.switch__slider:before {
+  border-radius: 50%;
+}

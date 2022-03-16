@@ -1,0 +1,48 @@
+@import 'src/assets/styles/index';
+@import 'src/assets/styles/mixins/media';
+
+.history-table-row {}
+
+.history-table-row__col {
+  padding: 12px 0 12px 24px;
+
+  &:nth-child(3) {
+    text-align: end;
+    padding-right: 24px;
+  }
+
+  &:nth-child(4) {
+    text-align: end;
+    padding-right: 24px;
+  }
+}
+
+.history-table-row__call-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 5px;
+}
+
+.history-table-row--compact {
+  border-top: 1px solid $input-border;
+}
+
+.history-table-row__col--compact {
+  line-height: 2rem;
+  padding: 16px 0;
+
+  &:nth-child(1) {
+    text-align: start;
+  }
+
+  &:nth-child(2) {
+    text-align: end;
+  }
+
+  @include below-breakpoint(xs) {
+    font-size: 1rem;
+  }
+}

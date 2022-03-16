@@ -1,0 +1,127 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media.scss';
+
+.basket-item {
+  width: 100%;
+  max-width: 1005px;
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  border-radius: 10px;
+  background-color: $label;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.basket-item__content {
+  padding: 24px 24px 0 24px;
+  margin-bottom: 48px;
+}
+
+.basket-item__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.basket-item__header-text {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.5rem;
+}
+
+.basket_item__controls {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.basket-item__remove-item {
+  height: 24px;
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  svg {
+    width: 22px;
+  }
+}
+
+.basket-item__total-items {}
+
+.basket-item__add-item {
+  width: 22px;
+  height: 22px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.basket-item__delete-item {
+  margin-left: 51px;
+  width: 20px;
+  height: 24px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  @include below-breakpoint(md) {
+    margin-left: 30px;
+  }
+
+  @include below-breakpoint(xs) {
+    margin-left: 51px;
+  }
+}
+
+.basket-item__plan-description {
+  margin-bottom: 24px;
+}
+
+.basket-item__sim-header {
+  font-family: "Roboto-Medium", sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+.basket-item__sim-subtitle {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.basket-item__sim-learn-more {
+  @include link-red();
+  color: $primary-dark-blue;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: $primary-red;
+  }
+}
+
+.basket-item__switch-container {
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.basket-item__switch {
+  margin-right: 12px;
+}
+
+.basket-item__switch-label {}
+
+.basket-item__footer {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Raleway-Bold", sans-serif;
+  background-color: $basket-item-footer;
+  padding: 14px 24px;
+}
+
+.basket-item__footer-fee-text {
+  font-size: 1.5rem;
+}
+
+.basket-item__footer-fee {
+  font-size: 1.75rem;
+}

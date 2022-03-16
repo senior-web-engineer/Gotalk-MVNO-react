@@ -1,0 +1,42 @@
+@import 'src/assets/styles/index';
+
+.my-plan__header {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+};
+
+.my-plan__my-plan {
+  background: $label;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 80px;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 48px;
+  }
+}
+
+.my-plan__title {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 28px;
+}
+
+.my-plan__plans-container {
+  max-width: 1140px;
+
+  .plans__card-container {
+    margin: 0 0 56px;
+
+    @include below-breakpoint(xs) {
+      margin: 0;
+    }
+  }
+}
