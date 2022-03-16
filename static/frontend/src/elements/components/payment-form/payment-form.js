@@ -211,7 +211,7 @@ const PaymentForm = () => {
         </div>
         <Checkbox
           onChange={handleCheck}
-          label="Get a receipt be email"
+          label="Get a receipt by email"
           addClass="payment-form__checkbox"
         />
         <div className="payment-form__controls-container">

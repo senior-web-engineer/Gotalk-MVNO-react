@@ -28,7 +28,7 @@ class BasketController {
                     stripId: intent.client_secret,
                     payId: userPay.id,
                     info: products.info,
-                    token,
+                    token: token,
                     resultSum: products.sum
                 }
             });

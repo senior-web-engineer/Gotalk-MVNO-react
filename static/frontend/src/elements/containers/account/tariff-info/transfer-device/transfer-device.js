@@ -18,9 +18,9 @@ const AccountTariffInfoTransferDevice = ({ addClass }) => {
           <MockQrCode />
         </div>
 
-        <a href="/" className="account-tariff-info-transfer-device__link-generate">
+        <button className="account-tariff-info-transfer-device__link-generate">
           GENERATE QR-CODE
-        </a>
+        </button>
       </AccountTariffInfoPlanCard>
     </div>
   );
