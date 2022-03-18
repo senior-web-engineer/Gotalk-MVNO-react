@@ -6,7 +6,7 @@ import {
   responseInterceptorError,
 } from "./interceptors";
 
-const baseUrl = process.env.REACT_APP_URL || "https://gotalkwireless.com/api";
+const baseUrl = process.env.REACT_APP_URL || "https://gotalkwireless.com/api/";
 
 class Api {
   config = {
