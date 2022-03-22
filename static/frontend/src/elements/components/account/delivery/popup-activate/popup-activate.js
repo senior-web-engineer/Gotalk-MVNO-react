@@ -8,7 +8,7 @@ import Popup from '../../../ui-component/popup/popup';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -43,22 +43,12 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
 
   const activateEsim = () => {
     dispatch({
-      type: actionsTypes.LOAD_ACTIVATE_ESIM,
+      type: actionsTypes.LOAD_ACTIVATE_ESIM_AND_LOAD_GET_QR,
       payload: { productId },
     });
     setIsOpen(false);
     setOpenNumber(true);
   };
-
-  const activatedEsimResult = useSelector(state => state.accountReducer.activatedESim);
-  useEffect(() => {
-    if(activatedEsimResult?.success) {
-      dispatch({
-        type: actionsTypes.LOAD_GET_QR,
-        payload: { productId },
-      });
-    }
-  }, [activatedEsimResult]);
 
   const classSim = classNames('sim-activate-container', {
     'sim-activate-container-active': isOpen,

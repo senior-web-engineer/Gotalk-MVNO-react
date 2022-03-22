@@ -151,22 +151,17 @@ export function* activateESimSaga(body) {
   try {
     yield put(startLoading('activateEsimLoading'));
     const data = yield call(postActivateESim, body.payload);
+    console.log(data);
     yield put({
       type: accountTypes.POST_ACTIVATE_ESIM,
-      payload: {
-        ...data.data.payload,
-        success: true
-      },
+      payload: data.data.payload,
       message: 'Activation successful',
     });
   } catch (error) {
     console.log(error);
     yield put({
       type: accountTypes.POST_ACTIVATE_ESIM,
-      payload: {
-        ...error.response.data.payload,
-        success: false
-      },
+      payload: error.response.data.payload,
       message: 'Activation failed',
     });
   } finally {
@@ -194,6 +189,57 @@ export function* scanQrSaga(body) {
     });
   } finally {
     yield put(stopLoading('getQRLoading'));
+  }
+}
+
+export function* activateESimAndScanQrSaga(body) {
+  try {
+    //#region Activating sim
+    yield put(startLoading('activateEsimLoading'));
+    const data = yield call(postActivateESim, body.payload);
+    console.log(data);
+    yield put({
+      type: accountTypes.POST_ACTIVATE_ESIM,
+      payload: data.data.payload,
+      message: 'Activation successful',
+    });
+    yield put(stopLoading('activateEsimLoading'));
+    //#endregion
+
+    //#region Getting QR
+    const paramsQr = createQueryParams(body.payload);
+    try {
+      yield put(startLoading('getQRLoading'));
+
+      const response = yield call(getQr, paramsQr);
+      const qr = get(response, 'data.payload', '');
+
+      yield put({
+        type: accountTypes.GET_QR,
+        payload: `data:image/png;base64,${qr}`,
+      });
+    } catch (error) {
+      console.log(error);
+      yield put({
+        type: accountTypes.GET_QR,
+        payload: error.response.data.payload,
+      });
+    } finally {
+      yield put(stopLoading('getQRLoading'));
+    }
+    //#endregion
+
+  } catch (error) {
+    console.log(error);
+    yield put(stopLoading('activateEsimLoading'));
+    yield put({
+      type: accountTypes.POST_ACTIVATE_ESIM,
+      payload: {
+        ...error.response.data.payload,
+        success: false
+      },
+      message: 'Activation failed',
+    });
   }
 }
 
@@ -277,4 +323,5 @@ export default function* accountWatcher() {
   yield takeLatest([accountTypes.LOAD_CHANGE_NUMBER], changeNumberSaga);
   yield takeLatest([accountTypes.LOAD_ACTIVATE_ESIM], activateESimSaga);
   yield takeLatest([accountTypes.LOAD_GET_QR], scanQrSaga);
+  yield takeLatest([accountTypes.LOAD_ACTIVATE_ESIM_AND_LOAD_GET_QR], activateESimAndScanQrSaga);
 }
