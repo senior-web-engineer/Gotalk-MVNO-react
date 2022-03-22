@@ -34,13 +34,15 @@ const AccountTariffInfoCard = ({ addClass }) => {
   const name = get(plan, 'name', '');
   const costPerMonth = get(plan, 'costPerMonth', 0);
   const minuteCount = get(plan, 'minuteCount', 0);
-  const internetCountUnit = get(plan, 'internetCount.unit', '');
-  const internetCountValue = get(plan, 'internetCount.value', 0);
   const SMSCount = get(plan, 'SMSCount', 0);
 
   const remainder = get(plan, 'remainder', {});
   const min = get(remainder, 'min', 0);
-  const internetValue = get(remainder, 'internet.value', 0);
+
+  const subscriberUsage = get(currentProduct, 'querySubscriber.product.usage', {});
+  const internetCountUnit = get(subscriberUsage, 'limit.bucket_value.unit', '');
+  const internetCountValue = get(subscriberUsage, 'limit.bucket_value.value', '');
+  const internetRemaining = get(subscriberUsage, 'remaining.value', 0);
   const sms = get(remainder, 'sms', 0);
 
   const number = get(currentProduct, 'msisdn', '');
@@ -66,8 +68,8 @@ const AccountTariffInfoCard = ({ addClass }) => {
                 max={Number(minuteCount)}
               />
               <AccountTariffInfoPlanCircle
-                isUnlimited={internetValue > UNLIMITED_VALUE}
-                count={internetValue}
+                isUnlimited={internetRemaining > UNLIMITED_VALUE}
+                count={internetRemaining}
                 unit={internetCountUnit}
                 max={internetCountValue}
               />
