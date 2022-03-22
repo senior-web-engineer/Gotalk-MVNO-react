@@ -133,7 +133,7 @@ class PlanClass {
             };
 
             if ((userSimPlan.Delivery && (userSimPlan.Delivery?.status !== ('delivered' || 'shipped')))
-                || (userSimPlan.PlintronSim?.status !== "BUSY" && userSimPlan.PlintronSim?.MSISDN.length !== 10)) {
+                || (userSimPlan.PlintronSim?.status !== "BUSY" && userSimPlan.PlintronSim?.MSISDN?.length !== 10)) {
                 simInfo.delivery = userSimPlan.Delivery;
                 simInfo.plan = plan;
                 simInfo.plan.internetCount = formatUnit(plan.internetCount);
