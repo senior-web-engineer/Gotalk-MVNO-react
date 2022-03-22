@@ -172,7 +172,6 @@ class PlanClass {
                 plintronLogger.error(e);
             }
 
-
             let userSimStatistic = (userSimPlan.UserSimStatistics[0]) ?
                 userSimPlan.UserSimStatistics[0] : {min: 0, sms: 0, internet: 0};
             let remainderInternet = formatUnit(userSimPlan.plan.internetCount - userSimStatistic.internet);
@@ -191,7 +190,8 @@ class PlanClass {
                         sms: (userSimPlan.plan.SMSCount - userSimStatistic.sms) || userSimPlan.plan.SMSCount,
                         internet: remainderInternet
                     }
-                }
+                },
+                querySubscriber: (await this.querySubscriberUsage(userSimPlan.PlintronSim.ICCID))
             };
             return simInfo;
         } catch (e) {
