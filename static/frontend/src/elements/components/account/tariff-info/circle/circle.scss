@@ -47,11 +47,15 @@
   }
 }
 
-.account-tariff-info-plan-circle__unit-wrapper,
-.account-tariff-info-plan-circle__max-wrapper {
+.account-tariff-info-plan-circle__unit-wrapper {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+.account-tariff-info-plan-circle__max-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .account-tariff-info-plan-circle__count {
