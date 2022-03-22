@@ -73,6 +73,12 @@ class SetOptimalPlan {
                                 break;
                         }
                     }
+
+                    const internetUsage = await planClass.querySubscriberUsage(item.ICCID);
+                    if(internetUsage) {
+                        internet = parseFloat(internetUsage.product.usage.remaining.value);
+                    }
+
                     let dbReq = {};
 
                     plintronLogger.notify(elements);
