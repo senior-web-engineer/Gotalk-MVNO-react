@@ -153,14 +153,20 @@ export function* activateESimSaga(body) {
     const data = yield call(postActivateESim, body.payload);
     yield put({
       type: accountTypes.POST_ACTIVATE_ESIM,
-      payload: data.data.payload,
+      payload: {
+        ...data.data.payload,
+        success: true
+      },
       message: 'Activation successful',
     });
   } catch (error) {
     console.log(error);
     yield put({
       type: accountTypes.POST_ACTIVATE_ESIM,
-      payload: error.response.data.payload,
+      payload: {
+        ...error.response.data.payload,
+        success: false
+      },
       message: 'Activation failed',
     });
   } finally {
