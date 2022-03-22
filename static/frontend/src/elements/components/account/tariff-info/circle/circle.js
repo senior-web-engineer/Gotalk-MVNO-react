@@ -7,8 +7,8 @@ const AccountTariffInfoPlanCircle = ({
   count, unit, max, isUnlimited,
 }) => {
   const data = [
-    { name: 'Group A', value: count },
-    { name: 'Group B', value: max - count },
+    { name: 'Group A', value: parseFloat(count) },
+    { name: 'Group B', value: parseFloat(max) - parseFloat(count) },
   ];
 
   return (
