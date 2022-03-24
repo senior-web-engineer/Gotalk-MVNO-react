@@ -675,7 +675,7 @@ class SimCardClass {
                 city: data.city,
                 state: data.state,
                 zip: data.zip,
-                zip_code: data.zip_code
+                zip_code: data.zip
             });
 
             await PlintronSim.update({PMSISDN: pmsisdn}, {where: {id: userSimPlan.plintronSimId}});
