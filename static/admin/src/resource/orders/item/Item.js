@@ -5,11 +5,12 @@ import {
   DateField,
   FunctionField,
   Tab,
-  TabbedShowLayout,
+  TabbedShowLayout
 } from "react-admin";
 import get from "lodash/get";
 
 const OrderItem = (props) => {
+
   const getDiliveryEmail = (record) => {
     const deliveryEmail = get(record, "Delivery.email");
     const userEmail = get(record, "User.email", "");
@@ -29,6 +30,14 @@ const OrderItem = (props) => {
 
     return `${deliveryCountry} ${deliveryCity} ${deliveryStreet} ${deliveryApartment} ${deliveryZip}`;
   };
+
+  const getPortRequest = (record) => {
+    if(record.UserSimPort) {
+      return 'User has a PORT request';
+    }
+    
+    return <b style={{color: 'red'}}>User doesn't have a PORT request</b>;
+  }
 
   return (
     <Show {...props}>
@@ -62,6 +71,28 @@ const OrderItem = (props) => {
           <DateField
             label="Date updated of order"
             source="Delivery.updatedAt"
+            emptyText="missing"
+          />
+        </Tab>
+
+        <Tab label="Port Request">
+          <FunctionField label="PORT" render={getPortRequest} emptyText="..." />
+          <TextField label="Phone number" source="UserSimPort.phoneNumber" emptyText="missing" />
+          <TextField label="Account number" source="UserSimPort.accountNumber" emptyText="missing" />
+          <TextField label="First name" source="UserSimPort.firstName" emptyText="missing" />
+          <TextField label="Pin number" source="UserSimPort.pinNumber" emptyText="missing" />
+          <TextField label="Address line" source="UserSimPort.addressLine" emptyText="missing" />
+          <TextField label="State" source="UserSimPort.state" emptyText="missing" />
+          <TextField label="City" source="UserSimPort.addressLine2" emptyText="missing" />
+          <TextField label="Zip" source="UserSimPort.zip" emptyText="missing" />
+          <DateField
+            label="Date created of PORT"
+            source="UserSimPort.createdAt"
+            emptyText="missing"
+          />
+          <DateField
+            label="Date updated of PORT"
+            source="UserSimPort.updatedAt"
             emptyText="missing"
           />
         </Tab>
