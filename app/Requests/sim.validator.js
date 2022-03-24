@@ -41,11 +41,12 @@ exports.rule = (type) => {
         case "create":
             return [
                 body('type').isIn(['esim', 'physical']).exists(),
-                body('ICCID').isString().exists().custom(value => {
-                    return PlintronSim.findOne({where: {ICCID: value}}).then(data => {
-                        if (data) return Promise.reject('ICCID already in use');
-                    })
-                }),
+                body('ICCID').isString().exists(),
+                // .custom(value => {
+                //     return PlintronSim.findOne({where: {ICCID: value}}).then(data => {
+                //         if (data) return Promise.reject('ICCID already in use');
+                //     })
+                // }),
                 body('PINOne').isString().exists(),
                 body('PUKOne').isString().exists(),
                 body('PINTwo').isString().exists(),
@@ -53,11 +54,12 @@ exports.rule = (type) => {
             ];
         case "createPhysical":
             return [
-                body('sim.ICCID').isString().exists().custom(value => {
-                    return PlintronSim.findOne({where: {ICCID: value}}).then(data => {
-                        if (data) return Promise.reject('ICCID already in use');
-                    })
-                }),
+                body('sim.ICCID').isString().exists(),
+                // .custom(value => {
+                //     return PlintronSim.findOne({where: {ICCID: value}}).then(data => {
+                //         if (data) return Promise.reject('ICCID already in use');
+                //     })
+                // }),
                 body('sim.PINOne').isString().exists(),
                 body('sim.PUKOne').isString().exists(),
                 body('sim.PINTwo').isString().exists(),

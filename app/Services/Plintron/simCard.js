@@ -500,8 +500,8 @@ class SimCardClass {
             errCheckerPlintron(!userSimPlan, 'User sim plan not found');
 
             if (data.newSim && isAdmin && data.simType === 'physical') {
-                let checkPlintronSim = await PlintronSim.findOne({where: {ICCID: data.newSim.ICCID}});
-                errCheckerPlintron(checkPlintronSim, 'ICCID already in use');
+                //let checkPlintronSim = await PlintronSim.findOne({where: {ICCID: data.newSim.ICCID}});
+                //errCheckerPlintron(checkPlintronSim, 'ICCID already in use');
                 const accountDetails = await this.getAccountDetails(data.newSim.ICCID);
                 errCheckerPlintron(!accountDetails?.primary_imsi, 'No SIM card information');
                 data.newSim.MSISDN = accountDetails.msisdn;
