@@ -283,7 +283,7 @@ class SimController extends MainController {
     switchingAnotherOperatorBooking = async (req, res) => {
         try {
             let {user} = req;
-            const userId = (user.role === 'Owner') ? req.body.userId : user.id;
+            const userId = (user.role === 'Owner') ? (req.body.userId || user.id) : user.id;
             await simCardClass.switchingAnotherOperatorBooking(req.body, userId);
             return this.successRes(res, {message: "Number porting request accepted"});
         } catch (e) {
@@ -306,7 +306,7 @@ class SimController extends MainController {
         try {
             let body = req.body;
             let {user} = req;
-            const userId = (user.role === 'Owner') ? req.body.userId : user.id;
+            const userId = (user.role === 'Owner') ? (req.body.userId || user.id) : user.id;
             const result = await simCardClass.cancelPurchase(body.bySimCardPayId, userId);
             return this.successRes(res, result);
         } catch (e) {
@@ -329,7 +329,7 @@ class SimController extends MainController {
     simActivateCompany = async (req, res) => {
         try {
             let {user} = req;
-            const userData = (user.role === 'Owner') ? await User.findByPk(req.body.userId) : user;
+            const userData = (user.role === 'Owner' && req.body.userId) ? await User.findByPk(req.body.userId) : user;
             const result = await simCardClass.simActivateCompany(req.body, userData);
             return this.successRes(res, result);
         } catch (e) {

@@ -62,19 +62,19 @@ const AccountTariffInfoCard = ({ addClass }) => {
           <div className="account-tariff-info__container">
             <div className="account-tariff-info__circles-wrapper">
               <AccountTariffInfoPlanCircle
-                isUnlimited={min > UNLIMITED_VALUE}
+                isUnlimited={Number(minuteCount) > UNLIMITED_VALUE}
                 count={min}
                 unit="min"
                 max={Number(minuteCount)}
               />
               <AccountTariffInfoPlanCircle
-                isUnlimited={internetRemaining > UNLIMITED_VALUE}
+                isUnlimited={internetCountValue > UNLIMITED_VALUE}
                 count={internetRemaining}
                 unit={internetCountUnit}
                 max={internetCountValue}
               />
               <AccountTariffInfoPlanCircle
-                isUnlimited={sms > UNLIMITED_VALUE}
+                isUnlimited={Number(SMSCount) > UNLIMITED_VALUE}
                 count={sms}
                 unit="SMS"
                 max={Number(SMSCount)}

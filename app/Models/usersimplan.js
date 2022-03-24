@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       UserSimPlan.belongsTo(models.WholesalePlan, {foreignKey: 'wholesalePlanId'});
       UserSimPlan.hasMany(models.UserSimStatistic, {foreignKey: 'userSimPlanId'});
       UserSimPlan.hasMany(models.UserPlanHistory, {foreignKey: 'userSimPlanId'});
+      UserSimPlan.hasOne(models.UserSimPort, {foreignKey: 'userSimPlanId'});
     }
   };
 

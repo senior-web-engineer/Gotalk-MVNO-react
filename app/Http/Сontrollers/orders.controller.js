@@ -11,6 +11,7 @@ const UserPay = db.UserPay;
 const UserProduct = db.UserProduct;
 const WholesalePlan = db.WholesalePlan;
 const Company = db.Company;
+const UserSimPort = db.UserSimPort;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -143,7 +144,9 @@ class OrdersController extends MainController {
                                 attributes: {exclude: ['createdAt', 'updatedAt']}
                             }
                         ]
-
+                    },
+                    {
+                        model: UserSimPort
                     }
                 ]
             });

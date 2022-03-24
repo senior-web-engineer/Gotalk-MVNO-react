@@ -57,7 +57,7 @@ class PlanController extends MainController {
                 let userCheck = await User.findByPk(user.id);
                 this.errChecker(userCheck.companyId, "Only the owner of the company can change the tariff plan");
             }
-            const userId = (user.role === 'Owner') ? req.body.userId : user.id;
+            const userId = (user.role === 'Owner') ? (req.body.userId || user.id) : user.id;
 
             const result = await planClass.changePlan(body.productId, body.newPlanId);
             let dbReq = {

@@ -1,3 +1,5 @@
+require('dotenv').config({ silent: process.env === 'production'});
+
 module.exports = {
   development: {
     username: process.env.DB_USERNAME || 'root',

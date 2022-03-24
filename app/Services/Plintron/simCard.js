@@ -19,6 +19,7 @@ const UserSimStatistic = db.UserSimStatistic;
 const Company = db.Company;
 const StripPay = db.StripPay;
 const Delivery = db.Delivery;
+const UserSimPort = db.UserSimPort;
 const Sequelize = require('sequelize');
 const {plintron} = require("../../../config/index.config");
 const Op = Sequelize.Op;
@@ -678,6 +679,18 @@ class SimCardClass {
             });
 
             await PlintronSim.update({PMSISDN: pmsisdn}, {where: {id: userSimPlan.plintronSimId}});
+
+            await UserSimPort.create({
+                phoneNumber: pmsisdn,
+                accountNumber: data.osp_account_number,
+                firstName: data.name,
+                pinNumber: data.osp_account_password,
+                addressLine: data.address_line,
+                state: data.state,
+                addressLine2: data.city,
+                zip: data.zip,
+                userSimPlanId: data.productId
+            });
 
             return true;
         } catch (e) {
