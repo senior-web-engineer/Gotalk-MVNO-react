@@ -28,7 +28,10 @@ const OrderEditActions = ({
       sim: { ICCID, PINOne, PUKOne, PINTwo, PUKTwo },
     };
 
-    orders.updateIccidDelivery(data);
+    orders.updateIccidDelivery(data).catch(ex => {
+      console.log(ex.response);
+      alert(ex.response.data.payload.message);
+    });
   };
 
   return (
