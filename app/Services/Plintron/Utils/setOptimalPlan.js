@@ -131,6 +131,7 @@ class SetOptimalPlan {
 
             await sftp.connect(clientConfig);
 
+            plintronLogger.notify(`sftpStatistics -> ${JSON.stringify(config.plintron.sftpStatistics.statistics)}`);
             for (const elem of config.plintron.sftpStatistics.statistics) {
                 data = await this.getGroupStatistic(sftp, elem, data);
             }
