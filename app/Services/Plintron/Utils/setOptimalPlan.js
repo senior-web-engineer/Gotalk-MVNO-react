@@ -35,7 +35,7 @@ class SetOptimalPlan {
             statistics.forEach(item => {
                 imsis.push(item.imsi)
             });
-            plintronLogger.notify(`Statistics -> ${JSON.stringify(item)}`);
+            plintronLogger.notify(`Statistics -> ${JSON.stringify(statistics)}`);
 
             const plintronSims = await PlintronSim.findAll({
                 where: {IMSI: {[Op.in]: imsis}},
