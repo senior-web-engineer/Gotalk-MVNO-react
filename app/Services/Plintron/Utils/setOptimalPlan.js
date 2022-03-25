@@ -27,18 +27,20 @@ class SetOptimalPlan {
                 return 0;
             }
 
-            const statistics = await this.getStatistics();
-            const groupByIMSI = groupBy("imsi");
-            let groupIMSI = groupByIMSI(statistics);
+            try {
+                await this.getStatistics();
+            } catch (e) {
+                plintronLogger.notifyErr(e.message)
+            }
 
-            let imsis = [];
-            statistics.forEach(item => {
-                imsis.push(item.imsi)
-            });
-            plintronLogger.notify(`Statistics -> ${JSON.stringify(statistics)}`);
+            //const anHourBefore = new Date();
+            //anHourBefore.setHours(new Date().getHours() - 1);
+            const plintronStatistics = await PlintronStatistic.findAll({
+                //where: {createdAt: {[Op.gte]: anHourBefore}}
+            })
 
             const plintronSims = await PlintronSim.findAll({
-                where: {IMSI: {[Op.in]: imsis}},
+                where: {IMSI: {[Op.in]: plintronStatistics.map(m => m.IMSI)}},
                 include: [
                     {
                         model: UserSimPlan,
@@ -59,7 +61,7 @@ class SetOptimalPlan {
 
                     plintronLogger.notify(`-------------------- Optimal Plan Data Processing --------------------`);
                     let min = 0, sms = 0, internet = 0;
-                    let elements = groupIMSI[item.IMSI];
+                    let elements = plintronStatistics.filter(m => m.IMSI === item.IMSI);
 
                     for (const elem of elements) {
                         switch (elem.type) {
@@ -131,7 +133,6 @@ class SetOptimalPlan {
 
             await sftp.connect(clientConfig);
 
-            plintronLogger.notify(`sftpStatistics -> ${JSON.stringify(config.plintron.sftpStatistics.statistics)}`);
             for (const elem of config.plintron.sftpStatistics.statistics) {
                 data = await this.getGroupStatistic(sftp, elem, data);
             }
