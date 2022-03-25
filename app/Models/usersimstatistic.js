@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   UserSimStatistic.init({
     sms: DataTypes.INTEGER,
     min: DataTypes.INTEGER,
-    internet: DataTypes.INTEGER,
+    internet: DataTypes.DECIMAL,
   }, {
     sequelize,
     modelName: 'UserSimStatistic',
