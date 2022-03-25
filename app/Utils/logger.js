@@ -1,6 +1,6 @@
 const config = require("../../config/logger.config");
 const {createLogger, transports} = require('winston');
-// var S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
+var S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
 
 // simple Logger
 const logger = new createLogger({
