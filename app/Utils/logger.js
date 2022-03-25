@@ -6,8 +6,8 @@ const {createLogger, transports} = require('winston');
 const logger = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.main.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.main)}) :
+        (config.s3.main.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.main)}) :
             new transports.File(config.options.file)
 
     ],
@@ -24,8 +24,8 @@ logger.stream = {
 const cronPay = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.pay.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.pay)}) :
+        (config.s3.pay.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.pay)}) :
             new (transports.File)(config.payOptions.fileCron),
 
     ]
@@ -36,8 +36,8 @@ const cronPay = new createLogger({
 const reqPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.reqS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.reqS3)}) :
+        (config.s3.plintron.reqS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.reqS3)}) :
             new (transports.File)(config.plintronOptions.fileReq)
     ]
 });
@@ -45,8 +45,8 @@ const reqPlintron = new createLogger({
 const resPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.resS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.resS3)}) :
+        (config.s3.plintron.resS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.resS3)}) :
             new (transports.File)(config.plintronOptions.fileRes)
 
     ]
@@ -55,8 +55,8 @@ const resPlintron = new createLogger({
 const errorPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.errorS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.errorS3)}) :
+        (config.s3.plintron.errorS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.errorS3)}) :
             new (transports.File)(config.plintronOptions.fileError),
 
     ]
@@ -65,8 +65,8 @@ const errorPlintron = new createLogger({
 const cronPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.cronS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.cronS3)}) :
+        (config.s3.plintron.cronS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.cronS3)}) :
             new (transports.File)(config.plintronOptions.fileCron)
 
     ]
@@ -75,8 +75,8 @@ const cronPlintron = new createLogger({
 const notifyPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.notifyS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.notifyS3)}) :
+        (config.s3.plintron.notifyS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.notifyS3)}) :
             new (transports.File)(config.plintronOptions.fileNotify),
 
     ]
@@ -85,8 +85,8 @@ const notifyPlintron = new createLogger({
 const importSimPlintron = new createLogger({
     transports: [
         new transports.Console(config.options.console),
-        // (config.s3.plintron.importSimS3.access_key_id) ?
-        //     new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.importSimS3)}) :
+        (config.s3.plintron.importSimS3.access_key_id) ?
+            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.importSimS3)}) :
             new (transports.File)(config.plintronOptions.importSim),
     ]
 });
