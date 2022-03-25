@@ -24,7 +24,7 @@ class Kernel {
     }
 
     setOptimalPlan() {
-        cron.schedule('* * * * *', async function () {
+        cron.schedule('*/16 * * * *', async function () {
             await setOptimalPlan.setOptimalPlan();
         });
     }
