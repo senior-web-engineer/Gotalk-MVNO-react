@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp }) => {
+const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort }) => {
   const schema = yup.object().shape({
     pmsisdn: yup.number().required('This field is required'),
     name: yup
@@ -38,6 +38,16 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp }) => {
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
+    defaultValues: reSendPort ? {
+      pmsisdn: reSendPort.phoneNumber,
+      osp_account_number: reSendPort.accountNumber,
+      name: reSendPort.firstName,
+      osp_account_password: reSendPort.pinNumber,
+      address_line: reSendPort.addressLine,
+      state: reSendPort.state,
+      city: reSendPort.addressLine2,
+      zip: reSendPort.zip
+    } : undefined
   });
   const { productId } = currentProduct;
 
@@ -194,8 +204,8 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp }) => {
             isInvalid={!!errors.city}
             description={errors.city?.message}
             type="text"
-            placeholder="Enter address line"
-            label="Address line"
+            placeholder="Enter city"
+            label="City"
             containerClass="delivery-activate__port"
           />
           <Input
@@ -209,7 +219,7 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp }) => {
           />
         </div>
         <div className="port-number-buttons">
-          <Button title="Activate" type="submit" addClass="popup-activate__button" />
+          <Button title={reSendPort ? "Re-Send Port" : "Activate"} type="submit" addClass="popup-activate__button" />
         </div>
       </form>
     </div>
@@ -220,12 +230,14 @@ PopupPortNumber.defaultProps = {
   addClass: '',
   setIsOpen: () => {},
   setOpenNumber: () => {},
+  reSendPort: {}
 };
 
 PopupPortNumber.propTypes = {
   addClass: PropTypes.string,
   setIsOpen: PropTypes.func,
   setOpenNumber: PropTypes.func,
+  reSendPort: PropTypes.object
 };
 
 export default PopupPortNumber;

@@ -665,33 +665,70 @@ class SimCardClass {
                 && userSimPlan.PlintronSim.ICCID === data.ICCID, 'Sim card not confirmed');
 
             const pmsisdn = (data.pmsisdn.length === 10) ? '1' + data.pmsisdn : data.pmsisdn;
-            await this.extMnpCreatePortin({
-                icc_id: userSimPlan.PlintronSim.ICCID,
-                pmsisdn: pmsisdn,
-                osp_account_number: data.osp_account_number,
-                osp_account_password: data.osp_account_password,
-                name: data.name,
-                address_line: data.address_line,
-                city: data.city,
-                state: data.state,
-                zip: data.zip,
-                zip_code: data.zip
+
+            const existSimPortRequest = await UserSimPort.findOne({
+                where: {phoneNumber: pmsisdn}
             });
+            if(existSimPortRequest) {
+                await this.extMnpUpdatePortin({
+                    icc_id: userSimPlan.PlintronSim.ICCID,
+                    pmsisdn: pmsisdn,
+                    osp_account_number: data.osp_account_number,
+                    osp_account_password: data.osp_account_password,
+                    name: data.name,
+                    address_line: data.address_line,
+                    city: data.city,
+                    state: data.state,
+                    zip: data.zip,
+                    zip_code: data.zip
+                });
+
+                await UserSimPort.update({
+                    phoneNumber: pmsisdn,
+                    accountNumber: data.osp_account_number,
+                    firstName: data.name,
+                    pinNumber: data.osp_account_password,
+                    addressLine: data.address_line,
+                    state: data.state,
+                    addressLine2: data.city,
+                    zip: data.zip,
+                    userSimPlanId: data.productId,
+                    status: 'PENDING'
+                }, {
+                    where: {
+                        id: existSimPortRequest.id
+                    }
+                });
+            }
+            else {
+                await this.extMnpCreatePortin({
+                    icc_id: userSimPlan.PlintronSim.ICCID,
+                    pmsisdn: pmsisdn,
+                    osp_account_number: data.osp_account_number,
+                    osp_account_password: data.osp_account_password,
+                    name: data.name,
+                    address_line: data.address_line,
+                    city: data.city,
+                    state: data.state,
+                    zip: data.zip,
+                    zip_code: data.zip
+                });
+    
+                await UserSimPort.create({
+                    phoneNumber: pmsisdn,
+                    accountNumber: data.osp_account_number,
+                    firstName: data.name,
+                    pinNumber: data.osp_account_password,
+                    addressLine: data.address_line,
+                    state: data.state,
+                    addressLine2: data.city,
+                    zip: data.zip,
+                    userSimPlanId: data.productId,
+                    status: 'PENDING'
+                });
+            }
 
             await PlintronSim.update({PMSISDN: pmsisdn}, {where: {id: userSimPlan.plintronSimId}});
-
-            await UserSimPort.create({
-                phoneNumber: pmsisdn,
-                accountNumber: data.osp_account_number,
-                firstName: data.name,
-                pinNumber: data.osp_account_password,
-                addressLine: data.address_line,
-                state: data.state,
-                addressLine2: data.city,
-                zip: data.zip,
-                userSimPlanId: data.productId,
-                status: 'PENDING'
-            });
 
             return true;
         } catch (e) {

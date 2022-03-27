@@ -130,3 +130,22 @@
     margin-bottom: 24px;
   }
 }
+
+.port-status {
+  text-align: center;
+  padding: 7px 10px;
+  background-color: #fff;
+  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  font-size: calc(10px + (24 - 18) * ((100vw - 375px) / (1920 - 375)));
+
+  small {
+    font-size: 80%;
+  }
+
+  &--button {
+    @include button-red($padding: 10px 20px);
+    margin-top: 10px;
+    width: 100%;
+  }
+}

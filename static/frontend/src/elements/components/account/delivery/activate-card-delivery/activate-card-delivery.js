@@ -9,12 +9,15 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './activate-card-delivery.scss';
+import PopupPortNumber from '../popup-activate/popup-port-number';
+import Popup from '../../../ui-component/popup/popup';
 
 const ActivateCardDelivery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenNumber, setOpenNumber] = useState(false);
   const [isOpenNumberTemp, setOpenNumberTemp] = useState(false);
   const [isScanQR, setScanQR] = useState(false);
+  const [isOpenReSendPort, setIsOpenReSendPort] = useState(false);
   const currentProduct = useSelector((state) => state.accountReducer.currentProduct);
   const activatedESim = useSelector((state) => state.accountReducer.activatedESim);
   const changeNumber = useSelector((state) => state.accountReducer.changeNumber);
@@ -64,6 +67,7 @@ const ActivateCardDelivery = () => {
           userSimPort={currentProduct?.userSimPort}
           onClick={() => setIsOpen(true)}
           onClickQR={() => clickQrScan()}
+          onClickReSendPort={() => setIsOpenReSendPort(true)}
         />
       )}
       {isOpen && (
@@ -99,6 +103,15 @@ const ActivateCardDelivery = () => {
           typeForm="scanQr"
           title={activatedESim?.message}
         />
+      )}
+      {isOpenReSendPort && (
+        <Popup close={() => setIsOpenReSendPort(false)}>
+          <PopupPortNumber 
+            setIsOpen={setIsOpenReSendPort} 
+            setOpenNumberTemp={setOpenNumberTemp}
+            reSendPort={currentProduct?.userSimPort}
+          />
+        </Popup>
       )}
     </section>
   );
