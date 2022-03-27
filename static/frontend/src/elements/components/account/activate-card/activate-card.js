@@ -53,7 +53,7 @@ const ActivateCard = ({
             <div className="port-status">
               <span>
                 PORT: {userSimPort.status} 
-                {userSimPort.messageCode && (
+                {(userSimPort.messageCode && userSimPort.status === 'RESOLUTION REQUIRED') && (
                   <>
                     <br />
                     <small>{userSimPort.messageCode}</small>

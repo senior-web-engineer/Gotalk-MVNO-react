@@ -133,7 +133,14 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort })
 
     data.state = findedState.short;
 
-    dispatch({ type: actionsTypes.LOAD_CHANGE_NUMBER, payload: { ...data, productId } });
+    dispatch({ 
+      type: actionsTypes.LOAD_CHANGE_NUMBER, 
+      payload: { 
+        ...data, 
+        pmsisdn: data.pmsisdn.toString(),
+        productId 
+      } 
+    });
     if (onSubmit) {
       setIsOpen(false);
       setOpenNumberTemp(true);

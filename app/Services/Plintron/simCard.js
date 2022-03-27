@@ -693,7 +693,8 @@ class SimCardClass {
                     addressLine2: data.city,
                     zip: data.zip,
                     userSimPlanId: data.productId,
-                    status: 'PENDING'
+                    status: 'PENDING',
+                    messageCode: ''
                 }, {
                     where: {
                         id: existSimPortRequest.id
