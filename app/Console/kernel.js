@@ -11,6 +11,7 @@ class Kernel {
             this.everyHour();
             this.setOptimalPlan();
             this.paymentEveryMonth();
+            this.queryPortInRequests();
         } catch (e) {
             winston.logger.error(e.message);
         }
@@ -38,6 +39,11 @@ class Kernel {
         });
     }
 
+    queryPortInRequests() {
+        cron.schedule('*/5 * * * *', async function () {
+            await simCardClass.queryPortInRequests();
+        });
+    }
 }
 
 

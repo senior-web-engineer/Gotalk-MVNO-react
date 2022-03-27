@@ -689,7 +689,8 @@ class SimCardClass {
                 state: data.state,
                 addressLine2: data.city,
                 zip: data.zip,
-                userSimPlanId: data.productId
+                userSimPlanId: data.productId,
+                status: 'PENDING'
             });
 
             return true;
@@ -792,6 +793,27 @@ class SimCardClass {
         });
     }
 
+    async queryPortInRequests() {
+        try {
+            plintronLogger.notify('------------------- Query PortIn Requests Start -------------------');
+            
+            const pendingRequests = await UserSimPort.findAll({
+                where: {status: 'PENDING'}
+            });
+
+            plintronLogger.notify(`Sum Pending Ports: ${pendingRequests.length}`);
+
+            for(const item of pendingRequests) {
+                const res = await this.extMnpQueryPortin({pmsisdn: item.phoneNumber});
+                plintronLogger.notify(`MSISDN: ${item.phoneNumber}, Result: ${JSON.stringify(res)}`);
+            }
+
+            plintronLogger.notify('------------------- Query PortIn Requests Done -------------------');
+        } catch (e) {
+            plintronLogger.error(e.message);
+            throw new PlintronError(e.code || 0, e.message || "Error");
+        }
+    }
 }
 
 

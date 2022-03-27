@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     addressLine: DataTypes.STRING,
     state: DataTypes.STRING,
     addressLine2: DataTypes.STRING,
-    zip: DataTypes.STRING
+    zip: DataTypes.STRING,
+    status: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'UserSimPort',
