@@ -125,6 +125,7 @@ class PlanClass {
             });
             errCheckerPlintron(!userSimPlan, 'User sim plan not found');
             let plan = userSimPlan?.plan?.dataValues;
+            const userSimPort = userSimPlan?.UserSimPort?.dataValues;
 
             simInfo = {
                 productId: userSimPlan?.id,
@@ -132,17 +133,17 @@ class PlanClass {
                 msisdn: userSimPlan?.PlintronSim?.MSISDN,
                 isPortIn: !!userSimPlan?.PlintronSim?.PMSISDN,
                 simType: userSimPlan?.PlintronSim?.type,
-                user: userSimPlan?.User
+                user: userSimPlan?.User,
+                userSimPort: userSimPort ? {
+                    ...userSimPort,
+                    messageCodeDescription: MessageCodeDesc[userSimPort.messageCode || ''] || ''
+                } : null
             };
 
             if ((userSimPlan.Delivery && (userSimPlan.Delivery?.status !== ('delivered' || 'shipped')))
                 || (userSimPlan.PlintronSim?.status !== "BUSY" && userSimPlan.PlintronSim?.MSISDN?.length !== 10)) {
                 simInfo.delivery = userSimPlan.Delivery;
                 simInfo.plan = plan;
-                simInfo.userSimPort = {
-                    ...userSimPlan.UserSimPort,
-                    messageCodeDescription: MessageCodeDesc[userSimPlan.UserSimPort?.messageCode || ''] || ''
-                },
                 simInfo.plan.internetCount = formatUnit(plan.internetCount);
                 return simInfo;
             }
@@ -197,10 +198,6 @@ class PlanClass {
                         sms: (userSimPlan.plan.SMSCount - userSimStatistic.sms) || userSimPlan.plan.SMSCount,
                         internet: remainderInternet
                     }
-                },
-                userSimPort: {
-                    ...userSimPlan.UserSimPort,
-                    messageCodeDescription: MessageCodeDesc[userSimPlan.messageCode] || ''
                 },
                 querySubscriber: (await this.querySubscriberUsage(userSimPlan.PlintronSim.ICCID))
             };
