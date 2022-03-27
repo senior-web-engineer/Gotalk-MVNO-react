@@ -28,15 +28,15 @@ class SetOptimalPlan {
             }
 
             try {
-               // await this.getStatistics();
+               await this.getStatistics();
             } catch (e) {
                 plintronLogger.notifyErr(e.message)
             }
 
-            const anHourBefore = new Date();
-            anHourBefore.setHours(new Date().getHours() - 3);
+            const threeHoursBefore = new Date();
+            threeHoursBefore.setHours(new Date().getHours() - 3);
             const plintronStatistics = await PlintronStatistic.findAll({
-                where: {createdAt: {[Op.gte]: anHourBefore}}
+                where: {createdAt: {[Op.gte]: threeHoursBefore}}
             })
 
             const plintronSims = await PlintronSim.findAll({
