@@ -138,6 +138,10 @@ class PlanClass {
                 || (userSimPlan.PlintronSim?.status !== "BUSY" && userSimPlan.PlintronSim?.MSISDN?.length !== 10)) {
                 simInfo.delivery = userSimPlan.Delivery;
                 simInfo.plan = plan;
+                simInfo.userSimPort = {
+                    ...userSimPlan.UserSimPort,
+                    messageCodeDescription: MessageCodeDesc[userSimPlan.UserSimPort?.messageCode || ''] || ''
+                },
                 simInfo.plan.internetCount = formatUnit(plan.internetCount);
                 return simInfo;
             }
@@ -193,7 +197,10 @@ class PlanClass {
                         internet: remainderInternet
                     }
                 },
-                userSimPort: userSimPlan.UserSimPort,
+                userSimPort: {
+                    ...userSimPlan.UserSimPort,
+                    messageCodeDescription: MessageCodeDesc[userSimPlan.messageCode] || ''
+                },
                 querySubscriber: (await this.querySubscriberUsage(userSimPlan.PlintronSim.ICCID))
             };
             return simInfo;
