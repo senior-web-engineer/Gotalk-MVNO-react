@@ -61,6 +61,7 @@ const ActivateCardDelivery = () => {
           sms={currentProduct?.plan?.SMSCount}
           internet={currentProduct?.plan?.internetCount}
           minute={currentProduct?.plan?.minuteCount}
+          userSimPort={currentProduct?.userSimPort}
           onClick={() => setIsOpen(true)}
           onClickQR={() => clickQrScan()}
         />

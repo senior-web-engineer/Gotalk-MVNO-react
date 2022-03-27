@@ -132,7 +132,7 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp }) => {
 
   return (
     <div className={addClass}>
-      <h3 className="port-number__title">Port number:</h3>
+      <h3 className="port-number__title">Port Number:</h3>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="port-number__inputs">
           <Input

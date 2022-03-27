@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     state: DataTypes.STRING,
     addressLine2: DataTypes.STRING,
     zip: DataTypes.STRING,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    messageCode: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'UserSimPort',

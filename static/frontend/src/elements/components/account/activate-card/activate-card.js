@@ -19,7 +19,8 @@ const ActivateCard = ({
   titleButton,
   titleButtonQR,
   addClass,
-}) => (
+  userSimPort,
+}) => ( console.log(userSimPort),
   <div className={`activate-card-block ${addClass}`}>
     <div className="activate-card-content">
       <h3 className="card-sim__title">{title}</h3>
@@ -68,6 +69,7 @@ ActivateCard.defaultProps = {
   addClass: '',
   onClickQR: () => {},
   onClick: () => {},
+  userSimPort: {}
 };
 
 ActivateCard.propTypes = {
@@ -85,6 +87,7 @@ ActivateCard.propTypes = {
   onClick: PropTypes.func,
   onClickQR: PropTypes.func,
   price: PropTypes.number,
+  userSimPort: PropTypes.object
 };
 
 export default ActivateCard;

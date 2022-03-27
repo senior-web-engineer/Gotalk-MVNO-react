@@ -59,52 +59,54 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
   return (
     <Popup close={close} addClass={params.type === 'physical' ? classSim : classESim}>
       <div className="popup-activate__title">Activate SIM-card</div>
-      {params.type === 'physical' ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="popup-activate__code-block">
-            <Input
-              {...register('codActivate', {
-                required: true,
-              })}
-              type="text"
-              description={errors.codActivate && 'This field is required'}
-              placeholder="Enter a code"
-              label="Enter a code"
-              containerClass="delivery-activate__input"
-              isInvalid={!!errors.codActivate}
-            />
-            {!isOpen && <Button title="Activate" type="submit" addClass="popup-activate__button" />}
-          </div>
-          <div className="popup-activate__sim-tip">
-            <div>
-              <img
-                src={SimExample}
-                className="popup-activate__sim-image"
-                style={{
-                  width: '196px',
-                }}
+      {!isOpen && (
+        params.type === 'physical' ? (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="popup-activate__code-block">
+              <Input
+                {...register('codActivate', {
+                  required: true,
+                })}
+                type="text"
+                description={errors.codActivate && 'This field is required'}
+                placeholder="Enter a code"
+                label="Enter a code"
+                containerClass="delivery-activate__input"
+                isInvalid={!!errors.codActivate}
               />
+              {!isOpen && <Button title="Activate New Number" type="submit" addClass="popup-activate__button" />}
             </div>
-            <div className="popup-activate__sim-tip-text">
-              Please enter the first 19 numbers on your Sim Card
+            <div className="popup-activate__sim-tip">
+              <div>
+                <img
+                  src={SimExample}
+                  className="popup-activate__sim-image"
+                  style={{
+                    width: '196px',
+                  }}
+                />
+              </div>
+              <div className="popup-activate__sim-tip-text">
+                Please enter the first 19 numbers on your Sim Card
+              </div>
             </div>
+          </form>
+        ) : (
+          <div className="popup-activate__code-block_esim">
+            {!isOpen && (
+              <Button
+                title="Activate New Number"
+                onClick={() => activateEsim()}
+                type="submit"
+                addClass="popup-activate__button"
+              />
+            )}
           </div>
-        </form>
-      ) : (
-        <div className="popup-activate__code-block_esim">
-          {!isOpen && (
-            <Button
-              title="Activate"
-              onClick={() => activateEsim()}
-              type="submit"
-              addClass="popup-activate__button"
-            />
-          )}
-        </div>
+        )
       )}
       <div>
         <div className="drop-settings">
-          <h4 className="drop-activate">Port number</h4>
+          <h4 className="drop-activate">Keep Existing Number (Port)</h4>
           <button type="button" onClick={() => setOpen(!isOpen)} className={classesReveal} />
         </div>
         {isOpen && <PopupPortNumber setIsOpen={setIsOpen} setOpenNumberTemp={setOpenNumberTemp} />}

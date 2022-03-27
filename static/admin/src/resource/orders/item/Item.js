@@ -78,6 +78,7 @@ const OrderItem = (props) => {
         <Tab label="Port Request">
           <FunctionField label="PORT" render={getPortRequest} emptyText="..." />
           <TextField label="Status" source="UserSimPort.status" emptyText="missing" />
+          <TextField label="Message Code" source="UserSimPort.messageCode" emptyText="missing" />
           <TextField label="Phone number" source="UserSimPort.phoneNumber" emptyText="missing" />
           <TextField label="Account number" source="UserSimPort.accountNumber" emptyText="missing" />
           <TextField label="First name" source="UserSimPort.firstName" emptyText="missing" />

@@ -13,6 +13,7 @@ const User = db.User;
 const WholesalePlan = db.WholesalePlan;
 const UserSimStatistic = db.UserSimStatistic;
 const UserPlanHistory = db.UserPlanHistory;
+const UserSimPort = db.UserSimPort;
 const Sequelize = require('sequelize');
 const moment = require("moment");
 const {getPagination, getPagingData} = require("../../Utils/dbHelpers");
@@ -117,7 +118,8 @@ class PlanClass {
                     {
                         model: UserSimStatistic,
                         order: [['createdAt', 'DESC']]
-                    }
+                    },
+                    {model: UserSimPort}
                 ]
             });
             errCheckerPlintron(!userSimPlan, 'User sim plan not found');
@@ -191,6 +193,7 @@ class PlanClass {
                         internet: remainderInternet
                     }
                 },
+                userSimPort: userSimPlan.UserSimPort,
                 querySubscriber: (await this.querySubscriberUsage(userSimPlan.PlintronSim.ICCID))
             };
             return simInfo;

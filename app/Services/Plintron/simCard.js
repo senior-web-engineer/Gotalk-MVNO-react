@@ -805,6 +805,17 @@ class SimCardClass {
 
             for(const item of pendingRequests) {
                 const res = await this.extMnpQueryPortin({pmsisdn: item.phoneNumber});
+                const {status, message_code} = res.ext_mnp_query_portin_response;
+                
+                await UserSimPort.update({
+                    status: status,
+                    messageCode: message_code
+                }, {
+                    where: {
+                        id: item.id
+                    }
+                });
+
                 plintronLogger.notify(`MSISDN: ${item.phoneNumber}, Result: ${JSON.stringify(res)}`);
             }
 
