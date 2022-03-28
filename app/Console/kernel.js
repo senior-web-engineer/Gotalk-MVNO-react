@@ -42,6 +42,7 @@ class Kernel {
     queryPortInRequests() {
         cron.schedule('*/5 * * * *', async function () {
             await simCardClass.queryPortInRequests();
+            await simCardClass.completedPortInSubscribeBundles();
         });
     }
 }

@@ -714,7 +714,7 @@ class SimCardClass {
                     zip: data.zip,
                     zip_code: data.zip
                 });
-    
+
                 await UserSimPort.create({
                     phoneNumber: pmsisdn,
                     accountNumber: data.osp_account_number,
@@ -834,9 +834,9 @@ class SimCardClass {
     async queryPortInRequests() {
         try {
             plintronLogger.notify('------------------- Query PortIn Requests Start -------------------');
-            
+
             const pendingRequests = await UserSimPort.findAll({
-                where: {status: 'PENDING'}
+                // where: {status: 'PENDING'}
             });
 
             plintronLogger.notify(`Sum Pending Ports: ${pendingRequests.length}`);
@@ -844,7 +844,7 @@ class SimCardClass {
             for(const item of pendingRequests) {
                 const res = await this.extMnpQueryPortin({pmsisdn: item.phoneNumber});
                 const {status, message_code} = res.ext_mnp_query_portin_response;
-                
+
                 await UserSimPort.update({
                     status: status,
                     messageCode: message_code
@@ -858,6 +858,44 @@ class SimCardClass {
             }
 
             plintronLogger.notify('------------------- Query PortIn Requests Done -------------------');
+        } catch (e) {
+            plintronLogger.error(e.message);
+            throw new PlintronError(e.code || 0, e.message || "Error");
+        }
+    }
+
+    async completedPortInSubscribeBundles() {
+        try {
+            plintronLogger.notify('------------------- Completed Port In Subscribe Bundles Start -------------------');
+
+            const completedPortIns = await UserSimPort.findAll({
+                where: {status: 'COMPLETE', subscribeBundleStatus: {[Op.ne]: 'COMPLETE'}}
+            });
+
+            plintronLogger.notify(`Sum Completed Port Ins: ${completedPortIns.length}`);
+
+            for(const item of completedPortIns) {
+                const userSimPlan = await UserSimPlan.findOne({
+                    where: {id: item.userSimPlanId},
+                    include: [
+                        {model: PlintronPlan},
+                        {model: PlintronSim}
+                    ]
+                });
+                const req = {icc_id: userSimPlan.PlintronSim.ICCID, bundle_code: userSimPlan.PlintronPlan.planID};
+                const subscribeBundleResponse = await PlintronClient.req(req, 'SUBSCRIBE_BUNDLE');
+                if (subscribeBundleResponse?.subscribe_bundle_response) {
+                    await UserSimPort.update({
+                        subscribeBundleStatus: 'COMPLETE'
+                    }, {
+                        where: {
+                            id: item.id
+                        }
+                    });
+                }
+            }
+
+            plintronLogger.notify('------------------- Completed Port In Subscribe Bundles Done -------------------');
         } catch (e) {
             plintronLogger.error(e.message);
             throw new PlintronError(e.code || 0, e.message || "Error");
