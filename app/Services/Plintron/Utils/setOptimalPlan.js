@@ -85,7 +85,7 @@ class SetOptimalPlan {
                     let dbReq = {};
 
                     plintronLogger.notify(elements);
-                    plintronLogger.notify(`Optimize plan data = ${sms}-${min}-${internet}`);
+                    plintronLogger.notify(`Optimize plan data = ${sms}-${min}-${internet}, Plintron Sim Id = ${item.id}`);
 
                     if (min > 0) {
                         min = item.UserSimPlan.PlintronPlan.minuteCount - min;
