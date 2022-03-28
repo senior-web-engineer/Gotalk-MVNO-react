@@ -251,7 +251,14 @@ class SetOptimalPlan {
             };
             plintronLogger.notify(`-------------------- changePlan worked --------------------`);
             plintronLogger.notify(req);
-            await PlintronClient.req(req, 'UPDATE_WPS');
+            try {
+                await PlintronClient.req(req, 'UPDATE_WPS');
+            } catch (e) {
+                plintronLogger.notify(JSON.stringify(e));
+                if(e.ERROR_CODE != "506") {
+                    throw e;
+                }
+            }
             await UserSimPlan.update({wholesalePlanId: optimizePlan.id}, {where: {id: plintronSim.UserSimPlan.id}});
             plintronLogger.notify(`Set optimal plan sucsess ICCID - ${plintronSim.ICCID}  wholesalePlanId - ${optimizePlan.id}`);
         } catch (e) {
