@@ -243,6 +243,12 @@ class SetOptimalPlan {
                 where: {unitCap: {[Op.gt]: spent}},
                 order: [['unitCap', 'ASC']]
             });
+            if(!optimizePlan) {
+                optimizePlan = await WholesalePlan.findOne({
+                    where: {},
+                    order: [['unitCap', 'DESC']]
+                });
+            }
             errCheckerPlintron(!optimizePlan, 'Optimize wholesale plan not found');
 
             const req = {
