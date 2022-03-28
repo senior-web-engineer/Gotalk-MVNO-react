@@ -8,7 +8,7 @@ import Popup from '../../../ui-component/popup/popup';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -50,6 +50,10 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
     setOpenNumber(true);
   };
 
+  const isSimPortComplete = useMemo(() => {
+    return currentProduct?.userSimPort?.status === 'COMPLETE';
+  }, [currentProduct?.userSimPort?.status]);
+
   const classSim = classNames('sim-activate-container', {
     'sim-activate-container-active': isOpen,
   });
@@ -74,7 +78,7 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
                 containerClass="delivery-activate__input"
                 isInvalid={!!errors.codActivate}
               />
-              {!isOpen && <Button title="Activate New Number" type="submit" addClass="popup-activate__button" />}
+              {!isOpen && <Button title={isSimPortComplete ? "Activate" : "Activate New Number"} type="submit" addClass="popup-activate__button" />}
             </div>
             <div className="popup-activate__sim-tip">
               <div>
@@ -95,7 +99,7 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
           <div className="popup-activate__code-block_esim">
             {!isOpen && (
               <Button
-                title="Activate New Number"
+                title={isSimPortComplete ? "Activate" : "Activate New Number"}
                 onClick={() => activateEsim()}
                 type="submit"
                 addClass="popup-activate__button"
@@ -104,13 +108,16 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
           </div>
         )
       )}
-      <div>
-        <div className="drop-settings">
-          <h4 className="drop-activate">Keep Existing Number (Port)</h4>
-          <button type="button" onClick={() => setOpen(!isOpen)} className={classesReveal} />
+      {!isSimPortComplete && (
+        <div>
+          <div className="drop-settings">
+            <h4 className="drop-activate">Keep Existing Number (Port)</h4>
+            <button type="button" onClick={() => setOpen(!isOpen)} className={classesReveal} />
+          </div>
+          {isOpen && <PopupPortNumber setIsOpen={setIsOpen} setOpenNumberTemp={setOpenNumberTemp} />}
         </div>
-        {isOpen && <PopupPortNumber setIsOpen={setIsOpen} setOpenNumberTemp={setOpenNumberTemp} />}
-      </div>
+      )}
+      
     </Popup>
   );
 };

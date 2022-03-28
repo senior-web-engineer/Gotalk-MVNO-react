@@ -27,6 +27,10 @@ const ActivateCard = ({
     return userSimPort?.status === 'PENDING' || userSimPort?.status === 'RESOLUTION REQUIRED';
   }, [userSimPort?.status]);
 
+  const isSimPortComplete = useMemo(() => {
+    return userSimPort?.status === 'COMPLETE';
+  }, [userSimPort?.status]);
+
   return (
     <div className={`activate-card-block ${addClass}`}>
       <div className="activate-card-content">
@@ -48,23 +52,22 @@ const ActivateCard = ({
           <div className="activate-card__status">Active</div>
         )}
 
-        {isOnSimPort && (
-          <>
-            <div className="port-status">
-              <span>
-                PORT: {userSimPort.status} 
-                {(userSimPort.messageCode && userSimPort.status === 'RESOLUTION REQUIRED') && (
-                  <>
-                    <br />
-                    <small>{userSimPort.messageCode}</small>
-                  </>
-                )}
-              </span>
-              {userSimPort.status === 'RESOLUTION REQUIRED' && (
-                <Button onClick={onClickReSendPort} title={"RE-SEND PORT"} addClass="port-status--button" />
+        <div>
+        {(isOnSimPort || isSimPortComplete) && (
+          <div className="port-status">
+            <span>
+              PORT: {userSimPort.status} 
+              {(userSimPort.messageCode && userSimPort.status === 'RESOLUTION REQUIRED') && (
+                <>
+                  <br />
+                  <small>{userSimPort.messageCode}</small>
+                </>
               )}
-            </div>
-          </>
+            </span>
+            {userSimPort.status === 'RESOLUTION REQUIRED' && (
+              <Button onClick={onClickReSendPort} title={"RE-SEND PORT"} addClass="port-status--button" />
+            )}
+          </div>
         )}
         {(!isOnSimPort && statusActivate !== 'active') && (
         <Button onClick={onClick} title={titleButton} addClass="sim-activate" />
@@ -72,6 +75,7 @@ const ActivateCard = ({
         {(!isOnSimPort && statusActivate === 'active' && typeSim === 'esim') && (
         <Button onClick={onClickQR} title={titleButtonQR} addClass="sim-activate" />
         )}
+        </div>
       </div>
     </div>
   );
