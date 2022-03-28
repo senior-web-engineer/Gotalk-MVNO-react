@@ -255,7 +255,7 @@ class SetOptimalPlan {
                 await PlintronClient.req(req, 'UPDATE_WPS');
             } catch (e) {
                 plintronLogger.notify(JSON.stringify(e));
-                if(e.ERROR_CODE != "506") {
+                if(e.code != "506") {
                     throw e;
                 }
             }
