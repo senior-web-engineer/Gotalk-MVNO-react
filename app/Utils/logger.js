@@ -114,7 +114,7 @@ const plintronLogger = {
         resPlintron.info(msg);
     },
     error: function (msg) {
-        errorPlintron.error(`${msg}; Stack=${new Error().stack}`);
+        errorPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
     },
     cron: function (msg) {
         cronPlintron.info(msg);
@@ -123,13 +123,13 @@ const plintronLogger = {
         importSimPlintron.info(msg);
     },
     importSimErr: function (msg) {
-        importSimPlintron.error(`${msg}; Stack=${new Error().stack}`);
+        importSimPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
     },
     notify: function (msg) {
         notifyPlintron.info(msg);
     },
     notifyErr: function (msg) {
-        notifyPlintron.error(`${msg}; Stack=${new Error().stack}`);
+        notifyPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
     },
     log: function (level, msg) {
         const lvl = plintronLogger[level];

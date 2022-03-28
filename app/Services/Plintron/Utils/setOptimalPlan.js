@@ -36,7 +36,7 @@ class SetOptimalPlan {
             const threeHoursBefore = new Date();
             threeHoursBefore.setHours(new Date().getHours() - 3);
             const plintronStatistics = await PlintronStatistic.findAll({
-                where: {createdAt: {[Op.gte]: threeHoursBefore}}
+                //where: {createdAt: {[Op.gte]: threeHoursBefore}}
             })
 
             const plintronSims = await PlintronSim.findAll({
