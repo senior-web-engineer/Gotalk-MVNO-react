@@ -239,7 +239,7 @@ class SetOptimalPlan {
 
     async changePlan(plintronSim, spent) {
         try {
-            const optimizePlan = await WholesalePlan.findOne({
+            let optimizePlan = await WholesalePlan.findOne({
                 where: {unitCap: {[Op.gt]: spent}},
                 order: [['unitCap', 'ASC']]
             });
