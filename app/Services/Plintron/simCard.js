@@ -836,7 +836,7 @@ class SimCardClass {
             plintronLogger.notify('------------------- Query PortIn Requests Start -------------------');
 
             const pendingRequests = await UserSimPort.findAll({
-                // where: {status: 'PENDING'}
+                where: {status: 'PENDING'}
             });
 
             plintronLogger.notify(`Sum Pending Ports: ${pendingRequests.length}`);
@@ -869,7 +869,15 @@ class SimCardClass {
             plintronLogger.notify('------------------- Completed Port In Subscribe Bundles Start -------------------');
 
             const completedPortIns = await UserSimPort.findAll({
-                where: {status: 'COMPLETE', subscribeBundleStatus: {[Op.ne]: 'COMPLETE'}}
+                where: {
+                    status: 'COMPLETE',
+                    subscribeBundleStatus: {
+                        [Op.or]: {
+                            [Op.ne]: 'COMPLETE',
+                            [Op.is]: null
+                        }
+                    }
+                }
             });
 
             plintronLogger.notify(`Sum Completed Port Ins: ${completedPortIns.length}`);
