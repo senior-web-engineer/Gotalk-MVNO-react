@@ -900,6 +900,8 @@ class SimCardClass {
                             id: item.id
                         }
                     });
+
+                    await this.simActivate(userSimPlan.id, userSimPlan.userId);
                 }
             }
 
