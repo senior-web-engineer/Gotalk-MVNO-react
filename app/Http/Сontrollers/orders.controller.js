@@ -47,7 +47,6 @@ class OrdersController extends MainController {
             };
             const userSimPlans = await UserSimPlan.findAndCountAll(options);
 
-
             let userSimPlanIds = userSimPlans.rows.map((item) => {
                 return item.id;
             });
