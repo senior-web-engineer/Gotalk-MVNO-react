@@ -148,7 +148,7 @@ class OrdersController extends MainController {
                     }
                 ]
             });
-            this.errChecker(userSimPlan?.PlintronSim && userSimPlan?.PlintronSim?.status !== 'NOT_ACTIVATED', "Order not found");
+            this.errChecker(!userSimPlan, "Order not found");
             return this.successRes(res, userSimPlan)
         } catch (e) {
             return this.errorRes(res, e);
