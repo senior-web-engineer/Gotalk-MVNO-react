@@ -83,7 +83,6 @@ class OrdersController extends MainController {
             };
 
             for (let userSimPlan of userSimPlans.rows) {
-                if (userSimPlan?.PlintronSim && userSimPlan?.PlintronSim?.status !== 'NOT_ACTIVATED') continue;
                 let product = products.find(item => item.productId === userSimPlan.id);
                 let pay = pays.find(item => item.productId.indexOf(product.id) !== -1);
                 if (pay) {
