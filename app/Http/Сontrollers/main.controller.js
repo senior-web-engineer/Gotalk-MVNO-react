@@ -38,7 +38,11 @@ class MainController extends FileController {
     update = async (req, res) => {
         try {
             let options = queueConstructor(req, res, {where: {id: req.params.id}}, this.Model);
-            const result = await this.Model.update(req.body, options);
+            const result = await this.Model.update({
+                ...req.body,
+                minuteCount: req.body.minuteCount === 'Infinity' ? 9007199254740991 : req.body.minuteCount,
+                SMSCount: req.body.SMSCount === 'Infinity' ? 9007199254740991 : req.body.SMSCount,
+            }, options);
             return result == 1 ?
                 this.successRes(res, {message: "Updated successfully"}) :
                 this.successRes(res, {message: "Cannot update"}, 404)
