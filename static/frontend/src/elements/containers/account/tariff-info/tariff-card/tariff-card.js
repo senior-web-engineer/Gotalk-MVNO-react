@@ -11,15 +11,6 @@ import React from 'react';
 import './tariff-card.scss';
 import { useSelector } from 'react-redux';
 
-const params = [
-  'Mollis Ornare Pretium',
-  'Donec Convallis Metus',
-  'Donec Convallis Metuss',
-  'Aenean Pretium',
-  'Integer Volutpat',
-  'Integer Volutpats',
-];
-
 const UNLIMITED_VALUE = 90000000000;
 
 const AccountTariffInfoCard = ({ addClass }) => {
@@ -81,15 +72,15 @@ const AccountTariffInfoCard = ({ addClass }) => {
               />
             </div>
 
-            <div className="account-tariff-info__params-wrapper">
-              {params.map((param) => (
-                <AccountTariffInfoPlanParameter
-                  addClass="account-tariff-info__params-item"
-                  key={param}
-                  title={param}
-                />
-              ))}
-            </div>
+            {/*<div className="account-tariff-info__params-wrapper">*/}
+            {/*  {params.map((param) => (*/}
+            {/*    <AccountTariffInfoPlanParameter*/}
+            {/*      addClass="account-tariff-info__params-item"*/}
+            {/*      key={param}*/}
+            {/*      title={param}*/}
+            {/*    />*/}
+            {/*  ))}*/}
+            {/*</div>*/}
 
             <a href="/" className="account-tariff-info__options-link">
               Add options

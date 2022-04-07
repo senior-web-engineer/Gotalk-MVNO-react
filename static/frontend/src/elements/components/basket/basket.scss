@@ -54,7 +54,7 @@
 
 .basket__price-container {
   width: 100%;
-  max-height: 344px;
+  max-height: 400px;
   max-width: 362px;
   padding: 48px;
   border-radius: 10px;
@@ -111,4 +111,11 @@
 .basket__button-next {
   @include button-red($padding: 20px 48px);
   margin: 0 auto;
+}
+
+.basket__price-row__policy-text {
+  font-size: 15px;
+  a {
+    text-decoration: underline;
+  }
 }

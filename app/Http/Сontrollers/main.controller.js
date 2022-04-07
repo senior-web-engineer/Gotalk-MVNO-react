@@ -38,6 +38,9 @@ class MainController extends FileController {
     update = async (req, res) => {
         try {
             let options = queueConstructor(req, res, {where: {id: req.params.id}}, this.Model);
+            if(!req.body.internetCount) {
+                delete req.body.internetCount;
+            }
             const result = await this.Model.update({
                 ...req.body,
                 minuteCount: req.body.minuteCount === 'Infinity' ? 9007199254740991 : req.body.minuteCount,

@@ -64,7 +64,9 @@ export const UserList = (props, source, label) => {
           linkType={(record) => (record.canEdit ? 'edit' : 'show')}
         />
       ) : (
-        <Datagrid rowClick="show" expand={<UserRole />}>
+        <Datagrid rowClick="show"
+            // expand={<UserRole />}
+        >
           <FunctionField
             label="Name"
             render={(record) => `${record.firstName} ${record.lastName}`}

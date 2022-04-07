@@ -71,7 +71,7 @@ const PlansCreate = (props) => {
           multiline={true}
           label="Description"
           source="description"
-          validate={[required()]}
+          allowNull={true}
         />
         <AutocompleteArrayInput
           source="props"

@@ -46,11 +46,11 @@ const questions = [
   {
     summary: 'Why should I use GoTalk?',
     details:
-      'GoTalk is a family owned business that believes that everyone has a right to data privacy. Unfortunately, a multitude of technology companies are capitalizing on our data– Big Wireless is making profits without concern for your safety. We want to make the world a better place by providing a service that protects everyone’s private & personal information',
+      'Millions of dollars are stolen every year from SIM card fraud. GoTalk is a security conscious company that knows just how important your digital security it. With our SafeSim (tm) technology, you’ll rest easy knowing your digital assets and data are protected from Sim Swap fraud. Not only that, we’ll never sell or share your data. Don’t waste time, protect your wireless account with our SafeSim Two-Factor and Three-Factor Authentication today.',
   },
   {
     summary: 'Can I use my phone as a Hotspot with GoTalk?',
-    details: 'Yes, mobile hotspot is included n some plans and is an add on for other plans.',
+    details: 'Yes, mobile hotspot is included in some plans and is an add on for other plans.',
   },
   {
     summary: 'What’s included in my GoTalk service?',
@@ -66,6 +66,10 @@ const questions = [
     details:
       'We actively take many security measures to protect all of your confidential business information as well as the data of your employees. With so many data breaches occurring in this day and age, we are here to keep your service and personal information confidential.',
   },
+  {
+    summary: 'How do I port my existing number?',
+    details: 'You can easily port your existing number. After completing an order on our website, you will be given a temporary number. In your account, click on the option to ‘Port’ your existing number and follow the simple on screen instructions. Most Ports complete in a very short time period.'
+  }
 ];
 
 export default questions;

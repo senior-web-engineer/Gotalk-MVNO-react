@@ -45,17 +45,18 @@ const HowItWorks = () => (
         <article className="how-it-works__article">
           <h3 className="how-it-works__title">Why Go Talk?</h3>
           <p className="how-it-works__subtitle">
-            GoTalk is an affordable, family-owned telecom service that provides you with the
-            security you need. We are here to here to protect you from sim swap fraud and unlike Big
-            Wireless, we won’t sell or share your data! Protect your wireless account with our
-            Two-Factor and Three-Factor Authentication options.
+            Millions of dollars are stolen every year from SIM card fraud. GoTalk is a security
+            conscious company that knows just how important your digital security it. With our
+            SafeSim (tm) technology, you’ll rest easy knowing your digital assets and data are
+            protected from Sim Swap fraud. Not only that, we’ll never sell or share your data.
+            Don’t waste time, protect your wireless account with our SafeSim Two-Factor and Three-Factor Authentication today.
           </p>
         </article>
         <article className="how-it-works__article">
           <h3 className="how-it-works__title">Where am I Covered with GoTalk?</h3>
           <p className="how-it-works__subtitle">
-            We offer 99% US coverage, including wide 5G Coverage! Explore our coverage map & type in
-            the zip-code where you’d need coverage!
+            We offer 99% US coverage, including wide 5G Coverage! Explore our coverage map &
+            type in the zip-code where you’d need coverage!
           </p>
         </article>
       </div>

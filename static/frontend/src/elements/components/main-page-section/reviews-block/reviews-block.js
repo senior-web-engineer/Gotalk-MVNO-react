@@ -38,7 +38,7 @@ const ReviewsBlock = () => (
           <span className="reviews__sublabel">Verified GoTalk User</span>
         </DropCard>
         <DropCard>
-          Data is currency and I feel like a target.I really like that GoTalk is family owned, cares
+          Data is currency and I feel like a target.I really like that GoTalk cares
           about my data privacy and safety, and that I can quickly talk to an actual human when I
           reach out to their customer service.
           <span className="reviews__label">Natasha L.</span>

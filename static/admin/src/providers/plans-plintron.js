@@ -29,10 +29,10 @@ const getOne = async ({ id }) => {
   } else {
     sms = SMSCount;
   }
-  const internet = `${Math.floor(dataResponse.internetCount / 1e9)} GB`;
+  const internet = `${dataResponse.internetCount.value} ${dataResponse.internetCount.unit}`;
   const data = {
     ...dataResponse,
-    internetCount: +dataResponse.internetCount,
+    internetCount: dataResponse.internetCount.value * 1073741824,
     internetFormatted: internet,
     minuteCount: minute,
     SMSCount: sms,
