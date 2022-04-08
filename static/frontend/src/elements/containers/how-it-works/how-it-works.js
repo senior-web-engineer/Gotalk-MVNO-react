@@ -21,26 +21,22 @@ const HowItWorks = () => (
             minutes.
           </p>
           <div className="how-it-works__instructions">
-            <p className="how-it-works__instruction">
-              1. Select a plan that suits you, your family or business and port in your number from
-              your existing carrier if you need to.
-            </p>
-            <p className="how-it-works__instruction">
-              2. Download the e-sim QR code and follow your handset instructions to “Convert to
-              eSIM”
-            </p>
-            <p className="how-it-works__instruction">
-              3. Wait a few moments for the eSIM to activate and for you with be live with Go Talk,
-              a secure carrier that’s focused on your privacy and security... voila!
-            </p>
-            <p className="how-it-works__instruction">
-              You’re done. Thought it would take longer, eh?
-            </p>
-            <p className="how-it-works__instruction">
-              Don’t worry if you need a physical sim….we have those too… and they can be delivered
-              in as little as 24 hours via Fedex.
-            </p>
+            <div className="how-it-works__instruction">
+              <div className="how-it-works__instruction__number">1</div>
+              Select a plan that suits you, your family or your business.
+            </div>
+            <div className="how-it-works__instruction">
+              <div className="how-it-works__instruction__number">2</div>
+              Scan the QR code and follow your activation instructions.
+            </div>
+            <div className="how-it-works__instruction">
+              <div className="how-it-works__instruction__number">3</div>
+              Enjoy a secure and Safe Sim experience direct from your phone.
+            </div>
           </div>
+          <p className="how-it-works__subtitle">
+            Porting your existing number is quick and easy too. Find out more here.
+          </p>
         </article>
         <article className="how-it-works__article">
           <h3 className="how-it-works__title">Why Go Talk?</h3>

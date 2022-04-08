@@ -18,8 +18,7 @@
       display: -webkit-box;
       overflow: hidden;
       word-break: break-word;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;
+      height: 120px;
     }
   }
 
@@ -76,6 +75,7 @@
     display: block;
     overflow: visible;
     word-break: break-word;
+    height: auto;
   }
 }
 

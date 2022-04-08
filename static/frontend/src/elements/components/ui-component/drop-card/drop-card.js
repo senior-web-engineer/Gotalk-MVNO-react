@@ -16,7 +16,9 @@ const DropCard = ({ children, addClass }) => {
           {' '}
         </button>
       </div>
-      <div className={isOpenCard ? 'drop-card__text open-card-text' : 'drop-card__text'}>{children}</div>
+      <div className={isOpenCard ? 'drop-card__text open-card-text' : 'drop-card__text'}>
+          {children}
+      </div>
     </article>
   );
 };

@@ -32,24 +32,41 @@
 .how-it-works__subtitle {}
 
 .how-it-works__instructions {
-  margin-top: 48px;
-  background-color: $beige;
-  border-radius: 10px;
-  padding: 24px;
+  display: flex;
+  margin: 15px 0;
 
-  @include below-breakpoint(xs) {
-    margin-top: 24px;
+  @include below-breakpoint(sm) {
+    flex-direction: column;
   }
 }
 
 .how-it-works__instruction {
-  &:not(:last-child) {
-    margin-bottom: 24px;
+  background-color: #041631;
+  border-radius: 12px;
+  margin: 0 10px;
+  padding: 15px 30px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    margin-left: 0;
+  }
+  &:last-child {
+    margin-right: 0;
   }
 
-  @include below-breakpoint(xs) {
+  @include below-breakpoint(sm) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: 0;
     &:not(:last-child) {
       margin-bottom: 12px;
     }
   }
+}
+
+.how-it-works__instruction__number {
+  font-size: 70px;
+  margin-right: 10px;
 }
