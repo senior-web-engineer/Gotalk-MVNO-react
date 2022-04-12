@@ -47,7 +47,7 @@ const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
             containerClass="user-info-form__input"
             placeholder="Enter telephone number"
             type="text"
-            label="Telephone number"
+            label="Telephone number (Optional)"
           />
         )}
         <Input
@@ -78,7 +78,7 @@ const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
             containerClass="user-info-form__input"
             placeholder="Enter telephone number"
             type="text"
-            label="Telephone number"
+            label="Telephone number (Optional)"
           />
         )}
         <Input

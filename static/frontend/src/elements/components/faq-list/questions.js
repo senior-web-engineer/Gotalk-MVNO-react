@@ -68,7 +68,7 @@ const questions = [
   },
   {
     summary: 'How do I port my existing number?',
-    details: 'You can easily port your existing number. After completing an order on our website, you will be given a temporary number. In your account, click on the option to ‘Port’ your existing number and follow the simple on screen instructions. Most Ports complete in a very short time period.'
+    details: 'You can easily port your existing number. After completing an order on our website, in your account, click on the option to ‘Port’ your existing number and follow the simple on screen instructions. Most Ports complete in a very short time period.'
   }
 ];
 

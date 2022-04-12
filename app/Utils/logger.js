@@ -1,18 +1,73 @@
 const config = require("../../config/logger.config");
 const {createLogger, transports} = require('winston');
-var S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
+const S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
+const PostgresTransport = require('winston-postgres-transport');
+require('dotenv').config({ silent: process.env === 'production'});
 
 const s3LogEnabled = false;
 
-// simple Logger
-const logger = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.main.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.main)}) :
-            new transports.File(config.options.file)
+function giveTransportList(type) {
+    let s3Config = {};
+    let dbTable = '';
+    switch (type) {
+        case 'main':
+            s3Config = config.s3.main;
+            dbTable = "logMain";
+            break;
 
-    ],
+        case 'pay':
+            s3Config = config.s3.pay;
+            dbTable = "logPay";
+            break;
+
+        case 'req':
+            s3Config = config.s3.plintron.reqS3;
+            dbTable = "logPlintronRequest";
+            break;
+
+        case 'res':
+            s3Config = config.s3.plintron.resS3;
+            dbTable = "logPlintronResponse";
+            break;
+
+        case 'error':
+            s3Config = config.s3.plintron.errorS3;
+            dbTable = "logPlintronError";
+            break;
+
+        case 'cron':
+            s3Config = config.s3.plintron.cronS3;
+            dbTable = "logPlintronCron";
+            break;
+
+        case 'notify':
+            s3Config = config.s3.plintron.notifyS3;
+            dbTable = "logPlintronNotify";
+            break;
+
+        case 'importSim':
+            s3Config = config.s3.plintron.importSimS3;
+            dbTable = "logPlintronImportSim";
+            break;
+    }
+
+    const transportList = [
+        new transports.Console(config.options.console),
+    ];
+    if(config.s3.main.access_key_id && s3LogEnabled) {
+        transportList.push(new (transports.Stream)({stream: new S3StreamLogger(s3Config)}));
+    }
+    //if(process.env.NODE_ENV === 'production')
+    {
+        transportList.push(new PostgresTransport({
+            postgresUrl: `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`,
+        }));
+    }
+    return transportList;
+}
+
+const logger = new createLogger({
+    transports: giveTransportList('main'),
     exitOnError: false,
 });
 
@@ -24,73 +79,32 @@ logger.stream = {
 
 // Pay Logger
 const cronPay = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.pay.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.pay)}) :
-            new (transports.File)(config.payOptions.fileCron),
-
-    ]
+    transports: giveTransportList('pay')
 });
-
 
 // Plintron Logger
 const reqPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.reqS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.reqS3)}) :
-            new (transports.File)(config.plintronOptions.fileReq)
-    ]
+    transports: giveTransportList('req')
 });
 
 const resPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.resS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.resS3)}) :
-            new (transports.File)(config.plintronOptions.fileRes)
-
-    ]
+    transports: giveTransportList('res')
 });
 
 const errorPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.errorS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.errorS3)}) :
-            new (transports.File)(config.plintronOptions.fileError),
-
-    ]
+    transports: giveTransportList('error')
 });
 
 const cronPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.cronS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.cronS3)}) :
-            new (transports.File)(config.plintronOptions.fileCron)
-
-    ]
+    transports: giveTransportList('cron')
 });
 
 const notifyPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.notifyS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.notifyS3)}) :
-            new (transports.File)(config.plintronOptions.fileNotify),
-
-    ]
+    transports: giveTransportList('notify')
 });
 
 const importSimPlintron = new createLogger({
-    transports: [
-        new transports.Console(config.options.console),
-        (config.s3.plintron.importSimS3.access_key_id && s3LogEnabled) ?
-            new (transports.Stream)({stream: new S3StreamLogger(config.s3.plintron.importSimS3)}) :
-            new (transports.File)(config.plintronOptions.importSim),
-    ]
+    transports: giveTransportList('importSim')
 });
 
 const payLogger = {
