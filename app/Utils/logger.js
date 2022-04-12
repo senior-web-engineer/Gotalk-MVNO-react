@@ -1,67 +1,70 @@
 const config = require("../../config/logger.config");
 const {createLogger, transports} = require('winston');
 const S3StreamLogger = require('s3-streamlogger').S3StreamLogger;
-const PostgresTransport = require('winston-postgres-transport');
-require('dotenv').config({ silent: process.env === 'production'});
+const db = require("../Models/index");
+const WinstonTransportSequelize = require("../Utils/winstonTransportSequelize");
+const Sequelize = require('sequelize');
 
 const s3LogEnabled = false;
 
 function giveTransportList(type) {
     let s3Config = {};
-    let dbTable = '';
+    let logType = '';
     switch (type) {
         case 'main':
             s3Config = config.s3.main;
-            dbTable = "logMain";
+            logType = "logMain";
             break;
 
         case 'pay':
             s3Config = config.s3.pay;
-            dbTable = "logPay";
+            logType = "logPay";
             break;
 
         case 'req':
             s3Config = config.s3.plintron.reqS3;
-            dbTable = "logPlintronRequest";
+            logType = "logPlintronRequest";
             break;
 
         case 'res':
             s3Config = config.s3.plintron.resS3;
-            dbTable = "logPlintronResponse";
+            logType = "logPlintronResponse";
             break;
 
         case 'error':
             s3Config = config.s3.plintron.errorS3;
-            dbTable = "logPlintronError";
+            logType = "logPlintronError";
             break;
 
         case 'cron':
             s3Config = config.s3.plintron.cronS3;
-            dbTable = "logPlintronCron";
+            logType = "logPlintronCron";
             break;
 
         case 'notify':
             s3Config = config.s3.plintron.notifyS3;
-            dbTable = "logPlintronNotify";
+            logType = "logPlintronNotify";
             break;
 
         case 'importSim':
             s3Config = config.s3.plintron.importSimS3;
-            dbTable = "logPlintronImportSim";
+            logType = "logPlintronImportSim";
             break;
     }
 
     const transportList = [
         new transports.Console(config.options.console),
+        new WinstonTransportSequelize({
+            sequelize: db.sequelize, // sequelize instance [required]
+            meta: { project: logType }, // meta object defaults
+            fields: { meta: Sequelize.JSONB }, // merge model fields
+            modelOptions: { timestamps: false }, // merge model options
+            logType: logType,
+            level: 'info'
+        })
     ];
     if(config.s3.main.access_key_id && s3LogEnabled) {
         transportList.push(new (transports.Stream)({stream: new S3StreamLogger(s3Config)}));
-    }
-    //if(process.env.NODE_ENV === 'production')
-    {
-        transportList.push(new PostgresTransport({
-            postgresUrl: `postgres://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`,
-        }));
     }
     return transportList;
 }
