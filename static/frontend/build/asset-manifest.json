@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.602c1291.css",
-    "main.js": "/static/js/main.7f6ae7d2.js",
+    "main.css": "/static/css/main.ee141749.css",
+    "main.js": "/static/js/main.6b3bf6cc.js",
     "static/media/cryptocoins.webp": "/static/media/cryptocoins.d6b60706e201f9dcf326.webp",
     "static/media/man-with-tablet.webp": "/static/media/man-with-tablet.cb568381963b4c8c037e.webp",
     "static/media/hands-with-phone.webp": "/static/media/hands-with-phone.0a974753acba5e4c6e72.webp",
@@ -48,11 +48,11 @@
     "static/media/checkmark.svg": "/static/media/checkmark.85d84d029f4b638d4cfd.svg",
     "static/media/minus.svg": "/static/media/minus.7742b360fad0d0e081788d32e4e3d4e4.svg",
     "static/media/quotes.svg": "/static/media/quotes.317267598f4eb3e807ad6fd0f1fc237d.svg",
-    "main.602c1291.css.map": "/static/css/main.602c1291.css.map",
-    "main.7f6ae7d2.js.map": "/static/js/main.7f6ae7d2.js.map"
+    "main.ee141749.css.map": "/static/css/main.ee141749.css.map",
+    "main.6b3bf6cc.js.map": "/static/js/main.6b3bf6cc.js.map"
   },
   "entrypoints": [
-    "static/css/main.602c1291.css",
-    "static/js/main.7f6ae7d2.js"
+    "static/css/main.ee141749.css",
+    "static/js/main.6b3bf6cc.js"
   ]
 }

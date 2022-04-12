@@ -35,6 +35,7 @@
   @include text-card();
   width: 32.35%;
   margin-top: 24px;
+  display: flex;
   @media (max-width: 1600px) {
     width: 100%;
     margin: 24px auto 0px auto;
@@ -43,17 +44,15 @@
 
 .cards-plan__head-three {
   font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
-  line-height: calc(32px + (44 - 32) * ((100vw - 375px) / (1920 - 375)));
-  margin-bottom: calc(24px + (48 - 24) * ((100vw - 375px) / (1920 - 375)));
   font-family: 'Roboto-Bold';
   font-weight: 700;
+  flex-grow: 1;
 }
 
 .cards-item-paragraph {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding-top: calc(12px + (24 - 12) * ((100vw - 375px) / (1920 - 375)));
 }
 
 .cards-item-paragraph__value {

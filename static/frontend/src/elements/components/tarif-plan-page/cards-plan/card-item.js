@@ -7,36 +7,29 @@ const CardsItem = ({ title, description, descriptionTwo, descriptionThree, value
   <section className="cards-item">
     <h3 className="cards-plan__head-three">{title}</h3>
     <div className="cards-item-paragraph">
-      <p className="cards-item-paragraph__item">{description}</p>
       {title === 'Internet' && (
         <span className="cards-item-paragraph__value">
           {value?.value} {value?.unit}
         </span>
       )}
-    </div>
-    <div className="cards-item-paragraph">
-      <p className="cards-item-paragraph__item">{descriptionTwo}</p>
-      {title === 'Calls' && (
+    {title === 'Calls' && (
         <span className="cards-item-paragraph__value">
+      {value === '9007199254740991' ? (
+          <span className="infinity-symbol">∞</span>
+      ) : (
+          `${value} min`
+      )}
+    </span>
+    )}
+        {title === 'SMS' && (
+            <span className="cards-item-paragraph__value">
           {value === '9007199254740991' ? (
-            <span className="infinity-symbol">∞</span>
+              <span className="infinity-symbol">∞</span>
           ) : (
-            `${value} min`
+              `${value} SMS`
           )}
         </span>
-      )}
-      {title === 'SMS' && (
-        <span className="cards-item-paragraph__value">
-          {value === '9007199254740991' ? (
-            <span className="infinity-symbol">∞</span>
-          ) : (
-            `${value} SMS`
-          )}
-        </span>
-      )}
-    </div>
-    <div className="cards-item-paragraph">
-      <p className="cards-item-paragraph__item">{descriptionThree}</p>
+        )}
     </div>
   </section>
 );
