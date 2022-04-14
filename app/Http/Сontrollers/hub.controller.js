@@ -11,6 +11,7 @@ const {PayController} = require("./pay.controller");
 const {WholesalePlanController} = require("./wholesalePlan.controller");
 const {OrdersController} = require("./orders.controller");
 const {SystemController} = require("./system.controller");
+const {CouponController} = require("./coupon.controller");
 
 module.exports = {
     auth : new AuthController(),
@@ -26,4 +27,5 @@ module.exports = {
     wholesalePlan : new WholesalePlanController(),
     orders : new OrdersController(),
     system : new SystemController(),
+    coupon : new CouponController()
 };

@@ -181,6 +181,14 @@ module.exports = function (app) {
             router.delete("/:id", controller.orders.destroy);
         });
 
+        router.group("/coupons", (router) => {
+           router.get("/", [middleware.role('Owner')], controller.coupon.findAll);
+           router.get("/:id", [middleware.role('Owner')], controller.coupon.findOne);
+           router.post("/", [middleware.role('Owner'), middleware.validator], controller.coupon.create);
+           router.put("/:id", [middleware.role('Owner'), middleware.validator], controller.coupon.update);
+           router.delete("/:id", controller.coupon.delete);
+           router.get("/canUseCoupon", controller.coupon.canUseCoupon);
+        });
     });
 
     app.use((req, res, next) => next(createError(404)));
