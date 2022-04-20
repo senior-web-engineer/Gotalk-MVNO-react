@@ -5,6 +5,8 @@ import user from "./users";
 import plans from "./plans";
 import plansPlintron from "./plans-plintron";
 import plansWholesales from "./plans-wholesales";
+import coupons from './coupons';
+import couponUsages from './coupon-usages';
 import { get } from "lodash";
 
 const dataProvider = {
@@ -24,6 +26,13 @@ const dataProvider = {
 
       case RESOURCE_NAMES.PLANS_WHOLESALES:
         return plansWholesales.getList(params);
+
+      case RESOURCE_NAMES.COUPONS:
+        return coupons.getList(params);
+
+      case RESOURCE_NAMES.COUPON_USAGES:
+        return couponUsages.getList(params);
+
       default:
         return { data: [], total: 0 };
     }
@@ -46,6 +55,12 @@ const dataProvider = {
       case RESOURCE_NAMES.PLANS_WHOLESALES:
         return plansWholesales.getOne(params);
 
+      case RESOURCE_NAMES.COUPONS:
+        return coupons.getOne(params);
+
+      case RESOURCE_NAMES.COUPON_USAGES:
+        return couponUsages.getOne(params);
+
       default:
         return { data: [] };
     }
@@ -54,11 +69,14 @@ const dataProvider = {
   getMany: async (resource, params) => Promise.resolve(),
 
   getManyReference: async (resource, params) => {
-    const response = await axios.get(
-      `https://jsonplaceholder.typicode.com/${resource}/1`,
-    );
+    switch (resource) {
 
-    return { data: response.data, total: 10 };
+      case RESOURCE_NAMES.COUPON_USAGES:
+        return couponUsages.getManyReference(params);
+
+      default:
+        return { data: [], total: 0 };
+    }
   },
 
   create: async (resource, params) => {
@@ -69,6 +87,8 @@ const dataProvider = {
         return plansPlintron.create(params);
       case RESOURCE_NAMES.PLANS_WHOLESALES:
         return plansWholesales.create(params);
+      case RESOURCE_NAMES.COUPONS:
+        return coupons.create(params);
       default:
         const response = await axios.get(
           `https://jsonplaceholder.typicode.com/${resource}/1`,
@@ -91,6 +111,8 @@ const dataProvider = {
       case RESOURCE_NAMES.ORDERS:
         const ordersId = get(params, "data.id", "");
         return { data: { id: ordersId } };
+      case RESOURCE_NAMES.COUPONS:
+        return coupons.update(params);
       default:
         return { data: { ...params.data } };
     }
@@ -120,6 +142,9 @@ const dataProvider = {
 
       case RESOURCE_NAMES.USER:
         return user.removeOne(params);
+
+      case RESOURCE_NAMES.COUPONS:
+        return coupons.removeOne(params);
       default:
         return { data: [] };
     }

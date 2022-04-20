@@ -189,6 +189,14 @@ module.exports = function (app) {
            router.delete("/:id", controller.coupon.delete);
            router.get("/canUseCoupon", controller.coupon.canUseCoupon);
         });
+
+        router.group("/couponUsages", (router) => {
+            router.get("/", [middleware.role('Owner')], controller.couponUsage.findAll);
+            router.get("/byCouponId/:id", [middleware.role('Owner')], controller.couponUsage.findAllByCouponId);
+            router.get("/:id", [middleware.role('Owner')], controller.couponUsage.findOne);
+            router.post("/", [middleware.role('Owner'), middleware.validator], controller.couponUsage.create);
+            router.put("/:id", [middleware.role('Owner'), middleware.validator], controller.couponUsage.update);
+        });
     });
 
     app.use((req, res, next) => next(createError(404)));

@@ -21,6 +21,11 @@ import PlansPlintronCreate from "./resource/plans-plintron/create/Create";
 import PlansWholesalesCreate from "./resource/plans-wholesales/create/Create";
 import PlansEdit from "./resource/plans/edit/Edit";
 import PlansWholesalesEdit from "./resource/plans-wholesales/edit/Edit";
+import CouponsShow from "./resource/coupons/show/Show";
+import CouponsList from "./resource/coupons/list/List";
+import CouponsCreate from "./resource/coupons/create/Create";
+import CouponsEdit from "./resource/coupons/edit/Edit";
+import CouponUsagesList from "./resource/coupon-usages/list/List";
 
 const App = () => (
   <div className="app">
@@ -61,6 +66,19 @@ const App = () => (
         list={UserList}
         name={RESOURCE_NAMES.USER}
         edit={UserEdit}
+      />
+        <Resource
+            name={RESOURCE_NAMES.COUPONS}
+            show={CouponsShow}
+            list={CouponsList}
+            create={CouponsCreate}
+            edit={CouponsEdit}
+        />
+      <Resource
+          title="Coupon Usages"
+          label="Coupon Usages"
+          name={RESOURCE_NAMES.COUPON_USAGES}
+          list={CouponUsagesList}
       />
     </Admin>
   </div>

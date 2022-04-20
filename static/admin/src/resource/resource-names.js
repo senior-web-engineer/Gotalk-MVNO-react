@@ -4,6 +4,8 @@ const RESOURCE_NAMES = {
   PLANS_WHOLESALES:'plans_wholesales',
   ORDERS: 'orders',
   USER: 'users',
+  COUPONS: 'coupons',
+  COUPON_USAGES: 'couponUsages'
 };
 
 export default RESOURCE_NAMES;

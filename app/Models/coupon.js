@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Coupon.belongsTo(models.Plan, {foreignKey: 'planId', as: 'plan'});
+      Coupon.hasMany(models.CouponUsage,{ foreignKey: 'couponId', as: 'CouponUsages'});
     }
   };
   Coupon.init({
     code: DataTypes.STRING,
     monthCount: DataTypes.STRING,
-    planId: DataTypes.INTEGER
+    planId: DataTypes.INTEGER,
+    expireDate: DataTypes.DATE,
+    isActive: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Coupon',
