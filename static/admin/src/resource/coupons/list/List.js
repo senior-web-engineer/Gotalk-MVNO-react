@@ -8,6 +8,7 @@ import {
     DeleteButton,
     TopToolbar,
     CreateButton,
+    NumberField,
 } from "react-admin";
 import { useMediaQuery } from "@material-ui/core";
 
@@ -30,12 +31,14 @@ const CouponsList = (props, source, label) => {
             {isSmall ? (
                 <SimpleList
                     primaryText={(record) => record.code}
+                    secondaryText={(record) => record.discountAmount}
                     tertiaryText={(record) => record.isActive ? 'Active' : 'Not Active'}
                     linkType={(record) => record.monthCount}
                 />
             ) : (
                 <Datagrid rowClick="show">
                     <TextField emptyText="missing" source="code" label="Coupon Code" />
+                    <NumberField emptyText="missing" label="Discount Amount" source="discountAmount" />
                     <BooleanField emptyText="missing" source="isActive" label="Is Active?" />
                     <TextField emptyText="missing" source="monthCount" label="Month Count" />
                     <TextField emptyText="missing" source="plan.name" label="Plan Name" />

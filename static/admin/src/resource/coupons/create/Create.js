@@ -18,6 +18,7 @@ const CouponsCreate = (props) => {
             <SimpleForm>
                 <TextInput label="Code" source="code" validate={[required()]} />
                 <NumberInput label="Month Count" source="monthCount" validate={[required()]} />
+                <NumberInput label="Discount Amount" source="discountAmount" validate={[required()]} />
                 <BooleanInput label="Is Active?" source="isActive" validate={[required()]} />
                 <DateInput label="Expire Date" source="expireDate" validate={[required()]} />
                 <ReferenceInput label="Plan" source="plan.id" reference={RESOURCE_NAMES.PLANS} validate={[required()]}>

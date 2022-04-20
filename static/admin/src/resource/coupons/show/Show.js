@@ -6,7 +6,7 @@ import {
     TabbedShowLayout,
     Tab, DateField,
     Datagrid,
-    ReferenceManyField, BooleanField
+    ReferenceManyField, BooleanField, NumberField
 } from "react-admin";
 
 const CouponsShow = (props) => {
@@ -22,6 +22,7 @@ const CouponsShow = (props) => {
                     <SimpleShowLayout>
                         <TextField emptyText="missing" source="code" label="Coupon Code" />
                         <BooleanField emptyText="missing" source="isActive" label="Is Active?" />
+                        <NumberField emptyText="missing" source="discountAmount" label="Discount Amount" />
                         <TextField emptyText="missing" source="monthCount" label="Month Count" />
                         <TextField emptyText="missing" source="plan.name" label="Plan Name" />
                         <DateField

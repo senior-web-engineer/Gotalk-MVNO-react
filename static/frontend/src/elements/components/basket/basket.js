@@ -148,6 +148,9 @@ const Basket = ({ setBasketEmpty }) => {
             <div className="basket__price-row taxes">
               <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
             </div>
+            <div className="basket__price-row coupon">
+              <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
+            </div>
             <div className="basket__price-row policy">
               <p className="basket__price-row__policy-text">
                 By placing your order, you agree to our <a href="/terms-conditions" target="_blank">Terms & Conditions</a>, <a href="/return-policy" target="_blank">Refund Policy</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>

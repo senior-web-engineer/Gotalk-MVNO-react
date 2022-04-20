@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     monthCount: DataTypes.STRING,
     planId: DataTypes.INTEGER,
     expireDate: DataTypes.DATE,
-    isActive: DataTypes.BOOLEAN
+    isActive: DataTypes.BOOLEAN,
+    discountAmount: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Coupon',
