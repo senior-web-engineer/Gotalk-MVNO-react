@@ -2,7 +2,7 @@ import './billing-form.scss';
 import routes from '../../../navigation/routes';
 import actionsType from '../../../redux/workers/main-page/actions-type';
 import paymentTypes from '../../../redux/workers/payment/payment-types';
-import { getBasketItems } from '../../../shared/basketActions';
+import {getBasketItems, getCouponFromLocalStorage} from '../../../shared/basketActions';
 import { billingUserSchema, deliverySchema, emptySchema } from '../../../shared/schemas/validation-rules';
 import DeliveryInfoForm from '../delivery-info-form/delivery-info-form';
 import Checkbox from '../ui-component/checkbox/checkbox';
@@ -82,6 +82,7 @@ const BillingForm = ({ onSubmit }) => {
     const products = getBasketItems();
     const userInfoData = {
       products,
+      coupon: getCouponFromLocalStorage()
     };
 
     if (location.state?.hasDelivery) {

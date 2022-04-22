@@ -23,6 +23,8 @@ const UserSimPort = db.UserSimPort;
 const Sequelize = require('sequelize');
 const {plintron} = require("../../../config/index.config");
 const Op = Sequelize.Op;
+const Coupon = db.Coupon;
+const CouponUsage = db.CouponUsage;
 
 class SimCardClass {
 
@@ -255,7 +257,27 @@ class SimCardClass {
                     }
                 }
             }
-            return {sum, productIds, info}
+
+            let couponId;
+            let discountAmount = 0;
+            if(data.coupon) {
+                const requestedCoupon = await Coupon.findOne({where: {id: data.coupon.id}});
+                if(requestedCoupon?.isActive) {
+                    const planExists = data.products.some(m => m.planId === requestedCoupon.planId);
+                    if(planExists) {
+                        discountAmount = requestedCoupon.discountAmount;
+                        couponId = requestedCoupon.id;
+                    }
+                }
+            }
+
+            return {
+                sum: sum - discountAmount,
+                productIds,
+                info,
+                couponId,
+                discountAmount
+            }
         } catch (e) {
             plintronLogger.error(e.message);
             throw new PlintronError(e.code || 0, e.message || "Error");
@@ -327,6 +349,17 @@ class SimCardClass {
                 if (!paymentStatus) throw new PlintronError(503, 'Payment not confirmed');
                 await userPay.update({status: 'paid'});
                 await StripPay.update({payToken: null}, {where: {userPayId: userPay.id}});
+
+                if(userPay.couponId > 0) {
+                    const coupon = await CouponUsage.findByPk(userPay.couponId);
+                    await CouponUsage.create({
+                        couponId: coupon.id,
+                        monthCount: coupon.monthCount,
+                        userId: userPay.userId,
+                        usedMonthCount: 1,
+                        userSimPlanIds: userPay.productId
+                    });
+                }
             }
             if (userPay.action === 'bySimCard') {
                 let products = await UserProduct.findAll({

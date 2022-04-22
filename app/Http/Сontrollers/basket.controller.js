@@ -18,7 +18,9 @@ class BasketController {
 
             userPay = await UserPay.create({
                 action: "bySimCard", sum: products.sum, userId: user.id,
-                productId: products.productIds, paymentType: 'stripe'
+                productId: products.productIds, paymentType: 'stripe',
+                discountAmount: products.discountAmount,
+                couponId: products.couponId
             });
             const intent = await paymentServices.createPayment(userPay);
             if (body.user) token = await auth.token(user);

@@ -8,7 +8,7 @@ import {
   countTotalPlans,
   deleteFromBasket,
   getBasketItems,
-  hasPlasticSim,
+  hasPlasticSim, setCouponToLocalStorage,
   updateBasket,
 } from '../../../shared/basketActions';
 import BasketItem from '../ui-component/basket-item/basket-item';
@@ -18,6 +18,11 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {useForm} from "react-hook-form";
+import Input from "../ui-component/input/input";
+import Spinner from "../ui-component/spinner/spinner";
+import { ReactComponent as CrossIcon } from '../../../assets/images/icons/cross.svg';
+import {canUseCoupon} from "../../../redux/workers/basket/coupon";
 
 const Basket = ({ setBasketEmpty }) => {
   const navigate = useNavigate();
@@ -27,14 +32,25 @@ const Basket = ({ setBasketEmpty }) => {
   const totalCount = useSelector((state) => state.basketReducer.totalCount);
   const hasDelivery = useSelector((state) => state.basketReducer.hasDelivery);
   const plans = useSelector((state) => state.mainReducer.plans);
-  const { errors } = useSelector((state) => state.payment);
+  const { errors: paymentErrors } = useSelector((state) => state.payment);
   const { isSignedIn, user } = useSelector((state) => state.authReducer);
+  const [coupon, setCoupon] = useState();
+  const [couponLoading, setCouponLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const handleNavigateToBillingForm = () => {
+    setCouponToLocalStorage(coupon);
+
     if (isSignedIn && !hasDelivery) {
       const userInfo = {
         products: getBasketItems(),
+        coupon: coupon
       };
 
       dispatch({
@@ -123,16 +139,86 @@ const Basket = ({ setBasketEmpty }) => {
     ));
   };
 
+  const couponForm = () => {
+    if(couponLoading) {
+      return (
+          <div className="basket__price-col__coupon-spinner">
+            <Spinner />
+          </div>
+      );
+    }
+
+    if(coupon) {
+      return (
+        <div className="basket__price-col__coupon-active">
+            <div className="basket__price-col__coupon-active-text">
+              <b>{coupon.code}</b> <br />
+              Yay! You saved <b>${coupon.discountAmount}</b> for <b>{coupon.monthCount}</b>
+            </div>
+            <div className="basket__price-col__coupon-active-cross" onClick={() => setCoupon(undefined)}>
+              <CrossIcon />
+            </div>
+        </div>
+      );
+    }
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="basket__price-col__coupon-form">
+            <Input
+                {...register('couponCode', {
+                  required: true,
+                })}
+                type="text"
+                placeholder="Enter a code"
+                containerClass="basket__price-col__coupon-input"
+                isInvalid={!!errors.couponCode}
+            />
+            <button className="basket__price-col__coupon-button" type="submit">
+              APPLY
+            </button>
+          </div>
+        </form>
+    );
+  }
+
+  const onSubmit = async ({couponCode}) => {
+    setCouponLoading(true);
+    try {
+      const coupon = await canUseCoupon({
+        code: couponCode,
+        planIds: basketItems.map(m => m.planId)
+      });
+      if(coupon?.data?.payload) {
+        setCoupon(coupon.data.payload);
+      } else {
+        alert('No coupon applied!');
+      }
+    }
+    catch (e) {
+      alert('An error occurred while applying the coupon code');
+    }
+
+    setCouponLoading(false);
+  };
+
   return (
     <div className="basket">
       <section className="basket__products">
         <h2 className="basket__title">Basket</h2>
-        <SimsOutErrors errors={errors} plans={plans} />
+        <SimsOutErrors errors={paymentErrors} plans={plans} />
         <div className="basket__products-container">
           <ul className="basket__products-list">
             <li className="basket__products-list-item">{renderBasketItems()}</li>
           </ul>
           <div className="basket__price-container">
+            <div className="basket__price-col coupon">
+              <div className="basket__price-col__coupon-title">Promo Code</div>
+              <div className="basket__price-col__coupon-form-wrapper">
+                {couponForm()}
+              </div>
+            </div>
+            <hr />
             <div className="basket__price-row">
               <div className="basket__price-col">Delivery</div>
               <div className="basket__price-col sum">{hasDelivery ? 'is 2 – 3 days' : '$0'}</div>
@@ -141,14 +227,17 @@ const Basket = ({ setBasketEmpty }) => {
               <div className="basket__price-col">Lines</div>
               <div className="basket__price-col sum">{totalLines}</div>
             </div>
+            {coupon && (
+                <div className="basket__price-row discount">
+                  <div className="basket__price-col">Coupon Discount</div>
+                  <div className="basket__price-col">{`(-) $${coupon.discountAmount}`}</div>
+                </div>
+            )}
             <div className="basket__price-row total">
               <div className="basket__price-col">Total</div>
-              <div className="basket__price-col">{`$${totalPrice}`}</div>
+              <div className="basket__price-col">{`$${totalPrice - (coupon?.discountAmount || 0)}`}</div>
             </div>
             <div className="basket__price-row taxes">
-              <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
-            </div>
-            <div className="basket__price-row coupon">
               <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
             </div>
             <div className="basket__price-row policy">

@@ -100,3 +100,11 @@ export const countTotalPlans = () => getBasketItems()
   .reduce((total, item) => total + item.count, 0);
 
 export const hasPlasticSim = () => getBasketItems().filter((item) => !item.isEsim).length;
+
+export const setCouponToLocalStorage = (coupon) => {
+  localStorage.setItem('coupon', JSON.stringify(coupon));
+}
+
+export const getCouponFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem('coupon'));
+};

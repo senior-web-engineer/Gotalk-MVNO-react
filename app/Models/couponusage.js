@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       CouponUsage.belongsTo(models.Coupon, {foreignKey: 'couponId'});
       CouponUsage.belongsTo(models.User, {foreignKey: 'userId'});
-      CouponUsage.belongsTo(models.UserSimPlan, {foreignKey: 'userSimPlanId'});
+      CouponUsage.belongsTo(models.UserSimPlan, {foreignKey: 'userSimPlanIds'});
     }
   };
   CouponUsage.init({
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     monthCount: DataTypes.INTEGER,
     userId: DataTypes.STRING,
     usedMonthCount: DataTypes.INTEGER,
-    userSimPlanId: DataTypes.INTEGER
+    userSimPlanIds: DataTypes.ARRAY(DataTypes.INTEGER)
   }, {
     sequelize,
     modelName: 'CouponUsage',

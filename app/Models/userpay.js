@@ -15,6 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         paymentType: DataTypes.STRING,
         productId: DataTypes.ARRAY(DataTypes.INTEGER),
+        couponId: DataTypes.INTEGER,
+        discountAmount: DataTypes.FLOAT
     }, {
         sequelize,
         modelName: 'UserPay',

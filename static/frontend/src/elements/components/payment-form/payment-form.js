@@ -19,6 +19,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import {getCouponFromLocalStorage} from "../../../shared/basketActions";
 
 const PaymentForm = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -45,6 +46,11 @@ const PaymentForm = () => {
     }),
     [],
   );
+  const [coupon, setCoupon] = useState();
+
+  useEffect(() => {
+    setCoupon(getCouponFromLocalStorage());
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -170,7 +176,7 @@ const PaymentForm = () => {
         </div>
         <span className="payment-form__total-price-container">
           <strong className="payment-form__total-price-text">Total</strong>
-          <strong className="payment-form__total-price-price">{`$${totalPrice}`}</strong>
+          <strong className="payment-form__total-price-price">{`$${totalPrice - (coupon?.discountAmount || 0)}`}</strong>
         </span>
         <div className="payment-form__card-container">
           <div className="payment-form__card-side front">

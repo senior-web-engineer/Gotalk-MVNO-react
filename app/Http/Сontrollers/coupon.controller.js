@@ -37,14 +37,20 @@ class CouponController extends MainController {
 
     canUseCoupon = async (req, res) => {
         try {
-            const {code, planId} = req.query;
-            const coupon = await Coupon.findOne({
-                where: {
-                    code, planId,
-                    isActive: true
+            const {code, planIds} = req.query;
+            let coupon;
+            for(let planId of planIds) {
+                coupon = await Coupon.findOne({
+                    where: {
+                        code, planId,
+                        isActive: true
+                    }
+                });
+                if(coupon) {
+                    break;
                 }
-            });
-            return this.successRes(res, coupon?.id > 0);
+            }
+            return this.successRes(res, coupon);
         }
         catch (e) {
             return this.errorRes(res, e);

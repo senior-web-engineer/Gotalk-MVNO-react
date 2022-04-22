@@ -33,3 +33,7 @@ export const ACCOUNT = {
   postActivateESim: '/v1/sim/esim/activate',
   getQr: '/v1/sim/esim/qr',
 };
+
+export const COUPON = {
+  canUseCoupon: '/v1/coupons/canUseCoupon'
+}
