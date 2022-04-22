@@ -22,13 +22,12 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
   return (
     <div className={contentClass}>
       <div className={colClass}>
-        {/*<GooglePlacesAutocomplete*/}
-        {/*    apiKey={process.env.GOOGLE_API_KEY}*/}
-        {/*    selectProps={{*/}
-        {/*      value: values,*/}
-        {/*      onChange: setValues,*/}
-        {/*    }}*/}
-        {/*/>*/}
+        <GooglePlacesAutocomplete
+            selectProps={{
+              value: values,
+              onChange: setValues,
+            }}
+        />
         <Input
           {...register(getFieldName('firstName', parentName))}
           description={errors.firstName?.message}
