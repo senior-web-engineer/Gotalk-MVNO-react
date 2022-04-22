@@ -3,8 +3,9 @@ import getFieldName from '../../../shared/getFieldName';
 import Input from '../ui-component/input/input';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useFormContext } from 'react-hook-form';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
   const { formState, register } = useFormContext();
@@ -12,10 +13,22 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
   const colClass = classNames('delivery-info-form__col', { 'delivery-info-form__col--wide': wide });
   const contentClass = classNames('delivery-info-form__form-content', { 'delivery-info-form__form-content--wide': wide });
   const inputClass = classNames('delivery-info-form__input', { 'delivery-info-form__input--wide': wide });
+  const [values, setValues] = useState();
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   return (
     <div className={contentClass}>
       <div className={colClass}>
+        {/*<GooglePlacesAutocomplete*/}
+        {/*    apiKey={process.env.GOOGLE_API_KEY}*/}
+        {/*    selectProps={{*/}
+        {/*      value: values,*/}
+        {/*      onChange: setValues,*/}
+        {/*    }}*/}
+        {/*/>*/}
         <Input
           {...register(getFieldName('firstName', parentName))}
           description={errors.firstName?.message}
