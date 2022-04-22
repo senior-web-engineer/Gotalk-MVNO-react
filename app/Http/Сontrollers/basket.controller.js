@@ -20,7 +20,8 @@ class BasketController {
                 action: "bySimCard", sum: products.sum, userId: user.id,
                 productId: products.productIds, paymentType: 'stripe',
                 discountAmount: products.discountAmount,
-                couponId: products.couponId
+                couponId: products.couponId,
+                doCaptureLater: products.doCaptureLater
             });
             const intent = await paymentServices.createPayment(userPay);
             if (body.user) token = await auth.token(user);

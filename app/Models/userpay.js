@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
         paymentType: DataTypes.STRING,
         productId: DataTypes.ARRAY(DataTypes.INTEGER),
         couponId: DataTypes.INTEGER,
-        discountAmount: DataTypes.FLOAT
+        discountAmount: DataTypes.FLOAT,
+        doCaptureLater: DataTypes.BOOLEAN
     }, {
         sequelize,
         modelName: 'UserPay',

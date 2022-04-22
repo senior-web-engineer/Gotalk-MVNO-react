@@ -102,9 +102,15 @@ export const countTotalPlans = () => getBasketItems()
 export const hasPlasticSim = () => getBasketItems().filter((item) => !item.isEsim).length;
 
 export const setCouponToLocalStorage = (coupon) => {
-  localStorage.setItem('coupon', JSON.stringify(coupon));
+  try {
+    localStorage.setItem('coupon', JSON.stringify(coupon));
+  } catch {}
 }
 
 export const getCouponFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem('coupon'));
+  try {
+    return JSON.parse(localStorage.getItem('coupon'));
+  } catch {
+    return null;
+  }
 };

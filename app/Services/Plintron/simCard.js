@@ -276,7 +276,8 @@ class SimCardClass {
                 productIds,
                 info,
                 couponId,
-                discountAmount
+                discountAmount,
+                doCaptureLater: data.products.every(m => !m.isEsim)
             }
         } catch (e) {
             plintronLogger.error(e.message);
@@ -452,6 +453,17 @@ class SimCardClass {
             errCheckerPlintron(!userPay, 'SIM card not paid yet');
             errCheckerPlintron(simPlan.PlintronSim.type === 'physical'
                 && (simPlan?.Delivery?.status !== ('delivered' || 'shipped')), 'SIM card has not been delivered yet');
+
+            if(userPay.status === 'paid' && userPay.doCaptureLater) {
+                const captured = await paymentServices.capturePayment(userPay);
+                if(captured) {
+                    await UserPay.update({ doCaptureLater: false }, {
+                        where: {id: userPay.id}
+                    });
+                } else {
+                    errCheckerPlintron(!userPay, 'SIM card not paid yet');
+                }
+            }
 
             let allocatedMsisdn;
             try {
