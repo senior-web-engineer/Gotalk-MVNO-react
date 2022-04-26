@@ -8,11 +8,17 @@ const SimsOutErrors = ({ errors, plans }) => {
     const uniqueErrors = [];
 
     errors.forEach((error) => {
-      if (!parsedErrors[error.product?.planId]) {
-        parsedErrors[error.product?.planId] = true;
+      if (error.product?.planId) {
+        if(!parsedErrors[error.product?.planId]) {
+          parsedErrors[error.product?.planId] = true;
+          uniqueErrors.push({
+            planId: error.product.planId,
+            message: error.message,
+          });
+        }
+      } else {
         uniqueErrors.push({
-          planId: error.product.planId,
-          message: error.message,
+          message: error.msg,
         });
       }
     });
@@ -25,16 +31,27 @@ const SimsOutErrors = ({ errors, plans }) => {
       <div className="sims-out-error__error-container">
         {getUniqueErrors().map((error) => {
           if (error) {
-            const missingPlan = plans
-              .find((plan) => plan.id === error.planId)?.name;
-            return (
-              <p
-                className="sims-out-error__error-message"
-                key={error.planId + error.message}
-              >
-                {`${missingPlan}: ${error.message}`}
-              </p>
-            );
+            if(error.planId) {
+              const missingPlan = plans
+                  .find((plan) => plan.id === error.planId)?.name;
+              return (
+                  <p
+                      className="sims-out-error__error-message"
+                      key={error.planId + error.message}
+                  >
+                    {`${missingPlan}: ${error.message}`}
+                  </p>
+              );
+            } else {
+              return (
+                  <p
+                      className="sims-out-error__error-message"
+                      key={error.message}
+                  >
+                    {error.message}
+                  </p>
+              );
+            }
           }
           return <p className="sims-out-error__error-message" key={error.planId}>{error.message}</p>;
         })}

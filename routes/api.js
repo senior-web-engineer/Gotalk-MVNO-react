@@ -11,6 +11,7 @@ module.exports = function (app) {
 
     app.group("/api/v1", (router) => {
 
+        //#region Allow Anonymous
         router.post("/plintron-notify-data", xmlparser(), controller.plintronPlan.asynchResponse);
 
         router.group("/auth", (router) => {
@@ -34,6 +35,12 @@ module.exports = function (app) {
             router.get("/:id", controller.plan.findOne);
         });
 
+        router.group("/coupons", (router) => {
+            router.get("/canUseCoupon", controller.coupon.canUseCoupon);
+        });
+        //#endregion
+
+        //#region Authorized Only
         router.use(passport.authenticate('jwt', {session: false}));
 
         router.get("/test",middleware.role('Owner'), controller.test.test);
@@ -182,12 +189,11 @@ module.exports = function (app) {
         });
 
         router.group("/coupons", (router) => {
-           router.get("/", [middleware.role('Owner')], controller.coupon.findAll);
-           router.get("/canUseCoupon", controller.coupon.canUseCoupon);
-           router.get("/:id", [middleware.role('Owner')], controller.coupon.findOne);
-           router.post("/", [middleware.role('Owner'), middleware.validator], controller.coupon.create);
-           router.put("/:id", [middleware.role('Owner'), middleware.validator], controller.coupon.update);
-           router.delete("/:id", controller.coupon.delete);
+            router.get("/", [middleware.role('Owner')], controller.coupon.findAll);
+            router.get("/:id", [middleware.role('Owner')], controller.coupon.findOne);
+            router.post("/", [middleware.role('Owner'), middleware.validator], controller.coupon.create);
+            router.put("/:id", [middleware.role('Owner'), middleware.validator], controller.coupon.update);
+            router.delete("/:id", [middleware.role('Owner'), middleware.validator], controller.coupon.delete);
         });
 
         router.group("/couponUsages", (router) => {
@@ -197,6 +203,8 @@ module.exports = function (app) {
             router.post("/", [middleware.role('Owner'), middleware.validator], controller.couponUsage.create);
             router.put("/:id", [middleware.role('Owner'), middleware.validator], controller.couponUsage.update);
         });
+        //#endregion
+
     });
 
     app.use((req, res, next) => next(createError(404)));

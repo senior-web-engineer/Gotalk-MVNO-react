@@ -30,7 +30,7 @@ function* buyPlanSaga(params) {
     if (error.response) {
       yield put({
         type: paymentTypes.PAYMENT_FAILED,
-        payload: error.response.data.payload.errors,
+        payload: error.response.data.errors,
       });
     }
   } finally {
@@ -56,7 +56,7 @@ function* buyPlanAuthorizedSaga(params) {
     if (error.response) {
       yield put({
         type: paymentTypes.PAYMENT_FAILED,
-        payload: error.response.data.payload.errors,
+        payload: error.response.data.errors,
       });
     }
   } finally {

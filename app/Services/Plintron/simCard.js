@@ -277,7 +277,7 @@ class SimCardClass {
                 info,
                 couponId,
                 discountAmount,
-                doCaptureLater: data.products.every(m => !m.isEsim)
+                doCaptureLater: true
             }
         } catch (e) {
             plintronLogger.error(e.message);
