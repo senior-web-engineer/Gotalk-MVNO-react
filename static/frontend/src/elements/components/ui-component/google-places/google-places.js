@@ -1,12 +1,10 @@
 import './google-places.scss';
 import GooglePlacesAutocomplete, {geocodeByPlaceId} from "react-google-places-autocomplete";
 import React, {useState} from "react";
-import useClassnames from "../../../../shared/hooks/useClassnames";
 
-export default function GooglePlaces({onChange, containerClass, isInvalid, description}) {
+export default function GooglePlaces({onChange, containerClass}) {
 
     const [googleMapValue, setGoogleMapValue] = useState();
-    const descriptionClassNames = useClassnames('styled-input__description', isInvalid ? 'error' : '');
 
     function googleAddressChange(ev) {
         setGoogleMapValue(ev);
@@ -21,18 +19,17 @@ export default function GooglePlaces({onChange, containerClass, isInvalid, descr
 
     return (
         <div className={`styled-input ${containerClass}`}>
-            <p className="styled-input__label">Address</p>
+            <p className="styled-input__label">Automatic Address Entry w/Google</p>
             <GooglePlacesAutocomplete
                 apiKey={process.env.GOOGLE_MAPS}
                 selectProps={{
                     value: googleMapValue,
                     onChange: (ev) => googleAddressChange(ev),
                     placeholder: "Enter address",
-                    className: `google-autocomplete ${isInvalid ? 'error' : ''}`,
+                    className: 'google-autocomplete',
                     classNamePrefix: "gat"
                 }}
             />
-            <p className={descriptionClassNames}>{description}</p>
         </div>
     );
 }

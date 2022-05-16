@@ -13,7 +13,6 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
   const colClass = classNames('delivery-info-form__col', { 'delivery-info-form__col--wide': wide });
   const contentClass = classNames('delivery-info-form__form-content', { 'delivery-info-form__form-content--wide': wide });
   const inputClass = classNames('delivery-info-form__input', { 'delivery-info-form__input--wide': wide });
-  const [showAddress, setShowAddress] = useState(!!addressData);
 
   function googleAddressChange(place) {
     setValue(getFieldName('street', parentName), place.formatted_address);
@@ -27,8 +26,6 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
         setValue(getFieldName('city', parentName), item.long_name);
       }
     }
-
-    setShowAddress(true);
   }
 
   return (
@@ -58,72 +55,60 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
           <GooglePlaces
               containerClass={inputClass}
               onChange={googleAddressChange}
-              isInvalid={!!errors.street}
-              description={errors.street?.message}
           />
       )}
-        {showAddress && (
-            <Input
-                {...register(getFieldName('street', parentName))}
-                description={errors.street?.message}
-                isInvalid={!!errors.street}
-                containerClass={inputClass}
-                placeholder={addressData?.street || 'Enter street address'}
-                type="text"
-                label="Enter street address"
-                disabled={addressData}
-            />
-        )}
-        {showAddress && (
-            <Input
-                {...register(getFieldName('city', parentName))}
-                description={errors.city?.message}
-                isInvalid={!!errors.city}
-                containerClass={inputClass}
-                type="text"
-                label="Town / City"
-                placeholder={addressData?.city || 'Enter town/city'}
-                disabled={addressData}
-            />
-        )}
+        <Input
+            {...register(getFieldName('street', parentName))}
+            description={errors.street?.message}
+            isInvalid={!!errors.street}
+            containerClass={inputClass}
+            placeholder={addressData?.street || 'Enter street address'}
+            type="text"
+            label="Enter street address"
+            disabled={addressData}
+        />
+        <Input
+            {...register(getFieldName('city', parentName))}
+            description={errors.city?.message}
+            isInvalid={!!errors.city}
+            containerClass={inputClass}
+            type="text"
+            label="Town / City"
+            placeholder={addressData?.city || 'Enter town/city'}
+            disabled={addressData}
+        />
       </div>
       <div className={colClass}>
-        {showAddress && (
-            <Input
-                {...register(getFieldName('apartment', parentName))}
-                description={errors.apartment?.message}
-                isInvalid={!!errors.apartment}
-                containerClass={inputClass}
-                placeholder={addressData?.apartment || 'Enter apartment, suite, unit'}
-                type="text"
-                label="Apartment, suite, unit"
-                disabled={addressData}
-            />
-        )}
-        {showAddress && (
-            <Input
-                {...register(getFieldName('country', parentName))}
-                description={errors.country?.message}
-                isInvalid={!!errors.country}
-                containerClass={inputClass}
-                placeholder={addressData?.country || 'Enter state'}
-                type="text"
-                label="State"
-                disabled={addressData}
-            />
-        )}
-        {showAddress && (
-            <Input
-                {...register(getFieldName('zip', parentName))}
-                description={errors.zip?.message}
-                isInvalid={!!errors.zip}
-                containerClass={inputClass}
-                placeholder={addressData?.zip || 'Enter Zip'}
-                type="text"
-                label="Zip"
-                disabled={addressData}
-            />
-        )}
+        <Input
+            {...register(getFieldName('apartment', parentName))}
+            description={errors.apartment?.message}
+            isInvalid={!!errors.apartment}
+            containerClass={inputClass}
+            placeholder={addressData?.apartment || 'Enter apartment, suite, unit'}
+            type="text"
+            label="Apartment, suite, unit"
+            disabled={addressData}
+        />
+        <Input
+            {...register(getFieldName('country', parentName))}
+            description={errors.country?.message}
+            isInvalid={!!errors.country}
+            containerClass={inputClass}
+            placeholder={addressData?.country || 'Enter state'}
+            type="text"
+            label="State"
+            disabled={addressData}
+        />
+        <Input
+            {...register(getFieldName('zip', parentName))}
+            description={errors.zip?.message}
+            isInvalid={!!errors.zip}
+            containerClass={inputClass}
+            placeholder={addressData?.zip || 'Enter Zip'}
+            type="text"
+            label="Zip"
+            disabled={addressData}
+        />
       </div>
     </div>
   );

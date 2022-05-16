@@ -2,12 +2,30 @@ import './user-info-form.scss';
 import getFieldName from '../../../shared/getFieldName';
 import Input from '../ui-component/input/input';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useState} from 'react';
 import { useFormContext } from 'react-hook-form';
+import GooglePlaces from "../ui-component/google-places/google-places";
 
 const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
   const { formState, register } = useFormContext();
   const errors = formState.errors[parentName] || formState.errors;
+  const [showAddress, setShowAddress] = useState(!!addressData);
+
+  function googleAddressChange(place) {
+    setValue(getFieldName('street', parentName), place.formatted_address);
+
+    for(let item of place.address_components) {
+      if(item.types.includes('country')) {
+        setValue(getFieldName('country', parentName), item.long_name);
+      } else if(item.types.includes('postal_code')) {
+        setValue(getFieldName('zip', parentName), item.long_name);
+      } else if(item.types.includes('administrative_area_level_1')) {
+        setValue(getFieldName('city', parentName), item.long_name);
+      }
+    }
+
+    setShowAddress(true);
+  }
 
   return (
     <div className="user-info-form__row">
@@ -81,6 +99,10 @@ const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
             label="Telephone number (Optional)"
           />
         )}
+        <GooglePlaces
+            containerClass="user-info-form__input"
+            onChange={googleAddressChange}
+        />
         <Input
           {...register(getFieldName('street', parentName))}
           description={errors.street?.message}
