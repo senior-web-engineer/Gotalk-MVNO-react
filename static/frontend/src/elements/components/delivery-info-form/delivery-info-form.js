@@ -18,13 +18,18 @@ const DeliveryInfoForm = ({ parentName, addressData, wide }) => {
     setValue(getFieldName('street', parentName), place.formatted_address);
 
     for(let item of place.address_components) {
-      if(item.types.includes('country')) {
+      if(item.types.includes('administrative_area_level_1')) {
         setValue(getFieldName('country', parentName), item.long_name);
       } else if(item.types.includes('postal_code')) {
         setValue(getFieldName('zip', parentName), item.long_name);
-      } else if(item.types.includes('administrative_area_level_1')) {
+      } else if(item.types.includes('administrative_area_level_2')) {
         setValue(getFieldName('city', parentName), item.long_name);
       }
+    }
+
+    const locality = place.address_components.find(m => m.types.includes('locality'));
+    if(locality) {
+      setValue(getFieldName('city', parentName), locality.long_name);
     }
   }
 

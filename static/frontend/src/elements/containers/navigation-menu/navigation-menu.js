@@ -58,7 +58,6 @@ NavigationMenu.defaultProps = {
   addClass: '',
   classLink: '',
   links: [
-    { title: 'Shop plan', path: `${routes.plans}` },
     { title: 'How it works', path: `${routes.works}` },
     { title: 'FAQ', path: `${routes.faq}` },
     { title: 'Fraud Protection', path: `${routes.protect}` },

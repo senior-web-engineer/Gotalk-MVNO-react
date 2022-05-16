@@ -3,9 +3,27 @@
 .login-link-block {
   display: flex;
   align-items: center;
-  width: 15%;
+  width: 22%;
   @media(max-width:1200px){
     width: 50%;
+  }
+
+  .header-plan-button {
+    margin-top: 2px;
+    padding: 15px 19px;
+    border-radius: 50px;
+    display: block;
+    margin-left: 15px;
+    font-family: 'Raleway-Bold', sans-serif;
+    text-transform: initial;
+
+    @media(max-width:520px){
+      display: none;
+    }
+
+    .button-content {
+      white-space: nowrap;
+    }
   }
 }
 
@@ -35,6 +53,8 @@
   align-items: center;
   color: $label-reverse;
   transition: 0.2s linear;
+  white-space: nowrap;
+
   &:hover {
     color: $light-red;
 

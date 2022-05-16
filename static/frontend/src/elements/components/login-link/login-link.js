@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import './login-link.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Button from "../ui-component/button/button";
 
 const LoginLink = ({
   isBagShow, onClickLinkLogin, classPlaceholder, setIsOpenModalMenu,
@@ -76,6 +77,13 @@ const LoginLink = ({
           </NavLink>
         </div>
       )}
+      <Button
+          onClick={() => {
+            navigate(routes.plans);
+          }}
+          addClass="button header-plan-button"
+          title="Find a Plan"
+      />
     </div>
   );
 };
