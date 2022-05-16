@@ -7,9 +7,8 @@ import { useFormContext } from 'react-hook-form';
 import GooglePlaces from "../ui-component/google-places/google-places";
 
 const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
-  const { formState, register } = useFormContext();
+  const { formState, register, setValue } = useFormContext();
   const errors = formState.errors[parentName] || formState.errors;
-  const [showAddress, setShowAddress] = useState(!!addressData);
 
   function googleAddressChange(place) {
     setValue(getFieldName('street', parentName), place.formatted_address);
@@ -23,8 +22,6 @@ const UserInfoForm = ({ parentName, isBillingUserInfo }) => {
         setValue(getFieldName('city', parentName), item.long_name);
       }
     }
-
-    setShowAddress(true);
   }
 
   return (
