@@ -153,7 +153,7 @@ const Basket = ({ setBasketEmpty }) => {
         <div className="basket__price-col__coupon-active">
             <div className="basket__price-col__coupon-active-text">
               <b>{coupon.code}</b> <br />
-              Yay! You saved <b>${coupon.discountAmount}</b> for <b>{coupon.monthCount}</b>
+              Yay! You saved <b>${coupon.discountAmount}</b> for <b>{coupon.monthCount}</b> {coupon.monthCount > 1 ? 'Months' : 'Month'}
             </div>
             <div className="basket__price-col__coupon-active-cross" onClick={() => setCoupon(undefined)}>
               <CrossIcon />

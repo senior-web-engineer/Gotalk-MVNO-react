@@ -1,0 +1,16 @@
+.google-autocomplete {
+  .gat__control {
+    font-family: "Roboto-Normal", sans-serif;
+    font-size: 1.125rem;
+    border-radius: 10px;
+    padding: 10px 5px;
+    border: 1px solid #dcdce4;
+    width: 100%;
+  }
+
+  &.error {
+    .gat__control {
+      border-color: #d75f5c;
+    }
+  }
+}
