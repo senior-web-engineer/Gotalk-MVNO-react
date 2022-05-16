@@ -5,7 +5,7 @@
   align-items: center;
   width: 22%;
   @media(max-width:1200px){
-    width: 50%;
+    width: auto;
   }
 
   .header-plan-button {
@@ -17,13 +17,19 @@
     font-family: 'Raleway-Bold', sans-serif;
     text-transform: initial;
 
-    @media(max-width:520px){
+    @media(max-width:520px) {
       display: none;
     }
 
     .button-content {
       white-space: nowrap;
     }
+  }
+}
+
+.modal-user-link {
+  .header-plan-button {
+    display: block!important;
   }
 }
 
