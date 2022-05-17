@@ -80,6 +80,9 @@ const LoginLink = ({
       <Button
           onClick={() => {
             navigate(routes.plans);
+            if(setIsOpenModalMenu) {
+              setIsOpenModalMenu(false);
+            }
           }}
           addClass="button header-plan-button"
           title="Find a Plan"
