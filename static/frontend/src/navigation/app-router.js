@@ -46,10 +46,18 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
+import TagManager from 'react-gtm-module';
+TagManager.initialize({
+  gtmId: 'G-RXRW43L7BN'
+});
 
 const AppRouter = ({ history }) => {
+
   const dispatch = useDispatch();
   const isSignedIn = useSelector((state) => state.authReducer.isSignedIn);
+  window.dataLayer.push({
+    event: 'pageview'
+  });
 
   useEffect(() => {
     dispatch({ type: authTypes.CHECK_AUTH });
