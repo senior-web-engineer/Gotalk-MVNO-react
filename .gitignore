@@ -7,9 +7,6 @@ lerna-debug.log
 .serverless
 package-lock.json
 
-.env
-.env.test
-.env.local
 .custom-env
 .idea
 # cache files

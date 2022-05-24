@@ -8,10 +8,13 @@ const User = db.User;
 const Company = db.Company;
 const WholesalePlan = db.WholesalePlan;
 const UserSimStatistic = db.UserSimStatistic;
+const UserPay = db.UserPay;
+const CouponUsage = db.CouponUsage;
 const Sequelize = require('sequelize');
 const {planClass} = require("../Plintron/plan");
 const {simCardClass} = require("../Plintron/simCard");
 const Op = Sequelize.Op;
+const {paymentServices} = require("../../Services/hub.services");
 
 
 exports.paymentEveryMonth = async () => {
@@ -63,15 +66,60 @@ exports.paymentEveryMonth = async () => {
                 let payerId = userSimPlan.User.id;
                 let userEmail = userSimPlan.User.email;
 
+                const couponUsage = await CouponUsage.findOne({
+                    where: {
+                        userSimPlanIds: {[Op.contains]: [userSimPlan.id]}
+                    }
+                });
+                let discountAmount = 0;
+                if(couponUsage && couponUsage.usedMonthCount < couponUsage.monthCount) {
+                    discountAmount = couponUsage.discountAmount / couponUsage.userSimPlanIds.length;
+                    planPrice -= discountAmount;
+                }
+
                 if (userSimPlan.User.companyId) {
                     let owner = await User.findByPk(userSimPlan.User.Company.ownerId)
                     balance = owner.balance;
                     payerId = owner.id;
                     userEmail = owner.email;
                 }
-                let newBalance = balance - planPrice;
 
-                if (planPrice <= balance) {
+                let newBalance = balance - planPrice;
+                let isPaid = false;
+                let payType = "";
+
+                if(newBalance < 0 && userSimPlan.User.stripeCustomerId) {
+                    const userPay = await UserPay.create({
+                        action: "sim_plan_monthly",
+                        sum: planPrice,
+                        userId: userSimPlan.User.id,
+                        productId: [userSimPlan.id],
+                        paymentType: 'stripe',
+                        discountAmount: discountAmount,
+                        couponId: couponUsage?.couponId,
+                        doCaptureLater: false
+                    });
+                    isPaid = await paymentServices.makeRecurrencePayment({
+                        ...userPay,
+                        stripeCustomerId: userSimPlan.User.stripeCustomerId
+                    });
+
+                    payType = "card";
+                } else {
+                    isPaid = true;
+                    payType = "balance";
+                }
+
+                if (isPaid) {
+
+                    if(couponUsage) {
+                        await CouponUsage.update({
+                            usedMonthCount: couponUsage.usedMonthCount + 1
+                        }, {
+                            where: couponUsage.id
+                        });
+                    }
+
                     let paidOnTime = true;
                     // Update wholesale plan
                     const wholesalePlan = await WholesalePlan.findOne({
@@ -96,7 +144,11 @@ exports.paymentEveryMonth = async () => {
                         dbReq.status = "active";
                         paidOnTime = false;
                     }
-                    await User.update({balance: newBalance}, {where: {id: payerId}});
+
+                    if(payType === 'balance') {
+                        await User.update({balance: newBalance}, {where: {id: payerId}});
+                    }
+
                     await UserSimPlan.update(dbReq, {where: {id: userSimPlan.id}});
                     await UserSimStatistic.create({sms: 0, min: 0, internet: 0, userSimPlanId: userSimPlan.id});
                     messageArr.info.push({userSimPlan: userSimPlan.id, balance: newBalance, payerId, paidOnTime});

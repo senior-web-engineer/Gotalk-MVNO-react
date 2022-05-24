@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     zip: DataTypes.STRING,
     companyId: DataTypes.INTEGER,
     balance: DataTypes.FLOAT,
+    stripeCustomerId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',

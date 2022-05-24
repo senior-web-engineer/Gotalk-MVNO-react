@@ -6,7 +6,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React from 'react';
 
-const reactAppStripeKey = process.env.REACT_APP_STRIPE_TEST_TOKEN || '';
+const reactAppStripeKey = process.env.REACT_APP_STRIPE_PK || '';
 
 const stripePromise = loadStripe(reactAppStripeKey);
 

@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     monthCount: DataTypes.INTEGER,
     userId: DataTypes.STRING,
     usedMonthCount: DataTypes.INTEGER,
-    userSimPlanIds: DataTypes.ARRAY(DataTypes.INTEGER)
+    userSimPlanIds: DataTypes.ARRAY(DataTypes.INTEGER),
+    discountAmount: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'CouponUsage',

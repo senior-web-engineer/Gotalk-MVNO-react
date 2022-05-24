@@ -358,7 +358,8 @@ class SimCardClass {
                         monthCount: coupon.monthCount,
                         userId: userPay.userId,
                         usedMonthCount: 1,
-                        userSimPlanIds: userPay.productId
+                        userSimPlanIds: userPay.productId,
+                        discountAmount: coupon.discountAmount
                     });
                 }
             }
@@ -455,13 +456,35 @@ class SimCardClass {
                 && (simPlan?.Delivery?.status !== ('delivered' || 'shipped')), 'SIM card has not been delivered yet');
 
             if(userPay.status === 'paid' && userPay.doCaptureLater) {
-                const captured = await paymentServices.capturePayment(userPay);
-                if(captured) {
-                    await UserPay.update({ doCaptureLater: false }, {
-                        where: {id: userPay.id}
+                if(userPay.doCaptureLater) {
+                    const captured = await paymentServices.capturePayment(userPay);
+                    if(captured) {
+                        await UserPay.update({ doCaptureLater: false }, {
+                            where: {id: userPay.id}
+                        });
+
+                        for(const prodId of userPay.productId) {
+                            const userProd = await UserProduct.findByPk(prodId);
+                            await UserSimPlan.update({
+                                lastPayDate: new Date(),
+                                lastPayStatus: 'success'
+                            }, {
+                                where: {id: userProd.productId}
+                            });
+                        }
+                    } else {
+                        errCheckerPlintron(!userPay, 'SIM card not paid yet');
+                    }
+                }
+
+                const expireDate = new Date().setMonth(new Date().getMonth() + 1);
+                for(const prodId of userPay.productId) {
+                    const userProd = await UserProduct.findByPk(prodId);
+                    await UserSimPlan.update({
+                        expireDate
+                    }, {
+                        where: {id: userProd.productId}
                     });
-                } else {
-                    errCheckerPlintron(!userPay, 'SIM card not paid yet');
                 }
             }
 

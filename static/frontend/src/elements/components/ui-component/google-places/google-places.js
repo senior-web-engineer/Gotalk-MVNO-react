@@ -21,7 +21,7 @@ export default function GooglePlaces({onChange, containerClass}) {
         <div className={`styled-input ${containerClass}`}>
             <p className="styled-input__label">Automatic Address Entry w/Google</p>
             <GooglePlacesAutocomplete
-                apiKey={process.env.GOOGLE_MAPS}
+                apiKey={process.env.REACT_APP_GOOGLE_MAPS}
                 selectProps={{
                     value: googleMapValue,
                     onChange: (ev) => googleAddressChange(ev),

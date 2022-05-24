@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   UserSimPlan.init({
     status: DataTypes.STRING,
     simType: DataTypes.STRING,
-    expireDate: DataTypes.DATE,
+    expireDate: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'UserSimPlan',
