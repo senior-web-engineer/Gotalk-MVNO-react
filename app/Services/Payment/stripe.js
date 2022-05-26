@@ -38,10 +38,9 @@ exports.capturePaymentIntent = async (idStrip) => {
     return intent?.status;
 }
 
-exports.createCustomer = async ({name, email, paymentIntentId}) => {
-    const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
+exports.createCustomer = async ({name, email}) => {
     return await stripe.customers.create({
-        name, email, payment_method: intent?.payment_method
+        name, email
     });
 }
 

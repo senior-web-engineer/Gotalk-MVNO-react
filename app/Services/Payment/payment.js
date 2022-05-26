@@ -13,8 +13,7 @@ class PaymentServices {
                 if(!user.stripeCustomerId) {
                     const stripeCustomer = await stripe.createCustomer({
                         name: `${user.firstName} ${user.lastName}`,
-                        email: user.email,
-                        paymentIntentId: stripPay.idStrip
+                        email: user.email
                     });
                     if(stripeCustomer) {
                         stripeCustomerId = stripeCustomer.id;
