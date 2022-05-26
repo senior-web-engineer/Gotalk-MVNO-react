@@ -8,7 +8,26 @@ class PaymentServices {
     async createPayment(userPay, type = "stripe") {
         switch (type) {
             case "stripe":
-                const intent = await stripe.createPaymentIntent(userPay.sum, userPay.doCaptureLater);
+                const user = await User.findByPk(userPay.userId);
+                let stripeCustomerId;
+                if(!user.stripeCustomerId) {
+                    const stripeCustomer = await stripe.createCustomer({
+                        name: `${user.firstName} ${user.lastName}`,
+                        email: user.email,
+                        paymentIntentId: stripPay.idStrip
+                    });
+                    if(stripeCustomer) {
+                        stripeCustomerId = stripeCustomer.id;
+                        await User.update({
+                            stripeCustomerId: stripeCustomer.id
+                        }, {
+                            where: {id: user.id}
+                        });
+                    }
+                } else {
+                    stripeCustomerId = user.stripeCustomerId;
+                }
+                const intent = await stripe.createPaymentIntent(userPay.sum, userPay.doCaptureLater, stripeCustomerId);
                 await StripPay.create({idStrip: intent.id, userPayId: userPay.id, payToken:intent.client_secret});
                 return intent;
             default:
@@ -42,26 +61,6 @@ class PaymentServices {
                 const stripPay = await StripPay.findOne({where: {userPayId: userPay.id}});
                 const status = await stripe.capturePaymentIntent(stripPay.idStrip);
                 payStatus = status === 'succeeded';
-
-                if(payStatus) {
-                    const user = await User.findByPk(userPay.userId);
-
-                    if(!user.stripeCustomerId) {
-                        const stripeCustomer = await stripe.createCustomer({
-                            name: `${user.firstName} ${user.lastName}`,
-                            email: user.email,
-                            paymentIntentId: stripPay.idStrip
-                        });
-                        if(stripeCustomer) {
-                            await User.update({
-                                stripeCustomerId: stripeCustomer.id
-                            }, {
-                                where: {id: user.id}
-                            });
-                        }
-                    }
-                }
-
                 break;
             default:
                 throw new Error("Invalid payment system");
