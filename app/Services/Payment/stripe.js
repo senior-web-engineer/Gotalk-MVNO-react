@@ -1,6 +1,13 @@
+const {plintronLogger} = require("../../Utils/logger");
 const stripe = require('stripe')(process.env.STRIPE_SK);
 
 exports.createPaymentIntent = async (sum, doCaptureLater = false) => {
+    plintronLogger.error({
+        amount: sum * 100,
+        currency: 'usd',
+        payment_method_types: ['card'],
+        capture_method: doCaptureLater ? "manual" : ""
+    });
     return await stripe.paymentIntents.create({
         amount: sum * 100,
         currency: 'usd',
@@ -15,8 +22,18 @@ exports.getPaymentIntentStatus = async (idStrip) => {
 }
 
 exports.capturePaymentIntent = async (idStrip) => {
-    const intent = await stripe.paymentIntents.capture(idStrip);
-    return intent.status;
+    let intent;
+    try {
+        intent = await stripe.paymentIntents.capture(idStrip);
+    }
+    catch (ex) {
+        if(ex?.raw?.payment_intent) {
+            intent = ex.raw.payment_intent;
+        } else {
+            plintronLogger.error(ex.message);
+        }
+    }
+    return intent?.status;
 }
 
 exports.createCustomer = async ({name, email, paymentIntentId}) => {
