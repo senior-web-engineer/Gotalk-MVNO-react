@@ -14,7 +14,8 @@ exports.createPaymentIntent = async (sum, doCaptureLater = false, stripeCustomer
         currency: 'usd',
         payment_method_types: ['card'],
         capture_method: doCaptureLater ? "manual" : "",
-        customer: stripeCustomerId
+        customer: stripeCustomerId,
+        setup_future_usage: 'off_session'
     });
 };
 

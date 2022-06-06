@@ -48,7 +48,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 TagManager.initialize({
-  gtmId: 'GTM-N5955NN'
+  gtmId: 'GTM-NH8F8RN'
 });
 
 const AppRouter = ({ history }) => {
