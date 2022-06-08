@@ -61,9 +61,21 @@ exports.makeRecurrencePayment = async (sum, stripeCustomerId) => {
     return intent.status;
 }
 
-exports.setupIntent = async ({customerId}) => {
+exports.createSetupIntent = async (customerId) => {
     return await stripe.setupIntents.create({
         customer: customerId,
-        payment_method_types: ['card'],
+        usage: 'off_session'
     });
+}
+
+exports.paymentMethod = async (customerId) => {
+    const paymentMethods = await stripe.paymentMethods.list({
+        customer: customerId,
+        type: 'card',
+    });
+    return paymentMethods?.data?.length > 0 ? paymentMethods.data[0] : null;
+}
+
+exports.retrieveSetupIntent = async (id) => {
+    return await stripe.setupIntents.retrieve(id);
 }

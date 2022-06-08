@@ -1,0 +1,111 @@
+@import 'src/assets/styles/index.scss';
+
+.account-sidebar {
+  width: 300px;
+  background-color: $label;
+  padding: 0;
+  margin-left: 20px;
+
+  @include below-breakpoint(md) {
+    max-height: 64px;
+    max-width: 327px;
+    width: 100%;
+    background-color: $light-gray;
+    box-shadow: none;
+    margin-left: 0;
+
+    &_active {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+
+  &__item {
+    width: 100%;
+    margin-bottom: 30px;
+    @include content-container-shadow();
+
+    &__title {
+      font-size: 24px;
+      font-family: "Raleway-Bold", sans-serif;
+      margin-bottom: 10px;
+
+      span {
+        float: right;
+      }
+    }
+
+    &__sub {
+      font-family: 'Roboto-Regular', sans-serif;
+      font-size: 18px;
+      color: $grey-line;
+      margin-bottom: 10px;
+
+      span {
+        float: right;
+      }
+    }
+
+    &__card {
+      font-family: 'Roboto-Regular', sans-serif;
+      font-size: 18px;
+      color: $grey-line;
+      margin-bottom: 10px;
+
+      span {
+        float: right;
+      }
+    }
+
+    &__bold {
+      font-family: "Raleway-Bold", sans-serif;
+    }
+
+    &__button {
+      @include button-red();
+
+      margin: 24px auto 20px;
+      width: 178px;
+      height: 56px;
+
+      @include below-breakpoint(xs) {
+        width: 178px;
+      }
+    }
+
+    &__link {
+      text-decoration: underline;
+      color: $primary-red;
+      font-family: 'Roboto-Bold', sans-serif;
+      font-size: 16px;
+    }
+
+    &__history {
+      margin-bottom: 15px;
+
+      &__date {
+        color: #A5A5A5;
+        font-family: 'Roboto-Regular', sans-serif;
+        font-size: 14px;
+      }
+      &__number {
+        color: #051431;
+        font-family: 'Roboto-Medium', sans-serif;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+    }
+  }
+}
+
+.account-sidebar__spinner-container {
+  width: 100%;
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.account-screen-tariff-info {
+  width: calc(100% - 600px);
+}

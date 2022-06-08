@@ -123,30 +123,34 @@ const payLogger = {
     }
 };
 
+function toMessage(msg) {
+    return `${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`;
+}
+
 const plintronLogger = {
     req: function (msg) {
-        reqPlintron.info(msg);
+        reqPlintron.info(toMessage(msg));
     },
     res: function (msg) {
-        resPlintron.info(msg);
+        resPlintron.info(toMessage(msg));
     },
     error: function (msg) {
-        errorPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
+        errorPlintron.error(toMessage(msg));
     },
     cron: function (msg) {
-        cronPlintron.info(msg);
+        cronPlintron.info(toMessage(msg));
     },
     importSimInfo: function (msg) {
-        importSimPlintron.info(msg);
+        importSimPlintron.info(toMessage(msg));
     },
     importSimErr: function (msg) {
-        importSimPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
+        importSimPlintron.error(toMessage(msg));
     },
     notify: function (msg) {
-        notifyPlintron.info(msg);
+        notifyPlintron.info(toMessage(msg));
     },
     notifyErr: function (msg) {
-        notifyPlintron.error(`${typeof msg === "string" ? msg : JSON.stringify(msg)}; Stack=${new Error().stack}`);
+        notifyPlintron.error(toMessage(msg));
     },
     log: function (level, msg) {
         const lvl = plintronLogger[level];

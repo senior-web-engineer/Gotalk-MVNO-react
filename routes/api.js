@@ -117,6 +117,11 @@ module.exports = function (app) {
             });
             router.put("/", controller.user.update);
             router.post('/change-password', [forms.auth.rule('changePassword'), middleware.validator], controller.auth.changePassword);
+            router.post("/create-setup-intent", controller.user.createSetupIntent);
+            router.get('/get-setup-intent-result/:id', controller.user.getSetupIntentResult);
+            router.get('/get-payment-information/:userSimPlanId', controller.user.getPaymentInformation);
+            router.get('/get-call-history/:userSimPlanId/:count', controller.user.getCallHistory);
+            router.get('/get-sms-history/:userSimPlanId/:count', controller.user.getSmsHistory);
             router.use(middleware.isCompanyOwner);
             router.get("/details/:id", controller.user.getDetails);
             router.post("/", [middleware.role('Owner'), forms.user.rule(), middleware.validator], controller.user.create);

@@ -32,6 +32,11 @@ export const ACCOUNT = {
   postChangeNumber: '/v1/sim/set-phone',
   postActivateESim: '/v1/sim/esim/activate',
   getQr: '/v1/sim/esim/qr',
+  createSetupIntent: '/v1/users/create-setup-intent',
+  getSetupIntentResult: '/v1/users/get-setup-intent-result',
+  getPaymentInformation: '/v1/users/get-payment-information',
+  getCallHistory: '/v1/users/get-call-history',
+  getSmsHistory: '/v1/users/get-sms-history'
 };
 
 export const COUPON = {

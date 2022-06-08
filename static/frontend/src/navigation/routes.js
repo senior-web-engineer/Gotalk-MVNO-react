@@ -28,9 +28,9 @@ export default {
     tracker: 'tracker',
     history: {
       base: 'history',
-      payment: 'payment',
-      calls: 'calls',
-      sms: 'sms',
+      payment: '/account/history/payment',
+      calls: '/account/history/calls',
+      sms: '/account/history/sms',
     },
   },
   tariff: '/tariff',
@@ -46,4 +46,5 @@ export default {
   returnPolicy: '/return-policy',
   acceptable: '/acceptable',
   protect: '/protect',
+  setupIntentResult: '/setup-intent-result'
 };

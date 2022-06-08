@@ -37,3 +37,13 @@ export const postChangeNumber = (body) => api.post(ACCOUNT.postChangeNumber, bod
 export const postActivateESim = (body) => api.post(ACCOUNT.postActivateESim, body);
 
 export const getQr = (id) => api.get(`${ACCOUNT.getQr}${id}`);
+
+export const createSetupIntent = () => api.post(ACCOUNT.createSetupIntent);
+
+export const getSetupIntentResult = (setupIntentId) => api.get(`${ACCOUNT.getSetupIntentResult}/${setupIntentId}`);
+
+export const getPaymentInformation = (userSimPlanId) => api.get(`${ACCOUNT.getPaymentInformation}/${userSimPlanId}`);
+
+export const getCallHistory = (userSimPlanId, count = 0) => api.get(`${ACCOUNT.getCallHistory}/${userSimPlanId}/${count}`);
+
+export const getSmsHistory = (userSimPlanId, count = 0) => api.get(`${ACCOUNT.getSmsHistory}/${userSimPlanId}/${count}`);

@@ -42,13 +42,13 @@ const AccountSelect = ({ addClass }) => {
 
     switch (simStatus) {
       case 'BLOCKED':
-        navigate(`${routes.account.tracker}?${simStatus}`);
+        navigate(`${routes.account.tracker}?${simStatus}&id=${id}`);
         break;
       case 'BUSY':
-        navigate(`${routes.account.tariffInfo}`);
+        navigate(`${routes.account.tariffInfo}?id=${id}`);
         break;
       default:
-        navigate(`${routes.account.tracker}/${simType}`);
+        navigate(`${routes.account.tracker}/${simType}?id=${id}`);
     }
   };
 

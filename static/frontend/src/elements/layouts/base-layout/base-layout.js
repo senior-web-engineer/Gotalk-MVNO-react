@@ -3,8 +3,10 @@ import BaseHeader from '../../containers/base-header/base-header';
 import Footer from '../../containers/footer/footer';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 import './base-layout.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import {ToastContainer} from "react-toastify";
 
 const BaseLayout = ({ children }) => {
   const [classSticky, setClassSticky] = useState('');
@@ -47,6 +49,7 @@ const BaseLayout = ({ children }) => {
       <BaseHeader classUp={addClass} classSticky={classSticky} />
       <div className={addClassContent}>{children}</div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };

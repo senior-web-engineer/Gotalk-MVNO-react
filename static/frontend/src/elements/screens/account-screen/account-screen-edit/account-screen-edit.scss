@@ -2,7 +2,7 @@
 
 .account-screen-edit {
   position: relative;
-  width: 100%;
+  width: calc(100% - 300px);
   max-width: 748px;
   min-height: 447px;
   padding-bottom: calc(48px + (126 - 48) * ((100vw - 375px) / (1980 - 375)));

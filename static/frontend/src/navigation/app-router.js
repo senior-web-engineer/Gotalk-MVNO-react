@@ -47,6 +47,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
+import SetupIntentResult from "../elements/screens/setup-intent-result/setup-intent-result";
 TagManager.initialize({
   gtmId: 'GTM-NH8F8RN'
 });
@@ -173,6 +174,7 @@ const AppRouter = ({ history }) => {
         <Route history={history} exact path={routes.returnPolicy} element={<ReturnPolicy />} />
         <Route history={history} exact path={routes.acceptable} element={<AcceptablePolicy />} />
         <Route history={history} exact path={routes.protect} element={<ProtectInfo />} />
+        <Route history={history} exact path={routes.setupIntentResult} element={<SetupIntentResult />}/>
       </Routes>
     </BaseLayout>
   );

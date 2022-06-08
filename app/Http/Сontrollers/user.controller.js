@@ -18,7 +18,10 @@ const UserPay = db.UserPay;
 const PlintronPlan = db.PlintronPlan;
 const WholesalePlan = db.WholesalePlan;
 const Plan = db.Plan;
-
+const CouponUsage = db.CouponUsage;
+const stripe = require("../../Services/Payment/stripe");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class UserController extends MainController {
 
@@ -191,6 +194,115 @@ class UserController extends MainController {
         else if (req.query.type === 'file')
             return res.json(await generator.qrFile());
         return res.status(404).json({message: "Not found"});
+    }
+
+    createSetupIntent = async (req, res) => {
+        const {user} = req;
+        const userInfo = await User.findByPk(user.id);
+        if(!userInfo.stripeCustomerId) {
+            const customer = await stripe.createCustomer({
+                name: `${userInfo.firstName} ${userInfo.lastName}`,
+                email: userInfo.email
+            });
+            userInfo.stripeCustomerId = customer.id;
+            await User.update({stripeCustomerId: customer.id}, {where: {id: userInfo.id}});
+        }
+
+        const setupIntent = await stripe.createSetupIntent(userInfo.stripeCustomerId);
+        res.status(200).json({ clientSecret: setupIntent.client_secret });
+    }
+
+    getSetupIntentResult = async (req, res) => {
+        const {id} = req.params;
+        const setupIntent = await stripe.retrieveSetupIntent(id);
+        res.status(200).json({ status: setupIntent.status });
+    }
+
+    getPaymentInformation = async (req, res) => {
+        const {user} = req;
+        const {userSimPlanId} = req.params;
+        const userInfo = await User.findByPk(user.id);
+        const simPlan = await UserSimPlan.findOne({
+            where: {
+                id: userSimPlanId
+            },
+            include: [{
+                model: Plan, as: 'plan',
+                attributes: {exclude: ['createdAt', 'updatedAt']}
+            }]
+        });
+
+        let planPrice = 0;
+        if(simPlan) {
+            planPrice = Number(simPlan.plan.costPerMonth);
+            const couponUsage = await CouponUsage.findOne({
+                where: {
+                    userSimPlanIds: {[Op.contains]: [simPlan.id]}
+                }
+            });
+            if(couponUsage && couponUsage.usedMonthCount < couponUsage.monthCount) {
+                const discountAmount = couponUsage.discountAmount / couponUsage.userSimPlanIds.length;
+                planPrice -= discountAmount;
+            }
+        }
+
+        let output = {
+            nextPaymentPrice: planPrice,
+            nextPaymentDate: simPlan?.expireDate,
+            hasCard: false,
+            last4: '',
+            simStatus: simPlan?.status
+        };
+
+        if(userInfo.stripeCustomerId) {
+            const paymentMethod = await stripe.paymentMethod(userInfo.stripeCustomerId);
+            if(paymentMethod) {
+                output.hasCard = true;
+                output.last4 = paymentMethod.card.last4;
+            }
+        }
+
+        res.status(200).json(output);
+    }
+
+    getCallHistory = async (req, res) => {
+        const {userSimPlanId, count} = req.params;
+
+        const stats = await UserPlanHistory.findAll({
+            where: {
+                userSimPlanId: userSimPlanId,
+                type: 'min'
+            },
+            order: [['id', 'DESC']],
+            offset: 0,
+            limit: count
+        });
+
+        res.status(200).json(stats.map(m => ({
+            date: m.date,
+            phone: m.phone,
+            callLength: m.value
+        })));
+    }
+
+    getSmsHistory = async (req, res) => {
+        const {userSimPlanId, count} = req.params;
+
+        const stats = await UserPlanHistory.findAll({
+            where: {
+                userSimPlanId: userSimPlanId,
+                type: 'sms'
+            },
+            order: [['id', 'DESC']],
+            offset: 0,
+            limit: count
+        });
+
+        res.status(200).json(stats.map(m => ({
+            date: m.date,
+            phone: m.phone,
+            smsCount: m.value
+        })));
     }
 }
 
