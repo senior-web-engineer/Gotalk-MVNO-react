@@ -25,7 +25,7 @@ const AccountLayout = () => {
     }
   }, [navigate, pathname]);
 
-  const showSidebar = useMemo(() => pathname === '/account/tariff-info', [pathname]);
+  const showSidebar = useMemo(() => pathname.startsWith('/account/tariff-info'), [pathname]);
 
   return (
     <div className="account-layout">
