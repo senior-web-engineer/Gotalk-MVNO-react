@@ -35,6 +35,14 @@ export default function PaymentInformation() {
         manageCardPopupRef.current?.showPopup();
     }
 
+    const nextPaymentDate = useMemo(() => {
+        if(!data?.nextPaymentDate) {
+            return '';
+        }
+        const d = new Date(data.nextPaymentDate);
+        return `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+    }, [data?.nextPaymentDate]);
+
     if(loading) {
         return (
             <div className="account-sidebar__spinner-container">
@@ -67,7 +75,7 @@ export default function PaymentInformation() {
                     </div>
                     <div className="account-sidebar__item__sub">
                         Due Date
-                        <span>{data?.nextPaymentDate}</span>
+                        <span>{nextPaymentDate}</span>
                     </div>
                 </>
             )}
