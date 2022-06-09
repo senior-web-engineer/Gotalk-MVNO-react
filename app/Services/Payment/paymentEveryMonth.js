@@ -10,6 +10,7 @@ const WholesalePlan = db.WholesalePlan;
 const UserSimStatistic = db.UserSimStatistic;
 const UserPay = db.UserPay;
 const CouponUsage = db.CouponUsage;
+const UserProduct = db.UserProduct;
 const Sequelize = require('sequelize');
 const {planClass} = require("../Plintron/plan");
 const {simCardClass} = require("../Plintron/simCard");
@@ -89,11 +90,14 @@ exports.paymentEveryMonth = async () => {
                 let payType = "";
 
                 if(newBalance < 0 && userSimPlan.User.stripeCustomerId) {
+                    const userProduct = await UserProduct.findOne({
+                        where: {productId: userSimPlan.id}
+                    });
                     const userPay = await UserPay.create({
                         action: "sim_plan_monthly",
                         sum: planPrice,
                         userId: userSimPlan.User.id,
-                        productId: [userSimPlan.id],
+                        productId: [userProduct.id],
                         paymentType: 'stripe',
                         discountAmount: discountAmount,
                         couponId: couponUsage?.couponId,

@@ -44,6 +44,8 @@ export const getSetupIntentResult = (setupIntentId) => api.get(`${ACCOUNT.getSet
 
 export const getPaymentInformation = (userSimPlanId) => api.get(`${ACCOUNT.getPaymentInformation}/${userSimPlanId}`);
 
-export const getCallHistory = (userSimPlanId, count = 0) => api.get(`${ACCOUNT.getCallHistory}/${userSimPlanId}/${count}`);
+export const getCallHistory = (userSimPlanId, count = 0, page = 1) => api.get(`${ACCOUNT.getCallHistory}/${userSimPlanId}/${count}/${page}`);
 
-export const getSmsHistory = (userSimPlanId, count = 0) => api.get(`${ACCOUNT.getSmsHistory}/${userSimPlanId}/${count}`);
+export const getSmsHistory = (userSimPlanId, count = 0, page = 1) => api.get(`${ACCOUNT.getSmsHistory}/${userSimPlanId}/${count}/${page}`);
+
+export const getPaymentHistory = (userSimPlanId, count = 0, page = 1) => api.get(`${ACCOUNT.getPaymentHistory}/${userSimPlanId}/${count}/${page}`);

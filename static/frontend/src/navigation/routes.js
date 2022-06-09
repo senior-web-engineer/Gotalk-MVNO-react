@@ -46,5 +46,6 @@ export default {
   returnPolicy: '/return-policy',
   acceptable: '/acceptable',
   protect: '/protect',
-  setupIntentResult: '/setup-intent-result'
+  setupIntentResult: '/setup-intent-result',
+  outerActivation: '/activation'
 };

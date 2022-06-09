@@ -266,7 +266,7 @@ class UserController extends MainController {
     }
 
     getCallHistory = async (req, res) => {
-        const {userSimPlanId, count} = req.params;
+        const {userSimPlanId, count, page} = req.params;
 
         const stats = await UserPlanHistory.findAll({
             where: {
@@ -274,19 +274,30 @@ class UserController extends MainController {
                 type: 'min'
             },
             order: [['id', 'DESC']],
-            offset: 0,
+            offset: (page - 1) * count,
             limit: count
         });
 
-        res.status(200).json(stats.map(m => ({
-            date: m.date,
-            phone: m.phone,
-            callLength: m.value
-        })));
+        const maxCount = await UserPlanHistory.count({
+            where: {
+                userSimPlanId: userSimPlanId,
+                type: 'min'
+            }
+        });
+
+        res.status(200).json({
+            items: stats.map(m => ({
+                date: m.date,
+                phone: m.phone,
+                talkTime: m.value,
+                missed: m.callType === 'mt'
+            })),
+            maxCount
+        });
     }
 
     getSmsHistory = async (req, res) => {
-        const {userSimPlanId, count} = req.params;
+        const {userSimPlanId, count, page} = req.params;
 
         const stats = await UserPlanHistory.findAll({
             where: {
@@ -294,15 +305,61 @@ class UserController extends MainController {
                 type: 'sms'
             },
             order: [['id', 'DESC']],
-            offset: 0,
+            offset: (page - 1) * count,
             limit: count
         });
 
-        res.status(200).json(stats.map(m => ({
-            date: m.date,
-            phone: m.phone,
-            smsCount: m.value
-        })));
+        const maxCount = await UserPlanHistory.count({
+            where: {
+                userSimPlanId: userSimPlanId,
+                type: 'sms'
+            }
+        });
+
+        res.status(200).json({
+            items: stats.map(m => ({
+                date: m.date,
+                phone: m.phone,
+                quantity: m.value,
+                missed: m.callType === 'mt'
+            })),
+            maxCount
+        });
+    }
+
+    getPaymentHistory = async (req, res) => {
+        const {userSimPlanId, count, page} = req.params;
+
+        const userProduct = await UserProduct.findOne({
+            where: {productId: userSimPlanId}
+        });
+        const stats = await UserPay.findAll({
+            where: {
+                productId: {[Op.contains]: [userProduct.id]},
+                status: 'paid'
+            },
+            order: [['id', 'DESC']],
+            offset: (page - 1) * count,
+            limit: count
+        });
+        const maxCount = await UserPay.count({
+            where: {
+                productId: {[Op.contains]: [userProduct.id]},
+                status: 'paid'
+            }
+        });
+
+        res.status(200).json({
+            items: stats.map(m => {
+                const d = new Date(m.createdAt);
+                return {
+                    date: `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`,
+                    time: d.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3"),
+                    sum: m.sum
+                }
+            }),
+            maxCount
+        });
     }
 }
 

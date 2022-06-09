@@ -120,8 +120,9 @@ module.exports = function (app) {
             router.post("/create-setup-intent", controller.user.createSetupIntent);
             router.get('/get-setup-intent-result/:id', controller.user.getSetupIntentResult);
             router.get('/get-payment-information/:userSimPlanId', controller.user.getPaymentInformation);
-            router.get('/get-call-history/:userSimPlanId/:count', controller.user.getCallHistory);
-            router.get('/get-sms-history/:userSimPlanId/:count', controller.user.getSmsHistory);
+            router.get('/get-call-history/:userSimPlanId/:count/:page', controller.user.getCallHistory);
+            router.get('/get-sms-history/:userSimPlanId/:count/:page', controller.user.getSmsHistory);
+            router.get('/get-payment-history/:userSimPlanId/:count/:page', controller.user.getPaymentHistory);
             router.use(middleware.isCompanyOwner);
             router.get("/details/:id", controller.user.getDetails);
             router.post("/", [middleware.role('Owner'), forms.user.rule(), middleware.validator], controller.user.create);

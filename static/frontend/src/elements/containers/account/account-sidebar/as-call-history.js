@@ -21,12 +21,12 @@ export default function CallHistory() {
             setLoading(true);
             getCallHistory(id, 3).then(res => {
                 setLoading(false);
-                setData(res.data || []);
+                setData(res.data?.items || []);
             }, err => {
                 setLoading(false);
             });
         }
-    }, [search]);
+    }, [id]);
 
     if(loading) {
         return (
@@ -46,7 +46,7 @@ export default function CallHistory() {
                     <div className="account-sidebar__item__history__date">
                         {item.date}
                         <span style={{float: 'right'}}>
-                            {item.callLength}
+                            {item.talkTime}
                         </span>
                     </div>
                     <div className="account-sidebar__item__history__number">

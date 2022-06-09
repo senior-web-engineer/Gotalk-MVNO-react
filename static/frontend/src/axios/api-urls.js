@@ -36,7 +36,8 @@ export const ACCOUNT = {
   getSetupIntentResult: '/v1/users/get-setup-intent-result',
   getPaymentInformation: '/v1/users/get-payment-information',
   getCallHistory: '/v1/users/get-call-history',
-  getSmsHistory: '/v1/users/get-sms-history'
+  getSmsHistory: '/v1/users/get-sms-history',
+  getPaymentHistory: '/v1/users/get-payment-history'
 };
 
 export const COUPON = {

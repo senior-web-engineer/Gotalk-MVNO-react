@@ -21,7 +21,7 @@ export default function SmsHistory() {
             setLoading(true);
             getSmsHistory(id, 3).then(res => {
                 setLoading(false);
-                setData(res.data || []);
+                setData(res.data?.items || []);
             }, err => {
                 setLoading(false);
             });
@@ -46,7 +46,7 @@ export default function SmsHistory() {
                     <div className="account-sidebar__item__history__date">
                         {item.date}
                         <span style={{float: 'right'}}>
-                            {item.smsCount}
+                            {item.quantity}
                         </span>
                     </div>
                     <div className="account-sidebar__item__history__number">
