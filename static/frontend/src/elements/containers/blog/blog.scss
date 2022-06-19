@@ -313,19 +313,7 @@ a.sliderCard:hover {
     display: block;
   }
 
-  .single-post-container {
-    flex-direction: column;
-  }
 
-  .single-post-container article {
-    width: 100%;
-  }
-
-  .single-post-container aside {
-    margin-left: 0;
-    width: 100%;
-    max-width: 100%;
-  }
 }
 
 /* Medium devices (landscape tablets up to 768px) */
@@ -386,19 +374,7 @@ a.sliderCard:hover {
     display: block;
   }
 
-  .single-post-container {
-    flex-direction: column;
-  }
 
-  .single-post-container article {
-    width: 100%;
-  }
-
-  .single-post-container aside {
-    margin-left: 0;
-    width: 100%;
-    max-width: 100%;
-  }
 
 }
 
@@ -435,15 +411,7 @@ a.sliderCard:hover {
     display: none;
   }
 
-  .single-post-container article {
-    max-width: 75%;
-  }
 
-  .single-post-container aside {
-    width: 25%;
-    margin-left: 25px;
-    max-width: 282px;
-  }
 
 }
 
@@ -475,10 +443,7 @@ a.sliderCard:hover {
     margin-top: 10px;
   }
 
-  .single-post-container aside {
-    margin-left: 50px;
-    max-width: 225px;
-  }
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up until 1600px) */

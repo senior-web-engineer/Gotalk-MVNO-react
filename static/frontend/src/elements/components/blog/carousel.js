@@ -20,7 +20,7 @@ function Carousel(props) {
         {
           featuredPosts ? featuredPosts.filter(post => post.meta.featured == 'true').map((post) => {
             return (
-              <Link to={`/${post.slug}`} key={`sliderCard${post.id}`} className='sliderCard'>
+              <Link to={`/blog/${post.slug}`} key={`sliderCard${post.id}`} className='sliderCard'>
                   <div className="slider-card-banner">
                     {
                       post.featured_media && post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail ?

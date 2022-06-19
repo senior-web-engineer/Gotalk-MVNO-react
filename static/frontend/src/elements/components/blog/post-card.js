@@ -7,40 +7,12 @@ import { username, application_password, API_URL } from "../../../utils/const";
 function PostCard(props) {
   const { post } = props;
   const [card, setCard] = useState(post);
-  const [likes, setLikes] = useState("");
+//   const [likes, setLikes] = useState("");
   const likesSpan = useRef(null);
-
-  function likesCount(post) {
-    var count = 1;
-    if (likes != "") count = -1;
-    fetch(API_URL+`/wp/v2/posts/${post.id}`, {
-      // make sure to authenticate or pass the X-WP-Nonce value as a header
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Basic " + btoa(username + ":" + application_password),
-      },
-      // body: JSON.stringify({
-      //   likes_count: parseInt(card.likes_count) + count,
-      // }),
-      body: JSON.stringify({
-        acf: {
-          likes_count: parseInt(card.likes_count) + count,
-        },
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setCard(data);
-        setLikes(count == 1 ? "active" : "");
-        likesSpan.current.innerText = data.likes_count + "\u00A0";
-      })
-      .catch((error) => console.log("error", error));
-  }
 
   return (
     <div >
-      <Link to={`/${post.slug}`}>
+      <Link to={`/blog/${post.slug}`}>
         <div className="post-card">
           <div className="post-card-banner">
             {post.featured_media &&
