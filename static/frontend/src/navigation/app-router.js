@@ -18,6 +18,7 @@ import Bag from '../elements/containers/bag/bag';
 import BillingDetails from '../elements/containers/billing-details/billing-details';
 import Faq from '../elements/containers/faq/faq';
 import HowItWorks from '../elements/containers/how-it-works/how-it-works';
+import Blog from '../elements/containers/blog/blog';
 import Payment from '../elements/containers/payment/payment';
 import RestorePasswordEmail from '../elements/containers/restore-password-email/restore-password-email';
 import RestorePassword from '../elements/containers/restore-password/restore-password';
@@ -178,6 +179,9 @@ const AppRouter = ({ history }) => {
         <Route history={history} exact path={routes.protect} element={<ProtectInfo />} />
         <Route history={history} exact path={routes.setupIntentResult} element={<SetupIntentResult />}/>
         <Route history={history} exact path={routes.outerActivation} element={<OuterActivation />}/>
+        <Route history={history} path={routes.blog} element={<Blog />}>
+          <Route history={history} path=":id" element={<Blog />} />
+        </Route>
       </Routes>
     </BaseLayout>
   );

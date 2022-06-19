@@ -47,5 +47,6 @@ export default {
   acceptable: '/acceptable',
   protect: '/protect',
   setupIntentResult: '/setup-intent-result',
-  outerActivation: '/activation'
+  outerActivation: '/activation',
+  blog: '/blog'
 };

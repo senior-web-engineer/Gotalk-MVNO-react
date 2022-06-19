@@ -5,6 +5,7 @@ const initialState = {
   popularPlans: [],
   currentPlan: {},
   isModeBusiness: false,
+  category: 'All'
 };
 
 export default function mainReducer(state = initialState, action) {
@@ -29,6 +30,13 @@ export default function mainReducer(state = initialState, action) {
 
     case actionsType.SET_POPULAR_PLANS: {
       return { ...state, popularPlans: action.payload };
+    }
+
+    case actionsType.CHANGE_CATEGORY: {
+      return {
+        ...state,
+        category: action.payload,
+      };
     }
 
     default:

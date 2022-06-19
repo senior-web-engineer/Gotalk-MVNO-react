@@ -9,6 +9,8 @@ import './assets/styles/main.scss';
 import './assets/styles/reset.scss';
 import './assets/styles/colors.scss';
 import './assets/styles/fonts.scss';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.render(
   <Provider store={store}>

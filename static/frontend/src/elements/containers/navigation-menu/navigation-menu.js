@@ -61,6 +61,7 @@ NavigationMenu.defaultProps = {
     { title: 'How it works', path: `${routes.works}` },
     { title: 'FAQ', path: `${routes.faq}` },
     { title: 'Fraud Protection', path: `${routes.protect}` },
+    { title: 'Blog', path: `${routes.blog}` },
   ],
   mapNav: false,
 };

@@ -46,6 +46,22 @@ export const howItWorks = [
   },
 ];
 
+export const blogs = [
+  {
+    key: 'title',
+    value: 'Blogs - Go Talk Wireless',
+  },
+  {
+    key: 'description',
+    value:
+      'Blogs on Go Talk Wireless',
+  },
+  {
+    key: 'keywords',
+    value: 'Blog, gotalk, wireless, post',
+  },
+];
+
 export const FAQs = [
   {
     key: 'title',
