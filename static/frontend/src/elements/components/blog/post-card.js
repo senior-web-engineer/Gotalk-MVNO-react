@@ -25,7 +25,7 @@ function PostCard(props) {
                 }
               />
             ) : (
-              <img src="/img/placebo-effect.webp" />
+              <img src="/img/default.webp" />
             )}
           </div>
           <div className="post-card-title">
@@ -45,10 +45,10 @@ function PostCard(props) {
           <span>{post.date.split("T")[0]}</span>
         </div>
         <div className="d-flex counts">
-          <span className="views">
-            <p>{post.views_count}&nbsp; </p>
+          {/* <span className="views">
+            <p>{post.acf.views_count}&nbsp; </p>
             <FontAwesomeIcon icon={faEye} />
-          </span>
+          </span> */}
 
           {/* <span className="likes" onClick={() => likesCount(post)}>
             <p ref={likesSpan}>{post.likes_count}&nbsp; </p>

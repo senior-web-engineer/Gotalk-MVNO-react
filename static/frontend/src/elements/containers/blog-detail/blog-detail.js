@@ -45,26 +45,6 @@ function Post() {
     const resAvg_time = Math.ceil(words / 250);
     setAvgTime(resAvg_time);
 
-    fetch(API_URL+`/wp/v2/posts/${postRes[0].id}`, {
-        // make sure to authenticate or pass the X-WP-Nonce value as a header
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Basic ' + btoa(username + ':' + application_password),
-        },
-        body: JSON.stringify({
-          views_count: postRes[0].views_count + 1,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data)
-          setCard(data);
-        //   setLikes(count == 1 ? 'active' : '');
-        //   likesSpan.current.innerText = data.likes_count + '\u00A0';
-        })
-        .catch((error) => console.log('error', error));
-
   }, [params]);
 
   useEffect(() => {
@@ -84,10 +64,10 @@ function Post() {
           <h1 dangerouslySetInnerHTML={{ __html: post[0]?.title.rendered }}></h1>
           <span className="single-post-date">{post[0]?.date.split('T')[0]}</span>
           <div className="d-flex f-right">
-            <span className="views">
+            {/* <span className="views">
               <p>{post[0]?.views_count}&nbsp; </p>
               <FontAwesomeIcon icon={faEye} />
-            </span>
+            </span> */}
 
             {/* <span className="likes" onClick={() => likesCount(post[0])}>
               <p ref={likesSpan}>{post[0].likes_count}&nbsp; </p>
