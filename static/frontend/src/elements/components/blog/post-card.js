@@ -45,15 +45,7 @@ function PostCard(props) {
           <span>{post.date.split("T")[0]}</span>
         </div>
         <div className="d-flex counts">
-          {/* <span className="views">
-            <p>{post.acf.views_count}&nbsp; </p>
-            <FontAwesomeIcon icon={faEye} />
-          </span> */}
 
-          {/* <span className="likes" onClick={() => likesCount(post)}>
-            <p ref={likesSpan}>{post.likes_count}&nbsp; </p>
-            <FontAwesomeIcon icon={faHeart} className={likes} />
-          </span> */}
         </div>
       </div>
     </div>

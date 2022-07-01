@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { home } from '../../../data/meta-data';
 import Banner from '../../components/main-page-section/banner/banner';
+import Carousel from '../../components/main-page-section/carousel/carousel';
 import CardBlock from '../../components/main-page-section/card-block/card-block';
 import MapBlock from '../../components/main-page-section/map-block/map-block';
 import PresentMain from '../../components/main-page-section/present-main/present-main';
@@ -38,6 +39,7 @@ const Main = () => {
         <PresentMain />
         <Tariffs />
         <PlansBanner />
+        <Carousel/>
         <Banner />
         <ProtectBanner />
         <CardBlock />

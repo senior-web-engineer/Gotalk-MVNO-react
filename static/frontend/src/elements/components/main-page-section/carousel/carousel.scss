@@ -1,0 +1,62 @@
+.carousel-container {
+  padding-top: 25px !important;
+}
+
+.carousel-container .carouselCard {
+  display: block !important;
+}
+
+.carousel-container .carouselCardOdd {
+  display: block !important;
+  margin-top: 40px;
+}
+
+a.carouselCard:hover {
+  text-decoration: none;
+}
+
+.carousel-card-banner {
+  width: 90%;
+}
+
+.carousel-card-banner img {
+  max-width: 500px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.carousel-card-info {
+  width: 90%;
+  text-align: center;
+}
+
+.carousel-card-title h2 {
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.carousel-card-excerpt p {
+  font-size: 20px;
+  line-height: 20px;
+  margin-top: 16px;
+}
+
+.carousel-card-date {
+  font-size: 16px;
+  line-height: 16px;
+  margin-top: 16px;
+}
+
+.slick-dots li button {
+  font-size: 0;
+  display: none;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.blueBg {
+  background-color: aliceblue;
+}

@@ -33,7 +33,7 @@ export async function fetchPosts(page, category, search= null) {
   }
   
   export async function fetchFeaturedPosts() {
-    const res = await fetch(API_URL+`/wp/v2/posts?_embed&meta_key=featured&meta_value=true`)
+    const res = await fetch(API_URL+`/wp/v2/posts?_embed&featured=true`)
     return await res.json()
   }
   

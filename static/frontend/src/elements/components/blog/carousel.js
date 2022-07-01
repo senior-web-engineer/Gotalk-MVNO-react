@@ -8,7 +8,7 @@ function Carousel(props) {
     dots: true,
     infinite: true,
     arrows: false,
-    speed: 1200,
+    speed: 3200,
     autoplay: true,
     customPaging: i => (
       <div>&nbsp;</div>
@@ -18,7 +18,7 @@ function Carousel(props) {
     <div>
       <Slider {...settings} className="container slider-container">
         {
-          featuredPosts ? featuredPosts.filter(post => post.meta.featured == 'true').map((post) => {
+          featuredPosts ? featuredPosts.filter(post => post.featured == 'true').map((post) => {
             return (
               <Link to={`/blog/${post.slug}`} key={`sliderCard${post.id}`} className='sliderCard'>
                   <div className="slider-card-banner">
@@ -26,7 +26,7 @@ function Carousel(props) {
                       post.featured_media && post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail ?
                         <img src={post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url} />
                         :
-                        <img src="/img/placebo-effect.webp"/>
+                        <img src="/img/default.webp"/>
                     }
                   </div>
                   <div className="slider-card-info">

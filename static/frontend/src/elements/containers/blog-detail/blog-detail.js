@@ -64,15 +64,7 @@ function Post() {
           <h1 dangerouslySetInnerHTML={{ __html: post[0]?.title.rendered }}></h1>
           <span className="single-post-date">{post[0]?.date.split('T')[0]}</span>
           <div className="d-flex f-right">
-            {/* <span className="views">
-              <p>{post[0]?.views_count}&nbsp; </p>
-              <FontAwesomeIcon icon={faEye} />
-            </span> */}
 
-            {/* <span className="likes" onClick={() => likesCount(post[0])}>
-              <p ref={likesSpan}>{post[0].likes_count}&nbsp; </p>
-              <FontAwesomeIcon icon={faHeart} className={likes} />
-            </span> */}
           </div>
           <p className="average_time">
             <svg
@@ -101,7 +93,7 @@ function Post() {
             </div>
           ) : (
             <div className="single-post-banner">
-              <img src="/img/placebo-effect.webp" />
+              <img src="/img/default.webp" />
             </div>
           )}
           <div
@@ -183,7 +175,7 @@ function Post() {
                           }
                         />
                       ) : (
-                        <img src="/img/placebo-effect.webp" />
+                        <img src="/img/default.webp" />
                       )}
                       <h3
                         dangerouslySetInnerHTML={{
