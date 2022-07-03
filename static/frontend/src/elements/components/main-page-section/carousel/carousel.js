@@ -42,8 +42,8 @@ function Carousel(props) {
   ];
   let settings = {
     dots: true,
-    infinite: false,
-    speed: 300,
+    infinite: true,
+    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     responsive: [
