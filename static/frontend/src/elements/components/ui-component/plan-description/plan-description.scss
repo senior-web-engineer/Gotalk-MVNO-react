@@ -59,8 +59,15 @@
   line-height: 32px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-evenly;
   margin: 24px 0;
+
+  p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .card__conditions_item {
@@ -76,4 +83,13 @@
 
 .card__conditions_item-plan {
   margin-right: 10px;
+}
+
+.card__conditions_item__value {
+  font-family: 'Roboto-Medium';
+  color: #d75f5c;
+}
+
+.card__conditions_item__sub {
+  font-size: 16px;
 }

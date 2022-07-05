@@ -47,7 +47,7 @@ const Tariffs = () => {
       description={plan?.description}
       characteristics={plan?.props?.info}
       isCompany={plan?.isCompany}
-      clickCard={() => clickCard(plan?.id)}
+      clickCard={() => handleBasketAddition(plan?.id)}
       internet={plan?.internetCount}
       minute={plan?.minuteCount}
       sms={plan?.SMSCount}

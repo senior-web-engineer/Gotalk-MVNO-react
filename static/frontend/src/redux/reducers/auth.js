@@ -15,6 +15,9 @@ const initialState = {
   setNewPassword: {
     error: '',
   },
+  outerActivation: {
+    error: '',
+  }
 };
 
 const authReducer = (state = initialState, action) => {
@@ -52,6 +55,12 @@ const authReducer = (state = initialState, action) => {
     case authTypes.LOGOUT:
       return { ...state, isSignedIn: false, user: {} };
 
+    case authTypes.OUTER_ACTIVATION_FAIL:
+      return { ...state, outerActivation: { ...state.outerActivation, error: action.payload } };
+
+    case authTypes.OUTER_ACTIVATION_SUCCESS:
+      return { ...state, outerActivation: { ...state.outerActivation, error: '' } };
+
     case authTypes.RESET_ERRORS:
       return {
         ...state,
@@ -59,6 +68,7 @@ const authReducer = (state = initialState, action) => {
         signIn: { error: '' },
         restorePassword: { error: '' },
         setNewPassword: { error: '' },
+        outerActivation: { error: '' }
       };
 
     default:

@@ -11,6 +11,7 @@ const initialState = {
   getQRLoading: true,
   isLoadingPlan: false,
   checkAuthLoading: true,
+  outerActivationLoading: false,
 };
 
 const DEFAULT_KEY = 'isLoading';

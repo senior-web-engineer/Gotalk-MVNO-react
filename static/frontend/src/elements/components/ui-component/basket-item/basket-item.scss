@@ -125,3 +125,38 @@
 .basket-item__footer-fee {
   font-size: 1.75rem;
 }
+
+.basket-item {
+  &.collapsed {
+    .plans-description__description,
+    .card__conditions-plan,
+    .plans-description__list,
+    .basket-item__sim-header,
+    .basket-item__sim-subtitle,
+    .basket-item__switch-container {
+      display: none;
+    }
+
+    .basket-item__content {
+      margin-bottom: 24px;
+    }
+
+    .basket-item__plan-collapser {
+      transform: rotate(0deg);
+    }
+  }
+
+  &__plan-description-container {
+    position: relative;
+  }
+
+  &__plan-collapser {
+    width: 30px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+    transition: transform .3s;
+    transform: rotate(180deg);
+  }
+}

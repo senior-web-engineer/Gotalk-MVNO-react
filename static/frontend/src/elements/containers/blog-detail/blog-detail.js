@@ -89,7 +89,7 @@ function Post() {
           </div>
           {media ? (
             <div className="single-post-banner">
-              <img src={media.source_url} />
+              <img src={media.source_url.replace('http://', 'https://')} />
             </div>
           ) : (
             <div className="single-post-banner">
@@ -171,7 +171,7 @@ function Post() {
                         <img
                           src={
                             post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail
-                              .source_url
+                              .source_url.replace('http://', 'https://')
                           }
                         />
                       ) : (

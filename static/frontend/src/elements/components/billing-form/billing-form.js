@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
-const BillingForm = ({ onSubmit }) => {
+const BillingForm = ({ onSubmit, checkout, isBasketEmpty }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -25,7 +25,7 @@ const BillingForm = ({ onSubmit }) => {
   const { isSignedIn, user } = useSelector((state) => state.authReducer);
   const { errors } = useSelector((state) => state.payment);
   const { hasDelivery } = useSelector((state) => state.basketReducer);
-  const [isDeliveryAuto, setDeliveryAuto] = useState(false);
+  const [isDeliveryAuto, setDeliveryAuto] = useState(true);
   const [billingAddress, setBillingAddress] = useState();
 
   const deliveryContentClasses = classNames(
@@ -48,10 +48,10 @@ const BillingForm = ({ onSubmit }) => {
   });
 
   useEffect(() => {
-    if (!hasDelivery && isSignedIn) {
+    if (!hasDelivery && isSignedIn && !checkout) {
       navigate(routes.bag);
     }
-  }, [hasDelivery, isSignedIn, navigate]);
+  }, [hasDelivery, isSignedIn, navigate, checkout]);
 
   useEffect(() => {
     dispatch({ type: paymentTypes.RESET_PAYMENT_ERRORS });
@@ -78,6 +78,12 @@ const BillingForm = ({ onSubmit }) => {
     }
   }, [dispatch, plans]);
 
+  useEffect(() => {
+    if(isSignedIn) {
+      setDeliveryAuto(false);
+    }
+  }, [isSignedIn]);
+
   const handleUserInfo = async (data) => {
     const products = getBasketItems();
     const userInfoData = {
@@ -85,7 +91,19 @@ const BillingForm = ({ onSubmit }) => {
       coupon: getCouponFromLocalStorage()
     };
 
-    if (location.state?.hasDelivery) {
+    if(!data.delivery) {
+      data.delivery = {
+        firstName: '',
+        lastName: '',
+        street: '',
+        city: '',
+        apartment: '',
+        country: '',
+        zip: ''
+      }
+    }
+
+    if (hasDelivery) {
       userInfoData.delivery = data.delivery;
     }
 
@@ -94,10 +112,17 @@ const BillingForm = ({ onSubmit }) => {
       delete userInfoData.user.passwordConfirmation;
     }
 
-    if (isDeliveryAuto) {
-      Object.keys(data.delivery).forEach((key) => {
-        userInfoData.delivery[key] = userInfoData.user[key];
-      });
+    if (isDeliveryAuto && hasDelivery) {
+      if(isSignedIn) {
+        Object.keys(data.delivery).forEach((key) => {
+          userInfoData.delivery[key] = user[key];
+        });
+      }
+      else {
+        Object.keys(data.delivery).forEach((key) => {
+          userInfoData.delivery[key] = userInfoData.user[key];
+        });
+      }
     }
 
     if (isSignedIn) {
@@ -106,6 +131,7 @@ const BillingForm = ({ onSubmit }) => {
         payload: userInfoData,
         navigate,
         user,
+        checkout: !!checkout
       });
     } else {
       dispatch({
@@ -113,6 +139,7 @@ const BillingForm = ({ onSubmit }) => {
         payload: userInfoData,
         navigate,
         user: userInfoData.user,
+        checkout: !!checkout
       });
     }
 
@@ -133,6 +160,10 @@ const BillingForm = ({ onSubmit }) => {
     }
   };
 
+  if(isBasketEmpty) {
+    return null;
+  }
+
   return (
     <div className="billing-form">
       <FormProvider {...methods}>
@@ -144,32 +175,42 @@ const BillingForm = ({ onSubmit }) => {
           <div className="billing-form__row">
             {!isSignedIn
             && (
-            <div className="billing-form__form-container user">
-              <div className="billing-form__form-header-container">
-                <h3 className="billing-form__form-header">Billing details</h3>
+            <>
+              <div className="billing-form__form-container user">
+                <div className="billing-form__form-header-container">
+                  <h3 className="billing-form__form-header">Create Account</h3>
+                </div>
+                <div className="billing-form__form-content">
+                  <UserInfoForm parentName="user" isBillingUserInfo onlyCreateAccount={true} />
+                </div>
               </div>
-              <div className="billing-form__form-content">
-                <UserInfoForm parentName="user" isBillingUserInfo />
-                {hasDelivery
-                  && (
-                    <Checkbox
-                      onChange={(event) => handleSwitch(event)}
-                      addClass="billing-form__ship-to-address"
-                      label="Ship to billing address"
-                    />
-                  )}
+              <div className="billing-form__form-container user">
+                <div className="billing-form__form-header-container">
+                  <h3 className="billing-form__form-header">Billing Address</h3>
+                </div>
+                <div className="billing-form__form-content">
+                  <UserInfoForm parentName="user" isBillingUserInfo />
+                  {hasDelivery
+                      && (
+                          <Checkbox
+                              onChange={(event) => handleSwitch(event)}
+                              addClass="billing-form__ship-to-address"
+                              label="Ship to billing address"
+                              checked={isDeliveryAuto}
+                          />
+                      )}
+                </div>
               </div>
-            </div>
+            </>
             )}
-            {hasDelivery
-              && (
+            {(hasDelivery && isSignedIn || hasDelivery && !isDeliveryAuto) && (
                 <div className={deliveryContentClasses}>
                   <div className="billing-form__form-header-container">
-                    <h3 className="billing-form__form-header">Shipping details</h3>
+                    <h3 className="billing-form__form-header">Shipping Address</h3>
                   </div>
                   <DeliveryInfoForm
                     parentName="delivery"
-                    addressData={isDeliveryAuto ? billingAddress : null}
+                    addressData={(isDeliveryAuto && !isSignedIn) ? billingAddress : null}
                     wide={isSignedIn}
                   />
                 </div>
@@ -177,8 +218,9 @@ const BillingForm = ({ onSubmit }) => {
           </div>
           <SimsOutErrors errors={errors} plans={plans} />
           <button
-            className="billing-form__submit"
-            type="submit"
+              className="billing-form__submit"
+              type="submit"
+              style={{display: checkout ? "none" : "block"}}
           >
             NEXT STEP
           </button>

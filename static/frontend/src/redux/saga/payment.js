@@ -18,10 +18,15 @@ function* buyPlanSaga(params) {
     const { data } = yield call(buyPlan, params.payload);
 
     const payId = get(data, 'payload.payId', '');
-
-    if (params.navigate) {
+    if (params.navigate && !params.checkout) {
       params.navigate(routes.payment, {
         state: { clientSecret: data.payload.stripId, user: params.user, payId },
+      });
+    }
+    else if(params.checkout) {
+      yield put({
+        type: paymentTypes.CHECKOUT_DATAS,
+        payload: { clientSecret: data.payload.stripId, user: params.user, payId }
       });
     }
   } catch (error) {
@@ -44,10 +49,14 @@ function* buyPlanAuthorizedSaga(params) {
     const { data } = yield call(buyPlanAuthorized, params.payload);
 
     const payId = get(data, 'payload.payId', '');
-
-    if (params.navigate) {
-      params.navigate(routes.payment, {
+    if (params.navigate && !params.checkout) {
+      params.navigate(routes.checkout, {
         state: { clientSecret: data.payload.stripId, user: params.user, payId },
+      });
+    } else if(params.checkout) {
+      yield put({
+        type: paymentTypes.CHECKOUT_DATAS,
+        payload: { clientSecret: data.payload.stripId, user: params.user, payId }
       });
     }
   } catch (error) {

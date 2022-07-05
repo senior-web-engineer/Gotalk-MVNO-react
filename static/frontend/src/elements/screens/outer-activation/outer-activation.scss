@@ -1,0 +1,55 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.outer-activation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.outer-activation__form {
+  width: 100%;
+  max-width: 877px;
+  margin-bottom: 125px;
+}
+
+.outer-activation__sign-in-suggestion {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 1.125rem;
+  align-self: end;
+  margin-bottom: 44px;
+
+  @include below-breakpoint(xs) {
+    align-self: center;
+  }
+}
+
+.outer-activation__sign-in-text {
+  display: inline;
+  margin-right: 4px;
+}
+
+.outer-activation__sign-in-link {
+  color: $light-dark-grey;
+
+  &:hover {
+    color: $light-red;
+  }
+}
+
+.outer-activation__error-message {
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  color: $primary-red;
+  margin-bottom: 15px;
+  margin-top: 24px;
+}
+
+.outer-activation__submit {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}

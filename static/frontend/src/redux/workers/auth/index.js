@@ -17,3 +17,5 @@ export const restorePassword = (userData) => api.post(AUTH.restorePassword, user
 export const setNewPassword = (userData) => api.post(AUTH.setNewPassword, userData);
 
 export const checkAuth = () => api.get(AUTH.checkAuth);
+
+export const sendOuterActivation = (data) => api.post(AUTH.outerActivation, data);

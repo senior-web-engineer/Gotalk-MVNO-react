@@ -3,7 +3,7 @@
 @import 'src/assets/styles/mixins/button.scss';
 
 .payment__form {
-  max-width: 745px;
+  max-width: 1005px;
 }
 
 .payment-form__header-container {
@@ -188,7 +188,7 @@
 .payment-form__checkbox {
   margin-top: 80px;
 
-  @include below-breakpoint(xs) {
+  @include below-breakpoint(sm) {
     margin-top: 24px;
   }
 }
@@ -210,4 +210,32 @@
 
 .payment-form__button-pay {
   @include button-red($padding: 20px 48px)
+}
+
+.payment-form__card__trustbadge {
+  position: absolute;
+  width: 300px;
+  left: 65%;
+  transform: translateX(-50%);
+  bottom: -51px;
+
+  @include below-breakpoint(md) {
+    left: 45%;
+    bottom: 50px;
+  }
+
+  @include below-breakpoint(sm) {
+    position: static;
+    transform: initial;
+    text-align: center;
+    width: 100%;
+  }
+
+  &-img {
+    @include below-breakpoint(sm) {
+      height: 90px;
+      width: auto;
+      display: inline-block;
+    }
+  }
 }

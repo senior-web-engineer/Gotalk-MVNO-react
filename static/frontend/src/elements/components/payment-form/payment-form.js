@@ -20,8 +20,9 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {getCouponFromLocalStorage} from "../../../shared/basketActions";
+import StripeTrustBadge from "../../../assets/images/payment/stripe-trust-badge.png";
 
-const PaymentForm = () => {
+const PaymentForm = ({checkout, isBasketEmpty}) => {
   const [showPopup, setShowPopup] = useState(false);
   const holderRef = useRef(null);
   const sendReceipt = useRef(false);
@@ -47,14 +48,13 @@ const PaymentForm = () => {
     [],
   );
   const [coupon, setCoupon] = useState();
+  const {checkoutDatas} =  useSelector(state => state.payment);
 
   useEffect(() => {
     setCoupon(getCouponFromLocalStorage());
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     if (!holderRef.current.value) {
       return;
     }
@@ -81,9 +81,17 @@ const PaymentForm = () => {
       paymentConfig.receipt_email = location.state?.user?.email;
     }
 
-    const clientSecret = get(location, 'state.clientSecret', '');
-    const payId = get(location, 'state.payId', '');
-    const email = get(location, 'state.user.email', '');
+    let clientSecret, payId, email;
+    if(checkout) {
+      clientSecret = checkoutDatas.clientSecret;
+      payId = checkoutDatas.payId;
+      email = checkoutDatas.email;
+    }
+    else {
+      clientSecret = get(location, 'state.clientSecret', '');
+      payId = get(location, 'state.payId', '');
+      email = get(location, 'state.user.email', '');
+    }
 
     dispatch({
       type: paymentTypes.BUY_PLAN_STRIPE,
@@ -168,71 +176,123 @@ const PaymentForm = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => resetPaymentStatus, []);
 
+  const discountAmount = useMemo(() => {
+    if(!coupon) {
+      return 0;
+    }
+
+    if(coupon.discountType === 'PERCENTAGE') {
+      return totalPrice / (100 / coupon.discountPercentage);
+    }
+
+    return coupon.discountAmount;
+  }, [coupon]);
+
+  function checkoutSubmitForms() {
+    if(!checkoutDatas) {
+      document.querySelector('.billing-form__submit')?.click();
+    }
+    else {
+      handleSubmit();
+    }
+  }
+
+  useEffect(() => {
+    if(checkoutDatas) {
+      handleSubmit();
+    }
+  }, [checkoutDatas]);
+
+  function getPayId() {
+    return checkoutDatas?.payId || get(location, 'state.payId', '');
+  }
+
   return (
     <form onSubmit={handleSubmit} className="payment__form">
-      <div className="payment-form">
-        <div className="payment-form__header-container">
-          <h3 className="payment-form__header">Payment</h3>
-        </div>
-        <span className="payment-form__total-price-container">
-          <strong className="payment-form__total-price-text">Total</strong>
-          <strong className="payment-form__total-price-price">{`$${totalPrice - (coupon?.discountAmount || 0)}`}</strong>
-        </span>
-        <div className="payment-form__card-container">
-          <div className="payment-form__card-side front">
-            <div className="payment-form__field-container">
-              <p className="payment-form__field-label">Credit card number</p>
-              <CardNumberElement options={{ ...options, placeholder: '0000 0000 0000 0000' }} />
+      {!isBasketEmpty ? (
+          <div className="payment-form">
+            {!checkout && (
+                <>
+                  <div className="payment-form__header-container">
+                    <h3 className="payment-form__header">Payment</h3>
+                  </div>
+                  <span className="payment-form__total-price-container">
+                <strong className="payment-form__total-price-text">Total</strong>
+                <strong className="payment-form__total-price-price">{`$${totalPrice - (discountAmount || 0)}`}</strong>
+              </span>
+                </>
+            )}
+            <div className="payment-form__card-container">
+              <div className="payment-form__card-side front">
+                <div className="payment-form__field-container">
+                  <p className="payment-form__field-label">Credit card number</p>
+                  <CardNumberElement options={{ ...options, placeholder: '0000 0000 0000 0000' }} />
+                </div>
+                <div className="payment-form__row">
+                  <div className="payment-form__field-container holder">
+                    <p className="payment-form__field-label">Card Holder name</p>
+                    <Input
+                        ref={holderRef}
+                        onFocus={() => holderRef.current.classList.remove('invalid')}
+                        onChange={(event) => {
+                          const input = event.target;
+                          input.value = formatHolder(input.value);
+                          return event;
+                        }}
+                        containerClass="payment-form__input"
+                        placeholder="Enter credit holder name"
+                        type="text"
+                        autoComplete="name"
+                    />
+                  </div>
+                  <div className="payment-form__field-container">
+                    <p className="payment-form__field-label">Expiration Date</p>
+                    <CardExpiryElement options={options} />
+                  </div>
+                </div>
+              </div>
+              <div className="payment-form__card-side back">
+                <div className="payment-form__cvv-background" />
+                <div className="payment-form__field-container cvv">
+                  <p className="payment-form__field-label">CVC</p>
+                  <CardCvcElement options={{ ...options }} />
+                </div>
+              </div>
+              <div className="payment-form__card__trustbadge">
+                <img src={StripeTrustBadge} alt="Stripe Secure Payment" className="payment-form__card__trustbadge-img"/>
+              </div>
             </div>
             <div className="payment-form__row">
-              <div className="payment-form__field-container holder">
-                <p className="payment-form__field-label">Card Holder name</p>
-                <Input
-                  ref={holderRef}
-                  onFocus={() => holderRef.current.classList.remove('invalid')}
-                  onChange={(event) => {
-                    const input = event.target;
-                    input.value = formatHolder(input.value);
-                    return event;
-                  }}
-                  containerClass="payment-form__input"
-                  placeholder="Enter credit holder name"
-                  type="text"
-                  autoComplete="name"
-                />
-              </div>
-              <div className="payment-form__field-container">
-                <p className="payment-form__field-label">Expiration Date</p>
-                <CardExpiryElement options={options} />
-              </div>
+              <Checkbox
+                  onChange={handleCheck}
+                  label="Get a receipt by email"
+                  addClass="payment-form__checkbox"
+              />
+              <span className="payment-form__total-price-container">
+                <strong className="payment-form__total-price-text">Total</strong>
+                <strong className="payment-form__total-price-price">{`$${totalPrice - (discountAmount || 0)}`}</strong>
+              </span>
+            </div>
+            <div className="payment-form__controls-container">
+              <button
+                  type="button"
+                  className="payment-form__button-back"
+                  onClick={() => navigate(routes.billingDetails)}
+              >
+                BACK
+              </button>
+              {checkout ? (
+                  <button type="button" className="payment-form__button-pay" onClick={checkoutSubmitForms}>
+                    PAY
+                  </button>
+              ) : (
+                  <button type="submit" className="payment-form__button-pay">
+                    PAY
+                  </button>
+              )}
             </div>
           </div>
-          <div className="payment-form__card-side back">
-            <div className="payment-form__cvv-background" />
-            <div className="payment-form__field-container cvv">
-              <p className="payment-form__field-label">CVC</p>
-              <CardCvcElement options={{ ...options }} />
-            </div>
-          </div>
-        </div>
-        <Checkbox
-          onChange={handleCheck}
-          label="Get a receipt by email"
-          addClass="payment-form__checkbox"
-        />
-        <div className="payment-form__controls-container">
-          <button
-            type="button"
-            className="payment-form__button-back"
-            onClick={() => navigate(routes.billingDetails)}
-          >
-            BACK
-          </button>
-          <button type="submit" className="payment-form__button-pay">
-            PAY
-          </button>
-        </div>
-      </div>
+      ) : null}
       {showPopup && (
         <PaymentPopup
           isSuccess={paymentStatus.status === PAYMENT_STATUSES.SUCCESS}
@@ -240,6 +300,9 @@ const PaymentForm = () => {
           onSubmit={handleSubmitPopup}
           message={paymentStatus.message}
         />
+      )}
+      {(showPopup && paymentStatus.status === PAYMENT_STATUSES.SUCCESS) && (
+          <img src={`https://www.shareasale.com/sale.cfm?tracking=${getPayId()}&amount=${totalPrice - (discountAmount || 0)}&merchantID=127982&transtype=sale`} width="1" height="1" />
       )}
     </form>
   );

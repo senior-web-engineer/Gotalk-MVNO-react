@@ -51,6 +51,8 @@ import { Route, Routes } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 import SetupIntentResult from "../elements/screens/setup-intent-result/setup-intent-result";
 import OuterActivation from "../elements/screens/outer-activation/outer-activation";
+import generalSettingsTypes from "../redux/workers/general-settings/general-settings-types";
+import Checkout from "../elements/containers/checkout/checkout";
 
 TagManager.initialize({
   gtmId: 'GTM-NH8F8RN'
@@ -74,6 +76,11 @@ const AppRouter = ({ history }) => {
       });
     }
   }, [isSignedIn, dispatch]);
+
+  useEffect(() => {
+    dispatch({ type: generalSettingsTypes.GET_GENERAL_SETTINGS });
+  }, []);
+
   return (
     <BaseLayout>
       <Routes>
@@ -111,6 +118,7 @@ const AppRouter = ({ history }) => {
         <Route history={history} exact path={routes.faq} element={<Faq />} />
         <Route history={history} exact path={routes.works} element={<HowItWorks />} />
         <Route history={history} exact path={routes.payment} element={<Payment />} />
+        <Route history={history} exact path={routes.checkout} element={<Checkout />} />
         <Route history={history} exact path={routes.plans} element={<PlansScreen />} />
         <Route history={history} path={`${routes.account.base}`} element={<RequireAuth><AccountLayout /></RequireAuth>}>
           <Route history={history} path={routes.account.edit.base} element={<AccountScreenEdit />}>
@@ -180,11 +188,8 @@ const AppRouter = ({ history }) => {
         <Route history={history} exact path={routes.protect} element={<ProtectInfo />} />
         <Route history={history} exact path={routes.setupIntentResult} element={<SetupIntentResult />}/>
         <Route history={history} exact path={routes.outerActivation} element={<OuterActivation />}/>
-
         <Route history={history} path={`${routes.blog}/:slug`} element={<BlogDetail />} />
-        <Route history={history} path={routes.blog} element={<Blog />}>
-    
-        </Route>
+        <Route history={history} path={routes.blog} element={<Blog />} />
       </Routes>
     </BaseLayout>
   );

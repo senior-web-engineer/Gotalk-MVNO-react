@@ -6,10 +6,10 @@ import basketTypes from '../../../redux/workers/basket/basket-types';
 import { getBasketItems } from '../../../shared/basketActions';
 import HeaderDropdown from '../ui-component/dropdown/header-dropdown';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import './login-link.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import Button from "../ui-component/button/button";
 
 const LoginLink = ({
@@ -29,6 +29,10 @@ const LoginLink = ({
   const [placeholderName, setPlaceholderName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const isPlanPage = useMemo(() => {
+    return pathname.startsWith(routes.plans);
+  }, [pathname]);
 
   useEffect(() => {
     if (isSignedIn) {
@@ -85,7 +89,7 @@ const LoginLink = ({
             }
           }}
           addClass="button header-plan-button"
-          title="Find a Plan"
+          title={isPlanPage ? 'Buy Now' : 'Find a Plan'}
       />
     </div>
   );

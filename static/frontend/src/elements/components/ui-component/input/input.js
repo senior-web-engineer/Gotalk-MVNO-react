@@ -54,7 +54,9 @@ const Input = ({
 
   return (
     <div className={containerClassNames}>
-      <p className="styled-input__label">{label}</p>
+      <div className="styled-input__label">
+        {label}
+      </div>
       <input
         style={{ paddingRight: type === 'password' ? '42px' : '18px' }}
         disabled={disabled}

@@ -11,7 +11,6 @@
   background-color: $label;
   transition: all 0.5s linear;
   width: calc(320px + (362 - 320) * ((100vw - 375px) / (1920 - 375)));
-  cursor: pointer;
   margin: 12px 12px 40px 12px;
   color: $primary-dark-blue;
 
@@ -92,20 +91,25 @@
 .card__conditions {
   font-family: 'Roboto-Regular';
   font-size: 18px;
-  line-height: 32px;
+  line-height: 26px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   margin: 24px auto;
+
+  p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.card__conditions_item {
-  font-family: 'Raleway-Bold', sans-serif;
-  font-size: calc(24px + (32 - 24) * ((100vw - 375px) / (1920 - 375)));
-  line-height: calc(32px + (40 - 32) * ((100vw - 375px) / (1920 - 375)));
+.card__conditions_item__value {
+  font-family: 'Roboto-Medium';
+  color: #d75f5c;
 }
-.infinity-symbol {
-  font-size: 32px;
-  line-height: 32px;
-  padding-top: 5px;
+
+.card__conditions_item__sub {
+  font-size: 16px;
 }

@@ -47,7 +47,7 @@ const Plans = ({ wrapperClass }) => {
       internet={plan?.internetCount}
       minute={plan?.minuteCount}
       sms={plan?.SMSCount}
-      clickCard={() => clickCard(plan?.id)}
+      clickCard={() => handleBasketAddition(plan?.id)}
       onClick={(e) => {
         e.stopPropagation();
         handleBasketAddition(plan?.id);

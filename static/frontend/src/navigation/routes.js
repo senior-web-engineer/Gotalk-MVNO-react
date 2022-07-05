@@ -34,10 +34,7 @@ export default {
     },
   },
   tariff: '/tariff',
-  bag: '/bag',
-  billingDetails: '/bag/billing-details',
   faq: '/faq',
-  payment: '/bag/payment',
   plans: '/plans',
   works: '/how-it-works',
   termsConditions: '/terms-conditions',
@@ -47,6 +44,10 @@ export default {
   acceptable: '/acceptable',
   protect: '/protect',
   setupIntentResult: '/setup-intent-result',
-  outerActivation: '/activation',
+  outerActivation: '/activate',
+  bag: '/bag',
+  billingDetails: '/bag/billing-details',
+  payment: '/bag/payment',
+  checkout: '/bag/checkout',
   blog: '/blog'
 };

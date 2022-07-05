@@ -1,0 +1,124 @@
+@import 'src/assets/styles/index.scss';
+
+.brandpush-logo-container-item {
+  height: 100px;
+  position: relative;
+
+  @include below-breakpoint(md) {
+    height: auto;
+  }
+}
+.brandpush-vertical-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  @include below-breakpoint(md) {
+    flex-direction: column;
+  }
+}
+.brandpush-vertical-center img.brandpush-news-logo {
+  width: 100%;
+  max-width: 130px;
+  height: auto;
+  margin: 7px 10px;
+}
+.trust-badge-container {
+  width:100%;
+  margin-top:10px;
+  all:unset;
+}
+#brandpush-trust-badge {
+  position: relative;
+  width:100%;
+  background:#fff;
+  border-radius:10px;
+  min-height:180px;
+  margin: 25px 0;
+}
+.brandpush-title-hr {
+  border-top: 1.5px solid #dadada;
+  position: absolute;
+  padding:0;
+  margin: 0 0 0 5%;
+  width: 90%;
+  top: 30px;
+  left: 0;
+  z-index: 0;
+}
+.brandpush-title {
+  background-color: #fff;
+  z-index: 1;
+  position: relative;
+  padding: 0 20px;
+  margin:0;
+  top:-13px;
+  font-size: 20px;
+}
+.brandpush-news-logo {
+  max-width: 120px;
+}
+.brandpush-footer {
+  text-align: center;
+  padding: 0 20px;
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: 600;
+  letter-spacing: 3px;
+  position: relative;
+  width: 100%;
+  margin: 0 0 8px 0;
+  display: inline-block;
+  color: #a5a5a5;
+}
+
+.trust-badge-inner {
+  text-align:center;
+  padding:30px 5px 15px 5px;
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: 600;
+  letter-spacing: 8px;
+}
+
+.brandpush-logo-container {
+  text-align:center;
+  margin:0 auto;
+}
+
+@media screen and (min-width: 585px) {
+  .brandpush-leaf {
+    opacity:0.2 !important;
+  }
+  .brandpush-logo-container{
+    padding: 0 20px;
+  }
+}
+@media screen and (max-width: 584px) {
+  .brandpush-news-logo {
+    max-width:70px !important;
+  }
+  .brandpush-title {
+    font-size: 15px;
+    top: -5px;
+    letter-spacing: 6px;
+  }
+}
+@media screen and (max-width: 340px) {
+  .brandpush-title-hr {
+    display:none !important;
+  }
+  .brandpush-title {
+    font-size:14px;
+    padding:0 !important;
+  }
+  .brandpush-footer {
+    font-size:11px !important;
+    margin:20px 0 25px 0 !important;
+    letter-spacing: 2px !important;
+  }
+  .brandpush-news-logo{
+    max-width:50px !important;
+  }
+}

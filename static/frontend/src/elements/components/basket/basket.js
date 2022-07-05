@@ -15,7 +15,7 @@ import BasketItem from '../ui-component/basket-item/basket-item';
 import Button from '../ui-component/button/button';
 import SimsOutErrors from '../ui-component/sims-out-errors/sims-out-errors';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {useForm} from "react-hook-form";
@@ -23,8 +23,17 @@ import Input from "../ui-component/input/input";
 import Spinner from "../ui-component/spinner/spinner";
 import { ReactComponent as CrossIcon } from '../../../assets/images/icons/cross.svg';
 import {canUseCoupon} from "../../../redux/workers/basket/coupon";
+import StripeTrustBadge from "../../../assets/images/payment/stripe-trust-badge.png";
+import MoneyBackIcon from "../../../assets/images/payment/shield.svg";
+import SSLIcon from "../../../assets/images/payment/ssl.svg";
+import DeliveryIcon from "../../../assets/images/payment/delivery.svg";
+import FiveGIcon from "../../../assets/images/payment/5g.svg";
+import TrustBadge from "../main-page-section/trust-badge/trust-badge";
+import BillingForm from "../billing-form/billing-form";
+import PaymentForm from "../payment-form/payment-form";
+import {useMediaQuery} from "../../../hooks/useMediaQuery";
 
-const Basket = ({ setBasketEmpty }) => {
+const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
   const navigate = useNavigate();
   const [basketItems, setBasketItems] = useState(getBasketItems());
   const totalPrice = useSelector((state) => state.basketReducer.totalPrice);
@@ -37,6 +46,7 @@ const Basket = ({ setBasketEmpty }) => {
   const [coupon, setCoupon] = useState();
   const [couponLoading, setCouponLoading] = useState(false);
   const dispatch = useDispatch();
+  const isSmallForBasketProps = useMediaQuery('(max-width: 768px)');
 
   const {
     register,
@@ -45,6 +55,13 @@ const Basket = ({ setBasketEmpty }) => {
   } = useForm();
 
   const handleNavigateToBillingForm = () => {
+    if(checkout) {
+      window.scrollTo({
+        top: document.querySelector('.payment__form').offsetTop - 100,
+        behavior: "smooth"
+      });
+      return;
+    }
     setCouponToLocalStorage(coupon);
 
     if (isSignedIn && !hasDelivery) {
@@ -59,10 +76,9 @@ const Basket = ({ setBasketEmpty }) => {
         navigate,
         user,
       });
-      return;
     }
 
-    navigate(routes.billingDetails, {
+    navigate(routes.checkout, {
       state: {
         hasDelivery,
       },
@@ -135,9 +151,22 @@ const Basket = ({ setBasketEmpty }) => {
         onChange={onBasketItemChange}
         onDelete={onBasketItemDelete}
         className="basket__basket-item"
+        collapsible={!!checkout}
       />
     ));
   };
+
+  const discountAmount = useMemo(() => {
+    if(!coupon) {
+      return 0;
+    }
+
+    if(coupon.discountType === 'PERCENTAGE') {
+      return totalPrice / (100 / coupon.discountPercentage);
+    }
+
+    return coupon.discountAmount;
+  }, [coupon]);
 
   const couponForm = () => {
     if(couponLoading) {
@@ -153,7 +182,7 @@ const Basket = ({ setBasketEmpty }) => {
         <div className="basket__price-col__coupon-active">
             <div className="basket__price-col__coupon-active-text">
               <b>{coupon.code}</b> <br />
-              Yay! You saved <b>${coupon.discountAmount}</b> for <b>{coupon.monthCount}</b> {coupon.monthCount > 1 ? 'Months' : 'Month'}
+              Yay! You saved <b>${discountAmount}</b> for <b>{coupon.monthCount}</b> {coupon.monthCount > 1 ? 'Months' : 'Month'}
             </div>
             <div className="basket__price-col__coupon-active-cross" onClick={() => setCoupon(undefined)}>
               <CrossIcon />
@@ -202,56 +231,113 @@ const Basket = ({ setBasketEmpty }) => {
     setCouponLoading(false);
   };
 
+  function renderBasketProps() {
+    return (
+        <div className="basket__products-props">
+          <div className="basket__products-props__item">
+            <img src={SSLIcon} alt="Secure Shopping" />
+            <span>
+              Secure shopping<br/>
+              with SSL encryption
+            </span>
+          </div>
+          <div className="basket__products-props__item">
+            <img src={FiveGIcon} alt="5G" />
+            <span>
+              5G included<br/>
+              on all Go Talk plans
+            </span>
+          </div>
+          <div className="basket__products-props__item">
+            <img src={DeliveryIcon} alt="Free 2 day delivery" />
+            <span>
+              Choose Esim or<br/>
+              free 2 day delivery
+            </span>
+          </div>
+        </div>
+    );
+  }
+
   return (
     <div className="basket">
       <section className="basket__products">
-        <h2 className="basket__title">Basket</h2>
+        {!checkout && (
+            <h2 className="basket__title">Basket</h2>
+        )}
         <SimsOutErrors errors={paymentErrors} plans={plans} />
         <div className="basket__products-container">
-          <ul className="basket__products-list">
-            <li className="basket__products-list-item">{renderBasketItems()}</li>
-          </ul>
-          <div className="basket__price-container">
-            <div className="basket__price-col coupon">
-              <div className="basket__price-col__coupon-title">Promo Code</div>
-              <div className="basket__price-col__coupon-form-wrapper">
-                {couponForm()}
-              </div>
-            </div>
-            <hr />
-            <div className="basket__price-row">
-              <div className="basket__price-col">Delivery</div>
-              <div className="basket__price-col sum">{hasDelivery ? 'is 2 – 3 days' : '$0'}</div>
-            </div>
-            <div className="basket__price-row">
-              <div className="basket__price-col">Lines</div>
-              <div className="basket__price-col sum">{totalLines}</div>
-            </div>
-            {coupon && (
-                <div className="basket__price-row discount">
-                  <div className="basket__price-col">Coupon Discount</div>
-                  <div className="basket__price-col">{`(-) $${coupon.discountAmount}`}</div>
+          <div className="basket__products-list">
+            <div className="basket__products-list-item">{renderBasketItems()}</div>
+            {!checkout && !isSmallForBasketProps && renderBasketProps()}
+            {checkout && <BillingForm isBasketEmpty={isBasketEmpty} onSubmit={(data) => data} checkout={true} /> }
+            {checkout && <PaymentForm isBasketEmpty={isBasketEmpty} checkout={true} /> }
+          </div>
+          <div>
+            {(!checkout || (checkout && !isSmallForBasketProps)) && !isBasketEmpty ? (
+                <div className="basket__price-container">
+                  <div className="basket__price-col coupon">
+                    <div className="basket__price-col__coupon-title">Promo Code</div>
+                    <div className="basket__price-col__coupon-form-wrapper">
+                      {couponForm()}
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="basket__price-row">
+                    <div className="basket__price-col">Delivery</div>
+                    <div className="basket__price-col sum">{hasDelivery ? 'is 2 – 3 days' : '$0'}</div>
+                  </div>
+                  <div className="basket__price-row">
+                    <div className="basket__price-col">Lines</div>
+                    <div className="basket__price-col sum">{totalLines}</div>
+                  </div>
+                  {coupon && (
+                      <div className="basket__price-row discount">
+                        <div className="basket__price-col">Coupon Discount</div>
+                        <div className="basket__price-col">{`(-) $${discountAmount}`}</div>
+                      </div>
+                  )}
+                  <div className="basket__price-row total">
+                    <div className="basket__price-col">Total</div>
+                    <div className="basket__price-col">{`$${totalPrice - (discountAmount || 0)}`}</div>
+                  </div>
+                  <div className="basket__price-row taxes">
+                    <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
+                  </div>
+                  <div className="basket__price-row policy">
+                    <p className="basket__price-row__policy-text">
+                      By placing your order, you agree to our <a href="/terms-conditions" target="_blank">Terms & Conditions</a>, <a href="/return-policy" target="_blank">Refund Policy</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>
+                    </p>
+                  </div>
+                  <Button
+                      onClick={handleNavigateToBillingForm}
+                      addClass="basket__button-next"
+                      title={checkout ? "PAY" : "NEXT"}
+                  />
+                  <div className="basket__price-row__ptb">
+                    <img src={StripeTrustBadge} alt="Stripe Secure Payment" className="basket__price-row__ptb__img" />
+                  </div>
                 </div>
-            )}
-            <div className="basket__price-row total">
-              <div className="basket__price-col">Total</div>
-              <div className="basket__price-col">{`$${totalPrice - (coupon?.discountAmount || 0)}`}</div>
-            </div>
-            <div className="basket__price-row taxes">
-              <p className="basket__price-row__taxes-text">(Incl. all Taxes & Fees)</p>
-            </div>
-            <div className="basket__price-row policy">
-              <p className="basket__price-row__policy-text">
-                By placing your order, you agree to our <a href="/terms-conditions" target="_blank">Terms & Conditions</a>, <a href="/return-policy" target="_blank">Refund Policy</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>
-              </p>
-            </div>
-            <Button
-              onClick={handleNavigateToBillingForm}
-              addClass="basket__button-next"
-              title="NEXT"
-            />
+            ) : null}
+            {(!checkout || (checkout && !isSmallForBasketProps)) && !isBasketEmpty ? (
+                <div className="basket__money-back">
+                  <div className="basket__money-back__icon">
+                    <img src={MoneyBackIcon} alt="7 DAY" />
+                    <span className="basket__money-back__icon__text">
+                      <b>7</b><br/>
+                      DAY
+                    </span>
+                  </div>
+                  <div className="basket__money-back__text">
+                    MONEY-BACK<br/>
+                    100% GUARANTEE
+                  </div>
+                </div>
+            ) : null}
+            {!checkout && isSmallForBasketProps && !isBasketEmpty ? renderBasketProps() : null}
           </div>
         </div>
+        {!checkout && <TrustBadge />}
       </section>
     </div>
   );

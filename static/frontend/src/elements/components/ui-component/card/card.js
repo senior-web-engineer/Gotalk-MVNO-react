@@ -35,7 +35,7 @@ const Card = ({
   return (
     <div>
       {isCompanyMode === isCompany && (
-        <div className="card" onClick={clickCard}>
+        <div className="card">
           <div className="card__content">
             <h4 className="card__title">{title}</h4>
             <h3 className="card__total-price">{`$${price}`}</h3>
@@ -43,27 +43,24 @@ const Card = ({
             <p className="card__description">{description}</p>
             <p className="card__conditions">
               <p>
-                <span className="card__conditions_item">{internet.value}</span> {internet.unit}
+                <span className="card__conditions_item__value">{internet.value}{internet.unit}</span>
+                <span className="card__conditions_item__sub">4G / 5G Data</span>
               </p>
               <p>
-                <span className="card__conditions_item">
-                  {minute === '9007199254740991' ? (
-                    <span className="infinity-symbol">∞</span>
-                  ) : (
-                    `${minute}`
-                  )}
-                </span>{' '}
-                MIN
+                <span className="card__conditions_item__value">
+                  {minute === '9007199254740991' ?  'Unlimited' : minute}
+                </span>
+                <span className="card__conditions_item__sub">
+                  MIN
+                </span>
               </p>
               <p>
-                <span className="card__conditions_item">
-                  {sms === '9007199254740991' ? (
-                    <span className="infinity-symbol">∞</span>
-                  ) : (
-                    `${sms}`
-                  )}
-                </span>{' '}
-                SMS
+                <span className="card__conditions_item__value">
+                  {sms === '9007199254740991' ?  'Unlimited' : sms}
+                </span>
+                <span className="card__conditions_item__sub">
+                  SMS
+                </span>
               </p>
             </p>
             <ul className="card__characteristics">{getCharacteristics()}</ul>

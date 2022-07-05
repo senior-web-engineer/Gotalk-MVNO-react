@@ -13,6 +13,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLocation } from 'react-router-dom';
 import './main.scss';
+import TrustBadge from "../../components/main-page-section/trust-badge/trust-badge";
 
 const Main = () => {
   const { pathname } = useLocation();
@@ -38,6 +39,7 @@ const Main = () => {
       <div>
         <PresentMain />
         <Tariffs />
+        <TrustBadge />
         <PlansBanner />
         <Carousel/>
         <Banner />

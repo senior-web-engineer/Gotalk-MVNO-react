@@ -14,6 +14,7 @@ const initialState = {
     status: PAYMENT_STATUSES.DISABLE,
     message: '',
   },
+  checkoutDatas: null
 };
 
 const payment = (state = initialState, action) => {
@@ -26,6 +27,9 @@ const payment = (state = initialState, action) => {
 
     case paymentTypes.SET_PAYMENT_STATUS:
       return { ...state, paymentStatus: action.paymentStatus };
+
+    case paymentTypes.CHECKOUT_DATAS:
+      return { ...state, checkoutDatas: action.payload };
 
     default:
       return state;

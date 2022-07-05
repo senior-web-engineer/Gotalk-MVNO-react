@@ -90,7 +90,7 @@ export const countPrice = (plans, basketItems) => {
 
   const basketItemsIds = basketItems.map((item) => item.planId);
   basketItemsIds.forEach((id) => {
-    price += prices[id] * getBasketItem(id).count;
+    price += prices[id] * (getBasketItem(id)?.count || 0);
   });
 
   return price || 0;

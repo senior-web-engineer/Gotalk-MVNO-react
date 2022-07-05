@@ -15,7 +15,7 @@ const CardsItem = ({ title, description, descriptionTwo, descriptionThree, value
     {title === 'Calls' && (
         <span className="cards-item-paragraph__value">
       {value === '9007199254740991' ? (
-          <span className="infinity-symbol">∞</span>
+          <span className="infinity-symbol">Unlimited</span>
       ) : (
           `${value} min`
       )}
@@ -24,7 +24,7 @@ const CardsItem = ({ title, description, descriptionTwo, descriptionThree, value
         {title === 'SMS' && (
             <span className="cards-item-paragraph__value">
           {value === '9007199254740991' ? (
-              <span className="infinity-symbol">∞</span>
+              <span className="infinity-symbol">Unlimited</span>
           ) : (
               `${value} SMS`
           )}

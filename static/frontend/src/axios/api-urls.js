@@ -6,7 +6,8 @@ export const AUTH = {
   sendEmailCode: '/v1/mfa/sendEmail',
   restorePassword: '/v1/auth/password/reset',
   setNewPassword: '/v1/auth/password/set',
-  adminSignin: '/v1/auth/adminSignin'
+  adminSignin: '/v1/auth/adminSignin',
+  outerActivation: '/v1/auth/outer-activation'
 };
 
 export const USERS = {};
@@ -42,4 +43,8 @@ export const ACCOUNT = {
 
 export const COUPON = {
   canUseCoupon: '/v1/coupons/canUseCoupon'
+}
+
+export const GENERAL_SETTINGS = {
+  getSettings: '/v1/general-settings/get'
 }

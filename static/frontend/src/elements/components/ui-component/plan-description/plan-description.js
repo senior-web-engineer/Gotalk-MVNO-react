@@ -25,28 +25,25 @@ const PlanDescription = ({
       </p>
       <p className="plans-description__description">{description}</p>
       <p className="card__conditions-plan">
-        <p className="card__conditions_item-plan">
-          <span className="card__conditions_item">{internet.value}</span>
-          {' '}
-          {internet.unit}
+        <p>
+          <span className="card__conditions_item__value">{internet.value}{internet.unit}</span>
+          <span className="card__conditions_item__sub">4G / 5G Data</span>
         </p>
-        <p className="card__conditions_item-plan">
-          <span className="card__conditions_item">
-            {minute === '9007199254740991' ? (
-              <span className="infinity-symbol">∞</span>
-            ) : (
-              `${minute}`
-            )}
+        <p>
+          <span className="card__conditions_item__value">
+            {minute === '9007199254740991' ?  'Unlimited' : minute}
           </span>
-          {' '}
-          MIN
+          <span className="card__conditions_item__sub">
+            MIN
+          </span>
         </p>
-        <p className="card__conditions_item-plan">
-          <span className="card__conditions_item">
-            {sms === '9007199254740991' ? <span className="infinity-symbol">∞</span> : `${sms}`}
+        <p>
+          <span className="card__conditions_item__value">
+            {sms === '9007199254740991' ?  'Unlimited' : sms}
           </span>
-          {' '}
-          SMS
+          <span className="card__conditions_item__sub">
+            SMS
+          </span>
         </p>
       </p>
       <ul className="plans-description__list">

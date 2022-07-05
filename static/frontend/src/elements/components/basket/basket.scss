@@ -4,7 +4,7 @@
 
 .basket {
   margin-top: 61px;
-  margin-bottom: 125px;
+  margin-bottom: 70px;
 }
 
 .basket__title {
@@ -17,7 +17,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  gap: 100px;
+  gap: 70px;
+  margin-bottom: 50px;
 
   @include below-breakpoint(md) {
     gap: 30px;
@@ -54,16 +55,11 @@
 
 .basket__price-container {
   width: 100%;
-  max-height: 530px;
   max-width: 362px;
-  padding: 48px;
+  padding: 25px 30px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   background-color: $basket-price;
-
-  @include below-breakpoint(md) {
-    width: 50%;
-  }
 
   @include below-breakpoint(sm) {
     width: 100%;
@@ -161,7 +157,7 @@
   &__coupon-form-wrapper {
     height: 60px;
     position: relative;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   &__coupon-spinner {
@@ -209,5 +205,82 @@
         font-family: "Raleway-Bold", sans-serif;
       }
     }
+  }
+}
+
+.basket__price-row__ptb {
+  margin-top: 20px;
+}
+
+.basket__money-back {
+  width: 100%;
+  margin-top: 25px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  align-items: center;
+  margin-bottom: 25px;
+
+  &__icon {
+    position: relative;
+    img {
+      width: 60px;
+    }
+    &__text {
+      font-size: 13px;
+      color: #fff;
+      text-align: center;
+      font-family: "Roboto-Normal", sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      b {
+        font-family: "Roboto-Bold", sans-serif;
+      }
+    }
+  }
+
+  &__text {
+    color: #333;
+    font-family: "Roboto-Bold", sans-serif;
+    font-size: 16px;
+    margin-left: 15px;
+  }
+}
+
+.basket__products-props {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 20px 15px;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+      width: 60px;
+    }
+    span {
+      font-family: "Roboto-Normal", sans-serif;
+      font-size: 13px;
+      margin-left: 10px;
+    }
+
+    @include below-breakpoint(lg) {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
   }
 }

@@ -17,7 +17,7 @@ const PresentMain = () => {
   const isBusinessMode = useSelector((state) => state.mainReducer.isModeBusiness);
   const navigate = useNavigate();
   const clickMore = () => {
-    navigate(routes.works);
+    navigate(routes.plans);
     window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
@@ -28,9 +28,10 @@ const PresentMain = () => {
       ) : (
         <PresentBlock imgFon={main} imgMini={mainMini}>
           <p className="present-main-content__information_text">
-            The Wireless Carrier that protects your Security and Privacy
+            <b>Over $100 Million<br/>Stolen by Sim Swap Fraud.</b><br/><br/>
+            <span>Get Added Protection<br/>With Our Revolutionary<br/>SafeSim™</span>
           </p>
-          <Button onClick={() => clickMore()} title="learn more" addClass="button" />
+          <Button onClick={() => clickMore()} title="find a plan" addClass="button" />
         </PresentBlock>
       )}
       <div className="present-main-technologies">
@@ -44,7 +45,7 @@ const PresentMain = () => {
           <div className="technologies_block-item">
             <img src={sim} alt="main" className="technologies_block-image" />
             <p className="technologies_block-text">
-              E-Sim technology Swap from any carrier in under 10 minutes
+              E-Sim technology<br/>Move from any carrier in under 10 minutes
             </p>
           </div>
           <div className="technologies_block-item">

@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 
 const SignUp = () => {
@@ -20,9 +20,16 @@ const SignUp = () => {
   const errorMessage = useSelector((store) => store.authReducer.signUp.error);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { search } = useLocation();
 
   const handleSignUp = (data) => {
-    dispatch({ type: authTypes.SIGN_UP, payload: { ...data, redirect: navigate } });
+    const query = new URLSearchParams(search);
+    dispatch({ type: authTypes.SIGN_UP, payload: {
+        ...data,
+        redirect: navigate,
+        iccid: query?.iccid || '',
+      }
+    });
   };
 
   return (

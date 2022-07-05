@@ -10,6 +10,7 @@ import NavigationMenu from '../navigation-menu/navigation-menu';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import DownHeader from "../../components/down-header/down-header";
 
 const BaseHeader = ({ classSticky, classUp }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -32,6 +33,7 @@ const BaseHeader = ({ classSticky, classUp }) => {
         <NavigationMenu mapNav />
         <LoginLink />
       </div>
+      <DownHeader addClass={classUp} />
     </header>
   );
 };

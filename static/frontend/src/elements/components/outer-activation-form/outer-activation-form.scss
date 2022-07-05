@@ -1,0 +1,38 @@
+@import 'src/assets/styles/mixins/media.scss';
+
+.outer-activation-form__col {
+  width: 100%;
+}
+
+.outer-activation-form__input {
+  width: 100%;
+
+  &:not(:last-child) {
+    margin-bottom: 68px;
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 44px;
+    }
+  }
+}
+
+.outer-activation-form__info-label {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.outer-activation-form__info-button {
+  cursor: pointer;
+  margin-left: 5px;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.popup-activate__sim-tip {
+  flex-direction: column;
+  text-align: center;
+}

@@ -1,0 +1,33 @@
+@import '../../../assets/styles/index.scss';
+@import 'src/assets/styles/mixins/media';
+
+.down-header {
+  font-family: 'Roboto-Regular', sans-serif;
+  color: $label;
+  position: relative;
+  padding: 10px;
+
+  &.base-header-up-header {
+    height: auto;
+  }
+
+  &.base-header-up-header__height {
+    padding: 0;
+  }
+}
+
+.down-header-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.down-header-modal {
+  display: none;
+  @include below-breakpoint(xs) {
+    display: block;
+  }
+}

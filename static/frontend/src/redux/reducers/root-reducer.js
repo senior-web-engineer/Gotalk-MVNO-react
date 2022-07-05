@@ -5,6 +5,7 @@ import loadingReducer from './loading';
 import mainReducer from './main';
 import payment from './payment';
 import { combineReducers } from 'redux';
+import generalSettingsReducer from "./general-settings";
 
 const rootReducer = combineReducers({
   loadingReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   basketReducer,
   accountReducer,
   payment,
+  generalSettingsReducer
 });
 
 export default rootReducer;

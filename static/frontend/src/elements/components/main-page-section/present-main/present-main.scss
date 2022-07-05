@@ -3,17 +3,21 @@
 
 .present-main-block {
   width: 100%;
-  margin-bottom: calc(48px + (157 - 48) * ((100vw - 375px) / (1920 - 375)));
+  margin-bottom: calc(25px + (157 - 48) * ((100vw - 375px) / (1920 - 375)));
 }
 
 .present-main-content__information_text {
-  font-family: 'Raleway-Bold';
-  width: 45%;
-  font-size: calc(32px + (48 - 32) * ((100vw - 375px) / (1920 - 375)));
-  line-height: calc(40px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  font-family: 'Roboto-Regular';
+  width: 100%;
+  font-size: calc(22px + (48 - 32) * ((100vw - 375px) / (1920 - 375)));
+  line-height: calc(34px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
   color: $label;
   @media (max-width: 800px) {
     width: 100%;
+  }
+
+  b {
+    font-family: 'Roboto-Bold';
   }
 }
 .button {

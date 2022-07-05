@@ -33,7 +33,7 @@ const Bag = () => {
           <Button onClick={() => navigate(routes.plans)} addClass="bag-screen__empty-button" title="SEE PLANS" />
         </div>
       ) : (
-        <Basket setBasketEmpty={setBasketEmpty} />
+        <Basket isBasketEmpty={isBasketEmpty} setBasketEmpty={setBasketEmpty} />
       )}
     </BagScreen>
   );

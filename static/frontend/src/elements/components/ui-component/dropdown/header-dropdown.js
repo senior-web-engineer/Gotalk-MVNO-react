@@ -62,7 +62,7 @@ const HeaderDropdown = ({
         </li>
         <li className="dropdown__option">
           <button onClick={handleExit} className="dropdown__option-button" type="button">
-            Exit
+            Logout
           </button>
         </li>
       </ul>

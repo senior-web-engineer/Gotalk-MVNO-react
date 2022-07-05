@@ -23,7 +23,7 @@
 }
 
 .header-container {
-  padding: 24px calc(22px + (200 - 22) * ((100vw - 375px) / (1920 - 375)));
+  padding: 15px calc(22px + (200 - 22) * ((100vw - 375px) / (1920 - 375)));
   width: 100%;
   display: flex;
   align-items: center;
@@ -44,8 +44,8 @@
 }
 
 .header-logo {
-  width: calc(130px + (250 - 130) * ((100vw - 375px) / (1920 - 375)));
-  height: calc(60px + (100 - 60) * ((100vw - 375px) / (1920 - 375)));
+  width: calc(70px + (250 - 130) * ((100vw - 375px) / (1920 - 375)));
+  height: calc(30px + (100 - 60) * ((100vw - 375px) / (1920 - 375)));
 }
 
 .header-burger {

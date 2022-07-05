@@ -116,3 +116,16 @@ export const addYubikeySchema = () => yup.object().shape({
   secretKey: yup.string().required('This field is required'),
   yubicoFactor: yup.string().required('This field is required'),
 });
+
+export const outerActivationSchema = () => yup.object().shape({
+  iccid: yup
+      .string()
+      .min(19, 'Must contain exactly 19 characters')
+      .max(19, 'Must contain exactly 19 characters')
+      .required('This field is required'),
+  zip: yup
+      .string()
+      .min(5, 'Must contain exactly 5 characters')
+      .max(5, 'Must contain exactly 5 characters')
+      .required('This field is required'),
+});

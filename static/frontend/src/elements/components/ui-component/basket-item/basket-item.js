@@ -9,12 +9,14 @@ import Switch from '../switch/switch';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import ChevronDownIcon from "../../../../assets/images/payment/chevron-down.svg";
 
 const BasketItem = ({
-  id, className, item, onChange, onDelete,
+  id, className, item, onChange, onDelete, collapsible
 }) => {
   const containerClass = useClassnames('basket-item', className);
   const [itemData, setItemData] = useState({ planId: id, count: item.count, isEsim: item.isEsim });
+  const [collapsed, setCollapsed] = useState(collapsible ? true : false);
 
   const handleRemove = () => {
     if (itemData.count > 1) {
@@ -45,7 +47,7 @@ const BasketItem = ({
   }, [itemData, onChange]);
 
   return (
-    <article className={containerClass}>
+    <article className={`${containerClass} basket-item ${collapsed ? 'collapsed' : ''}`}>
       <div className="basket-item__content">
         <div className="basket-item__header">
           <h3 className="basket-item__header-text">{item.name}</h3>
@@ -77,15 +79,22 @@ const BasketItem = ({
             </button>
           </span>
         </div>
-        <PlanDescription
-          containerClass="basket-item__plan-description"
-          price={item.costBuyPlan}
-          description={item.description}
-          characteristics={item.props}
-          internet={getInternetFromItem()}
-          minute={item.minuteCount}
-          sms={item.SMSCount}
-        />
+        <div className="basket-item__plan-description-container">
+          <PlanDescription
+              containerClass="basket-item__plan-description"
+              price={item.costBuyPlan}
+              description={item.description}
+              characteristics={item.props}
+              internet={getInternetFromItem()}
+              minute={item.minuteCount}
+              sms={item.SMSCount}
+          />
+          {collapsible ? (
+              <div className="basket-item__plan-collapser" onClick={() => setCollapsed(c => !c)}>
+                <img src={ChevronDownIcon} alt="Collapser" />
+              </div>
+          ) : null}
+        </div>
         <h4 className="basket-item__sim-header">SIM card type</h4>
         <p className="basket-item__sim-subtitle">
           {itemData.isEsim ? (

@@ -2,7 +2,7 @@
 import routes from '../../navigation/routes';
 import accountTypes from '../workers/account/account-types';
 import {
-  signUp, signIn, checkAuth, multiFactorSignIn, restorePassword, setNewPassword,
+  signUp, signIn, checkAuth, multiFactorSignIn, restorePassword, setNewPassword, sendOuterActivation,
 } from '../workers/auth';
 import authTypes from '../workers/auth/auth-types';
 import { startLoading, stopLoading } from '../workers/loading';
@@ -16,7 +16,7 @@ const redirectUrl = 'restore-password/reset';
 function* signUpSaga(params) {
   try {
     yield put(startLoading('signUpLoading'));
-    yield call(signUp, { ...params.payload.user });
+    yield call(signUp, { ...params.payload.user, iccid: params.payload.iccid });
     yield put({ type: authTypes.SIGN_UP_SUCCESS });
     yield put({ type: authTypes.SAVE_USER, payload: { ...params.payload.user } });
     params.payload.redirect(routes.signIn.base);
@@ -150,6 +150,24 @@ function* setNewPasswordSaga(params) {
   }
 }
 
+function* outerActivationSaga(params) {
+  try {
+    yield put(startLoading('outerActivationLoading'));
+    const {iccid, zip} = params.payload.outerActivation;
+    yield call(sendOuterActivation, { iccid, zip });
+    yield put({ type: authTypes.OUTER_ACTIVATION_SUCCESS });
+    params.payload.redirect(`${routes.signUp}?iccid=${iccid}&zip=${zip}`);
+  } catch (error) {
+    console.log(error);
+
+    if (error.response) {
+      yield put({ type: authTypes.OUTER_ACTIVATION_FAIL, payload: error.response.data.message });
+    }
+  } finally {
+    yield put(stopLoading('outerActivationLoading'));
+  }
+}
+
 export default function* authWatcher() {
   yield takeLatest([authTypes.SIGN_UP], signUpSaga);
   yield takeLatest([authTypes.SIGN_IN], signInSaga);
@@ -157,4 +175,5 @@ export default function* authWatcher() {
   yield takeLatest([authTypes.MULTI_FACTOR_AUTH], multiFactorSignInSaga);
   yield takeLatest([authTypes.RESTORE_PASSWORD], restorePasswordSaga);
   yield takeLatest([authTypes.SET_NEW_PASSWORD], setNewPasswordSaga);
+  yield takeLatest([authTypes.OUTER_ACTIVATION], outerActivationSaga);
 }

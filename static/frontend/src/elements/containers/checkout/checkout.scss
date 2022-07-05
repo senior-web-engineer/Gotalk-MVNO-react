@@ -1,0 +1,180 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.checkout {
+  @include content-container();
+  margin-bottom: 125px;
+
+  &__title {
+    font-family: "Raleway-Bold", sans-serif;
+    font-size: 2.25rem;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .basket {
+    margin-top: 50px;
+    margin-bottom: 0;
+  }
+
+  .billing-form__form {
+    margin: 40px 0;
+  }
+
+  .billing-form__row {
+    margin-bottom: 0;
+    flex-direction: column;
+  }
+
+  .basket__products-container {
+    margin-bottom: 0;
+  }
+
+  .billing-form__form-container {
+    &.user {
+      flex-basis: 100%;
+    }
+
+    &.delivery {
+      .delivery-info-form__form-content {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+  }
+
+  .payment-form__total-price-container {
+    margin-bottom: 0;
+    margin-top: 93px;
+
+    @include below-breakpoint(md) {
+      margin-top: 150px;
+    }
+
+    @include below-breakpoint(sm) {
+      margin-top: 20px;
+    }
+  }
+
+  .payment-form__card-side {
+    padding: 30px;
+    @include below-breakpoint(md) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .payment-form__row {
+    gap: 15px;
+    @include below-breakpoint(md) {
+      gap: 0;
+    }
+  }
+
+  .payment-form__card-container {
+    margin: 0 auto;
+    height: auto;
+  }
+
+  .payment-form__cvv-background {
+    right: 0;
+    top: 100px;
+
+    @include below-breakpoint(md) {
+      top: 80px;
+    }
+  }
+
+  .payment-form__field-container.cvv {
+    right: 30px;
+    bottom: -45px;
+
+    @include below-breakpoint(md) {
+      bottom: -100px;
+      right: 15px;
+    }
+  }
+
+  .payment-form__card__trustbadge {
+    left: 15px;
+    transform: initial;
+    @include below-breakpoint(lg) {
+      width: 250px;
+      bottom: -40px;
+    }
+    @include below-breakpoint(md) {
+      bottom: -80px;
+      width: 150px;
+    }
+
+    @include below-breakpoint(sm) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .payment-form__checkbox {
+    margin-top: 100px;
+
+    @include below-breakpoint(md) {
+      margin-top: 160px;
+    }
+
+    @include below-breakpoint(sm) {
+      margin-top: 10px;
+    }
+  }
+
+  .billing-form__form-header-container {
+    padding: 14px 24px;
+    .billing-form__form-header {
+      font-size: 1.5rem;
+    }
+  }
+
+  .payment-form__card-side.front {
+    @include below-breakpoint(md) {
+      padding: 20px;
+    }
+
+    @include below-breakpoint(sm) {
+      padding-bottom: 0px;
+    }
+  }
+
+  .payment-form__card-side.back {
+    @include below-breakpoint(sm) {
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+  }
+}
+
+.checkout__empty {
+  margin-top: 80px;
+  margin-bottom: 280px;
+  text-align: center;
+
+  @include below-breakpoint(xs) {
+    margin-bottom: 48px;
+    margin-top: 48px;
+  }
+}
+
+.checkout__empty-header {
+  font-family: "Roboto-Bold", sans-serif;
+  font-size: 2.25rem;
+  margin-bottom: 48px;
+
+  @include below-breakpoint(xs) {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+  }
+}
+
+.checkout__empty-button {
+  @include button-red($padding: 20px 48px);
+  margin: 0 auto;
+}
