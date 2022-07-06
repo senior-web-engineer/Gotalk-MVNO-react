@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { home } from '../../../data/meta-data';
 import Banner from '../../components/main-page-section/banner/banner';
-import Carousel from '../../components/main-page-section/carousel/carousel';
+import Instagram from '../../components/main-page-section/instagram-section/instagram';
 import CardBlock from '../../components/main-page-section/card-block/card-block';
 import MapBlock from '../../components/main-page-section/map-block/map-block';
 import PresentMain from '../../components/main-page-section/present-main/present-main';
@@ -41,7 +41,7 @@ const Main = () => {
         <Tariffs />
         <TrustBadge />
         <PlansBanner />
-        <Carousel/>
+        <Instagram token={process.env.REACT_APP_INS_TOKEN} limit={8}/>
         <Banner />
         <ProtectBanner />
         <CardBlock />

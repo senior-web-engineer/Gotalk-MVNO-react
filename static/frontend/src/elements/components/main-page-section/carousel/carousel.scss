@@ -26,6 +26,7 @@ a.carouselCard:hover {
 }
 
 .carousel-card-info {
+  font-family: 'Roboto-Regular';
   width: 90%;
   text-align: center;
 }
@@ -37,7 +38,7 @@ a.carouselCard:hover {
 }
 
 .carousel-card-excerpt p {
-  font-family: Roboto;
+  font-family: 'Roboto-Regular';
   font-size: 20px;
   line-height: 20px;
   margin-top: 16px;
@@ -58,6 +59,8 @@ a.carouselCard:hover {
   margin: auto;
 }
 
-.blueBg {
-  background-color: aliceblue;
+.instagram-section {
+  background-color: #ebdfcf;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

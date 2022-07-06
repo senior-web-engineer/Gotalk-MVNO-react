@@ -2,46 +2,11 @@ import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import './carousel.scss';
+
 function Carousel(props) {
-  const slides = [
-    {
-      title: 'Machu Picchu',
-      subtitle: 'Peru',
-      description: 'Adventure is never far away',
-      image:
-      'https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-    },
-    {
-      title: 'Chamonix',
-      subtitle: 'France',
-      description: 'Let your dreams come true',
-      image:
-      'https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-    },
-    {
-      title: 'Mimisa Rocks',
-      subtitle: 'Australia',
-      description: 'A piece of heaven',
-      image:
-      'https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-    },
-    {
-      title: 'Four',
-      subtitle: 'Australia',
-      description: 'A piece of heaven',
-      image:
-        'https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-    },
-    {
-      title: 'Five',
-      subtitle: 'Australia',
-      description: 'A piece of heaven',
-      image:
-      'https://images.unsplash.com/flagged/photo-1564918031455-72f4e35ba7a6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-    },
-  ];
+  const {feeds} = props
   let settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -75,26 +40,27 @@ function Carousel(props) {
       // instead of a settings object
     ],
   };
+
   return (
-    <section className="blueBg">
+    <section className="instagram-section">
       <Slider {...settings} className="container carousel-container margin-auto">
-        {slides
-          ? slides.map((slide, index) => {
+        {feeds
+          ? feeds.map((slide, index) => {
               return (
-                <Link to={`#`} key={`${index}`} className={index%2==0?"carouselCardOdd":"carouselCard"}>
+                <a href={`${slide.media_url}`} key={`${index}`} className={index%2==0?"carouselCardOdd":"carouselCard"}>
                   <div className="carousel-card-banner">
-                    <img src={slide.image} />
+                    <img src={slide.thumbnail_url?slide.thumbnail_url:slide.media_url} />
                   </div>
                   <div className="carousel-card-info">
                     <div className="carousel-card-title">
-                      <h2>{slide.title}</h2>
+                      {/* <h2>{slide.media_type}</h2> */}
                     </div>
-                    {/* <div className="carousel-card-excerpt">{slide.subtitle}</div> */}
+                    <div className="carousel-card-excerpt">{slide.media_type}</div>
                     <div className="carousel-card-date">
-                      <span>{slide.subtitle}</span>
+                      <span>Gotalkwireless.com</span>
                     </div>
                   </div>
-                </Link>
+                </a>
               );
             })
           : ''}

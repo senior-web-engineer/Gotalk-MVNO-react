@@ -50,23 +50,30 @@ a.sliderCard:hover {
   width: 60%;
   margin-left: 64px;
 }
+.slider-card-title {
+  font-family: 'Raleway-Bold';
+}
 
 .slider-card-title h2 {
-  font-family: Raleway;
-  font-size: 48px;
-  line-height: 48px;
+  
+  font-size: 28px;
+  line-height: 28px;
   font-weight: 700;
 }
 
+.slider-card-excerpt {
+  font-family: 'Roboto-Regular';
+}
+
 .slider-card-excerpt p {
-  font-family: Roboto;
+  
   font-size: 20px;
   line-height: 20px;
   margin-top: 16px;
 }
 
 .slider-card-date {
-  font-family: Roboto;
+  font-family: 'Roboto-Regular';
   font-size: 16px;
   line-height: 16px;
   margin-top: 16px;
@@ -110,7 +117,7 @@ a.sliderCard:hover {
 }
 
 .catMenu a {
-  font-family: Roboto;
+  font-family: 'Roboto-Regular';
   margin-right: auto;
 }
 
@@ -175,17 +182,17 @@ a.sliderCard:hover {
 }
 
 .post-card-title {
-  font-family: Raleway;
-  font-size: 18px;
-  line-height: 16px;
+  font-family: 'Raleway-Bold';
+  font-size: 20px;
+  line-height: 20px;
   margin-top: 20px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .post-card-excerpt, .post-card-date {
-  font-family: Roboto;
-  font-size: 13px;
-  line-height: 13px;
+  font-family: 'Roboto-Regular';
+  font-size: 16px;
+  line-height: 16px;
   margin-top: 20px;
 }
 
@@ -285,8 +292,8 @@ a.sliderCard:hover {
   }
 
   .slider-card-title h2 {
-    font-size: 24px;
-    line-height: 24px;
+    font-size: 20px;
+    line-height: 20px;
     font-weight: 700;
   }
 
@@ -351,8 +358,8 @@ a.sliderCard:hover {
   }
 
   .slider-card-title h2 {
-    font-size: 26px;
-    line-height: 26px;
+    font-size: 22px;
+    line-height: 22px;
     font-weight: 700;
   }
 
@@ -392,14 +399,14 @@ a.sliderCard:hover {
   }
 
   .slider-card-title h2 {
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 24px;
+    line-height: 24px;
     font-weight: 700;
   }
 
   .slider-card-excerpt p {
-    font-size: 15px;
-    line-height: 15px;
+    font-size: 16px;
+    line-height: 16px;
     margin-top: 10px;
   }
 
@@ -432,14 +439,14 @@ a.sliderCard:hover {
   }
 
   .slider-card-title h2 {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 26px;
+    line-height: 26px;
     font-weight: 700;
   }
 
   .slider-card-excerpt p {
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 18px;
+    line-height: 18px;
     margin-top: 10px;
   }
 
@@ -463,14 +470,14 @@ a.sliderCard:hover {
   }
 
   .slider-card-title h2 {
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 28px;
+    line-height: 28px;
     font-weight: 700;
   }
 
   .slider-card-excerpt p {
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 20px;
+    line-height: 20px;
     margin-top: 10px;
   }
 
