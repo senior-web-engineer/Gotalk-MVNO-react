@@ -147,7 +147,7 @@ a.sliderCard:hover {
   flex-direction: row;
   margin-top: 75px;
   justify-content: start;
-  align-items: center;
+  // align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
 }
@@ -157,6 +157,7 @@ a.sliderCard:hover {
   max-width: 350px;
   width: 100%;
   margin: 12px;
+  margin-top: 30px;
 }
 
 .post-card:hover {

@@ -55,7 +55,7 @@
   flex-direction: row;
   padding-bottom: 50px;
   margin: 0 auto;
-  width: 1200px;
+  // width: 1200px;
   min-height: 500px;
   font-family: 'Roboto-Regular';
 }
@@ -114,6 +114,10 @@
   border-radius: 8px;
 }
 
+.single-post-content {
+  white-space: pre-wrap;
+}
+
 .single-post-content h2 {
   padding-top: 16px;
   margin-top: 16px;
@@ -165,6 +169,10 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  #single-post-tags ul {
+    flex-direction: column;
+  }
+
   .single-post-container {
     flex-direction: column;
   }

@@ -21,8 +21,10 @@ function Post() {
 //   const [likes, setLikes] = useState('');
   const likesSpan = useRef(null);
   const [url, setUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(async () => {
+    setIsLoading(true)
     let res = await fetch(API_URL+`/wp/v2/posts?_embed&slug=${params.slug}`);
     const postRes = await res.json();
     setPost(postRes);
@@ -34,8 +36,10 @@ function Post() {
     res = await fetch(API_URL+`/wp/v2/tags?post=${postRes[0].id}`);
     const resTags = await res.json();
     setTags(resTags);
+
     const resRelatedPosts = await fetchRelatedPosts(postRes[0].tags);
     setRelatedPosts(resRelatedPosts);
+    
     let words = postRes[0].content.rendered
       .replace(/(<([^>]+)>)/gi, '')
       .replace(/\s+/g, ' ')
@@ -45,6 +49,7 @@ function Post() {
     const resAvg_time = Math.ceil(words / 250);
     setAvgTime(resAvg_time);
 
+    setIsLoading(false)
   }, [params]);
 
   useEffect(() => {
@@ -87,7 +92,7 @@ function Post() {
                 : ''}
             </ul>
           </div>
-          {media ? (
+          {/* {media ? (
             <div className="single-post-banner">
               <img src={media.source_url.replace('http://', 'https://')} />
             </div>
@@ -95,7 +100,7 @@ function Post() {
             <div className="single-post-banner">
               <img src="/img/default.webp" />
             </div>
-          )}
+          )} */}
           <div
             className="single-post-content"
             dangerouslySetInnerHTML={{ __html: post[0]?.content.rendered }}
@@ -187,7 +192,7 @@ function Post() {
                 );
               })
             ) : (
-              <h4>No posts found</h4>
+              !isLoading ? <h1 className="not-found">No posts found</h1>:<h1 className="not-found">Loading...</h1>
             )}
           </div>
         </aside>

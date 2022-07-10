@@ -16,9 +16,11 @@ function BlogList() {
   const [categories, setCategories] = useState([])
   const [initialPosts, setInitialPosts] = useState([])
   const [featuredPosts, setFeaturedPosts] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
   
 
   useEffect(async () => {
+    setIsLoading(true)
     const categories = await fetchCategories()
     const initialPosts = await fetchPosts(1, 'All')
     const featuredPosts = await fetchFeaturedPosts()
@@ -29,6 +31,8 @@ function BlogList() {
 
     setPosts(initialPosts)
     setPage(2)
+
+    setIsLoading(false)
   },[])
 
   useEffect(async () => {
@@ -57,6 +61,7 @@ function BlogList() {
   }
 
   const searchPosts = debounce(async () => {
+    setIsLoading(true)
     let posts = await fetchPosts(1, category, keyword)
     if(posts.length) {
       setPosts(posts)
@@ -66,6 +71,7 @@ function BlogList() {
       setPosts([])
       setHasMore(false)
     }
+    setIsLoading(false)
   }, 500)
   return (
     <>
@@ -95,7 +101,7 @@ function BlogList() {
                 <PostCard key={`post_${post.id}`} post={post} />
               )
             })
-            : <h1 className="not-found">No posts found</h1>
+            : !isLoading ? <h1 className="not-found">No posts found</h1>:<div></div>
           }
         </div>
         </InfiniteScroll>
