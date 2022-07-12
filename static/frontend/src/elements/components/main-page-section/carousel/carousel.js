@@ -1,12 +1,11 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { Link } from 'react-router-dom';
 import './carousel.scss';
 
 function Carousel(props) {
   const {feeds} = props
   let settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,

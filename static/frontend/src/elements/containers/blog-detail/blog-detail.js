@@ -175,7 +175,7 @@ function Post() {
                       {post.featured_media ? (
                         <img
                           src={
-                            post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail
+                            post._embedded['wp:featuredmedia'][0].media_details.sizes.medium
                               .source_url.replace('http://', 'https://')
                           }
                         />

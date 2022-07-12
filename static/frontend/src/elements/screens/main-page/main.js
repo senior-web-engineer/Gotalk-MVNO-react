@@ -41,7 +41,7 @@ const Main = () => {
         <Tariffs />
         <TrustBadge />
         <PlansBanner />
-        <Instagram token={process.env.REACT_APP_INS_TOKEN} limit={8}/>
+        <Instagram token={process.env.REACT_APP_INS_TOKEN} limit={6}/>
         <Banner />
         <ProtectBanner />
         <CardBlock />

@@ -23,8 +23,8 @@ function Carousel(props) {
               <Link to={`/blog/${post.slug}`} key={`sliderCard${post.id}`} className='sliderCard'>
                   <div className="slider-card-banner">
                     {
-                      post.featured_media && post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail ?
-                        <img src={post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail.source_url} />
+                      post.featured_media && post._embedded['wp:featuredmedia'][0].media_details.sizes.medium ?
+                        <img src={post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} />
                         :
                         <img src="/img/default.webp"/>
                     }

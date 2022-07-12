@@ -4,11 +4,12 @@
 
 .carousel-container .carouselCard {
   display: block !important;
+  padding: 0 15px;
 }
 
 .carousel-container .carouselCardOdd {
   display: block !important;
-  margin-top: 40px;
+  padding: 40px 15px 0 15px;
 }
 
 a.carouselCard:hover {
@@ -16,7 +17,7 @@ a.carouselCard:hover {
 }
 
 .carousel-card-banner {
-  width: 90%;
+  width: 100%;
 }
 
 .carousel-card-banner img {
@@ -27,7 +28,7 @@ a.carouselCard:hover {
 
 .carousel-card-info {
   font-family: 'Roboto-Regular';
-  width: 90%;
+  width: 100%;
   text-align: center;
 }
 
@@ -62,5 +63,5 @@ a.carouselCard:hover {
 .instagram-section {
   background-color: #ebdfcf;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }

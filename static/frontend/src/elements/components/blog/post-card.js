@@ -17,11 +17,11 @@ function PostCard(props) {
           <div className="post-card-banner">
             {post.featured_media &&
             post._embedded["wp:featuredmedia"][0].media_details.sizes
-              .thumbnail ? (
+              .medium ? (
               <img
                 src={
                   post._embedded["wp:featuredmedia"][0].media_details.sizes
-                    .thumbnail.source_url
+                    .medium.source_url
                 }
               />
             ) : (
