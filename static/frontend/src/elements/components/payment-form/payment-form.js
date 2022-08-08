@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {getCouponFromLocalStorage} from "../../../shared/basketActions";
 import StripeTrustBadge from "../../../assets/images/payment/stripe-trust-badge.png";
+import authTypes from "../../../redux/workers/auth/auth-types";
 
 const PaymentForm = ({checkout, isBasketEmpty}) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -49,13 +50,14 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
   );
   const [coupon, setCoupon] = useState();
   const {checkoutDatas} =  useSelector(state => state.payment);
+  const {isSignedIn, user} = useSelector(state => state.authReducer);
 
   useEffect(() => {
     setCoupon(getCouponFromLocalStorage());
   }, []);
 
   const handleSubmit = () => {
-    if (!holderRef.current.value) {
+    if (!holderRef.current?.value) {
       return;
     }
 
@@ -78,14 +80,16 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
     };
 
     if (sendReceipt.current) {
-      paymentConfig.receipt_email = location.state?.user?.email;
+      paymentConfig.receipt_email = checkout
+          ? checkoutDatas.user.email
+          : location.state?.user?.email;
     }
 
     let clientSecret, payId, email;
     if(checkout) {
       clientSecret = checkoutDatas.clientSecret;
       payId = checkoutDatas.payId;
-      email = checkoutDatas.email;
+      email = checkoutDatas.user.email;
     }
     else {
       clientSecret = get(location, 'state.clientSecret', '');
@@ -114,7 +118,20 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
         break;
 
       case PAYMENT_STATUSES.SUCCESS:
-        navigate(routes.plans);
+        if(!isSignedIn) {
+          dispatch({
+            type: authTypes.SIGN_IN,
+            payload: {
+              userData: {
+                email: checkoutDatas.user.email,
+                password: checkoutDatas.user.password
+              },
+              redirect: navigate
+            }
+          });
+        } else {
+          navigate(routes.account.base);
+        }
         break;
 
       default:
@@ -133,7 +150,20 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
         break;
 
       case PAYMENT_STATUSES.SUCCESS:
-        navigate(routes.plans);
+        if(!isSignedIn) {
+          dispatch({
+            type: authTypes.SIGN_IN,
+            payload: {
+              userData: {
+                email: checkoutDatas.user.email,
+                password: checkoutDatas.user.password
+              },
+              redirect: navigate
+            }
+          });
+        } else {
+          navigate(routes.account.base);
+        }
         break;
 
       default:

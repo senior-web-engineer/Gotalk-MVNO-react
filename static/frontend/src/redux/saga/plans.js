@@ -9,7 +9,7 @@ export function* plansWorker() {
   try {
     yield put(startLoading('isLoadingPlan'));
     const { data } = yield call(getPlans);
-    yield put({ type: actionsType.GET_PLANS, payload: data.payload.data.reverse() });
+    yield put({ type: actionsType.GET_PLANS, payload: data.payload.data });
   } catch (error) {
     console.log(error);
   } finally {

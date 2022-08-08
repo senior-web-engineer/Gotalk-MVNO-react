@@ -26,15 +26,14 @@ const Card = ({
   }, [isModeBusiness]);
 
   const getCharacteristics = () =>
-    getProps(characteristics)?.map((characteristic) => (
+    getProps(characteristics)?.filter(m => m).map((characteristic) => (
       <li className="card__characteristics-item" key={characteristic}>
         {characteristic}
       </li>
     ));
 
-  return (
-    <div>
-      {isCompanyMode === isCompany && (
+  if(isCompanyMode === isCompany) {
+    return (
         <div className="card">
           <div className="card__content">
             <h4 className="card__title">{title}</h4>
@@ -67,9 +66,10 @@ const Card = ({
           </div>
           <Button onClick={onClick} addClass="card__button" title="BUY" />
         </div>
-      )}
-    </div>
-  );
+    );
+  }
+
+  return null;
 };
 
 Card.defaultProps = {

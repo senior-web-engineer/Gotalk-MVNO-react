@@ -312,7 +312,7 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
                   <Button
                       onClick={handleNavigateToBillingForm}
                       addClass="basket__button-next"
-                      title={checkout ? "PAY" : "NEXT"}
+                      title={checkout ? "PAY" : "CHECKOUT"}
                   />
                   <div className="basket__price-row__ptb">
                     <img src={StripeTrustBadge} alt="Stripe Secure Payment" className="basket__price-row__ptb__img" />

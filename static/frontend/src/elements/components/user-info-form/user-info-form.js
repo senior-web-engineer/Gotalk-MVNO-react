@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import GooglePlaces from "../ui-component/google-places/google-places";
+import routes from "../../../navigation/routes";
+import {NavLink} from "react-router-dom";
 
 const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
   const { formState, register, setValue } = useFormContext();
@@ -31,68 +33,106 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
 
   if(onlyCreateAccount) {
     return (
-        <div className="user-info-form__row">
-          <div className="user-info-form__col">
-            <Input
-                {...register(getFieldName('email', parentName))}
-                description={errors.email?.message}
-                isInvalid={!!errors.email}
-                containerClass="user-info-form__input"
-                placeholder="Enter e-mail address"
-                type="text"
-                label="E-mail address"
-            />
+        <>
+          <div className="user-info-form__row">
+            <div className="user-info-form__col">
+              <Input
+                  {...register(getFieldName('email', parentName))}
+                  description={errors.email?.message}
+                  isInvalid={!!errors.email}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter e-mail address"
+                  type="text"
+                  label="E-mail address"
+              />
+            </div>
+            <div className="user-info-form__col">
+              <Input
+                  {...register(getFieldName('password', parentName))}
+                  description={errors.password?.message}
+                  isInvalid={!!errors.password}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter password"
+                  type="password"
+                  label="Password"
+              />
+              <Input
+                  {...register(getFieldName('passwordConfirmation', parentName))}
+                  description={errors.passwordConfirmation?.message}
+                  isInvalid={!!errors.passwordConfirmation}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter confirm password"
+                  type="password"
+                  label="Confirm password"
+              />
+            </div>
           </div>
-          <div className="user-info-form__col">
-            <Input
-                {...register(getFieldName('password', parentName))}
-                description={errors.password?.message}
-                isInvalid={!!errors.password}
-                containerClass="user-info-form__input"
-                placeholder="Enter password"
-                type="password"
-                label="Password"
-            />
-            <Input
-                {...register(getFieldName('passwordConfirmation', parentName))}
-                description={errors.passwordConfirmation?.message}
-                isInvalid={!!errors.passwordConfirmation}
-                containerClass="user-info-form__input"
-                placeholder="Enter confirm password"
-                type="password"
-                label="Confirm password"
-            />
+          <div className="user-info-form__signin_link">
+            Are you an existing customer? <NavLink to={routes.signIn.base}>Sign In</NavLink>
           </div>
-        </div>
+        </>
     );
   }
 
   return (
     <div className="user-info-form__row">
       <div className="user-info-form__col">
-        <Input
-          {...register(getFieldName('firstName', parentName))}
-          description={errors.firstName?.message}
-          isInvalid={!!errors.firstName}
-          containerClass="user-info-form__input"
-          placeholder="Enter first name"
-          type="text"
-          label="First name"
-        />
+        {!isBillingUserInfo && (
+            <>
+              <Input
+                  {...register(getFieldName('email', parentName))}
+                  description={errors.email?.message}
+                  isInvalid={!!errors.email}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter e-mail address"
+                  type="text"
+                  label="E-mail address"
+              />
+              <Input
+                  {...register(getFieldName('password', parentName))}
+                  description={errors.password?.message}
+                  isInvalid={!!errors.password}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter password"
+                  type="password"
+                  label="Password"
+              />
+              <Input
+                  {...register(getFieldName('passwordConfirmation', parentName))}
+                  description={errors.passwordConfirmation?.message}
+                  isInvalid={!!errors.passwordConfirmation}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter confirm password"
+                  type="password"
+                  label="Confirm password"
+              />
+            </>
+        )}
         <GooglePlaces
             containerClass="user-info-form__input"
             onChange={googleAddressChange}
         />
         {isBillingUserInfo && (
-            <Input
-                {...register(getFieldName('city', parentName))}
-                description={errors.city?.message}
-                isInvalid={!!errors.city}
-                containerClass="user-info-form__input"
-                placeholder="Enter town/city"
-                type="text"
-                label="Town / City"
-            />
+            <>
+              <Input
+                  {...register(getFieldName('city', parentName))}
+                  description={errors.city?.message}
+                  isInvalid={!!errors.city}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter town/city"
+                  type="text"
+                  label="Town / City"
+              />
+              <Input
+                  {...register(getFieldName('phone', parentName))}
+                  description={errors.phone?.message}
+                  isInvalid={!!errors.phone}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter telephone number"
+                  type="text"
+                  label="Telephone number (Optional)"
+              />
+            </>
         )}
         <Input
             {...register(getFieldName('country', parentName))}
@@ -105,6 +145,15 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
         />
       </div>
       <div className="user-info-form__col">
+        <Input
+            {...register(getFieldName('firstName', parentName))}
+            description={errors.firstName?.message}
+            isInvalid={!!errors.firstName}
+            containerClass="user-info-form__input"
+            placeholder="Enter first name"
+            type="text"
+            label="First name"
+        />
         <Input
             {...register(getFieldName('lastName', parentName))}
             description={errors.lastName?.message}
@@ -152,17 +201,6 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
           type="text"
           label="Zip"
         />
-        {isBillingUserInfo && (
-            <Input
-                {...register(getFieldName('phone', parentName))}
-                description={errors.phone?.message}
-                isInvalid={!!errors.phone}
-                containerClass="user-info-form__input"
-                placeholder="Enter telephone number"
-                type="text"
-                label="Telephone number (Optional)"
-            />
-        )}
       </div>
     </div>
   );

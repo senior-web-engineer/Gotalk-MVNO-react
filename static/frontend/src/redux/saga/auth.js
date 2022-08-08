@@ -51,7 +51,7 @@ function* signInSaga(params) {
       yield put({ type: authTypes.SIGN_IN_SUCCESS, payload: data.user });
       yield put({ type: authTypes.SIGNED_IN });
 
-      params.payload.redirect(routes.home);
+      params.payload.redirect(routes.account.base)
     }
   } catch (error) {
     console.log(error);
