@@ -1,5 +1,5 @@
-import main from '../../../../assets/images/main-page/main.webp';
-import mainMini from '../../../../assets/images/main-page/mainMini.webp';
+import main from '../../../../assets/images/main-page/main.png';
+import mainMini from '../../../../assets/images/main-page/mainMini.png';
 import routes from '../../../../navigation/routes';
 import actionsType from '../../../../redux/workers/main-page/actions-type';
 import NavigationBack from '../../ui-component/navigation-back/navigation-back';

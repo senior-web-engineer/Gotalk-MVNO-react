@@ -24,11 +24,21 @@
 
 .outer-activation-form__info-button {
   cursor: pointer;
-  margin-left: 5px;
+  margin-left: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
   img {
     width: 20px;
     height: 20px;
+  }
+
+  &-text {
+    font-family: "Raleway-Bold", sans-serif;
+    margin-left: 10px;
+    text-decoration: underline;
+    font-size: 14px;
   }
 }
 

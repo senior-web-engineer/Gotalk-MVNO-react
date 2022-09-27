@@ -24,9 +24,10 @@ function* buyPlanSaga(params) {
       });
     }
     else if(params.checkout) {
+      const {userSimPlanId, simType} = data.payload;
       yield put({
         type: paymentTypes.CHECKOUT_DATAS,
-        payload: { clientSecret: data.payload.stripId, user: params.user, payId }
+        payload: { clientSecret: data.payload.stripId, user: params.user, payId, userSimPlanId, simType }
       });
     }
   } catch (error) {
@@ -54,15 +55,17 @@ function* buyPlanAuthorizedSaga(params) {
         state: { clientSecret: data.payload.stripId, user: params.user, payId },
       });
     } else if(params.checkout) {
+      const {userSimPlanId, simType} = data.payload;
       yield put({
         type: paymentTypes.CHECKOUT_DATAS,
-        payload: { clientSecret: data.payload.stripId, user: params.user, payId }
+        payload: { clientSecret: data.payload.stripId, user: params.user, payId, userSimPlanId, simType }
       });
     }
   } catch (error) {
     console.log(error);
 
     if (error.response) {
+      alert(error.response.data.message);
       yield put({
         type: paymentTypes.PAYMENT_FAILED,
         payload: error.response.data.errors,

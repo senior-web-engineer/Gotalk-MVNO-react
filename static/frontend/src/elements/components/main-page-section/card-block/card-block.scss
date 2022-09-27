@@ -5,6 +5,11 @@
 .card-block {
   padding: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)))
     calc(24px + (200 - 24) * ((100vw - 375px) / (1920 - 375)));
+
+  &.plan-page {
+    padding-top: 0;
+  }
+
   @media (max-width: 1100px) {
     padding-top: 0;
   }
@@ -44,6 +49,18 @@
   @media (max-width: 600px) {
     padding-top: 0;
     border-top: none;
+  }
+}
+
+.card-block__toptitle {
+  color: #051431;
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Roboto-Regular', sans-serif;
+  margin-top: 30px;
+
+  @media (max-width: 800px) {
+    font-size: 40px;
   }
 }
 

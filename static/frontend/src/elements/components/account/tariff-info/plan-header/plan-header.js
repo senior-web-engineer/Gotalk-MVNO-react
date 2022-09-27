@@ -3,17 +3,19 @@ import React from 'react';
 import './plan-header.scss';
 
 const AccountTariffInfoPlanHeader = ({
-  number, tariff, sum, period,
+  number, tariff, sum, period, isOuterSellingSim
 }) => (
   <div className="account-tariff-info-plan-header">
     <p className="account-tariff-info-plan-header__number">{number}</p>
 
     <div className="account-tariff-info-plan-header__info">
       <p className="account-tariff-info-plan-header__tariff">{tariff}</p>
-      <p className="account-tariff-info-plan-header__condition">
-        <span className="account-tariff-info-plan-header__condition-summ">{`${sum}$`}</span>
-        {period}
-      </p>
+      {!isOuterSellingSim && (
+          <p className="account-tariff-info-plan-header__condition">
+            <span className="account-tariff-info-plan-header__condition-summ">{`${sum}$`}</span>
+            {period}
+          </p>
+      )}
     </div>
   </div>
 );

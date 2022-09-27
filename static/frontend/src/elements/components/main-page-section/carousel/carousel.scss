@@ -51,17 +51,35 @@ a.carouselCard:hover {
   margin-top: 16px;
 }
 
+.slick-dots {
+  position: relative !important;
+  padding: 15px !important;
+}
+
 .slick-dots li button {
   font-size: 0;
   display: none;
 }
 
+.slick-next {
+  right: -10px !important;
+}
+
+.slick-prev {
+  left: -10px !important;
+}
 .margin-auto {
   margin: auto;
 }
 
 .instagram-section {
   background-color: #ebdfcf;
-  padding-top: 20px;
-  padding-bottom: 30px;
+  // padding-top: 20px;
+  // padding-bottom: 30px;
+  padding: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375))) 20px 30px;
+}
+
+.section-banner__title {
+  font-family: 'Raleway-Extra-Bold';
+  font-size: calc(32px + (56 - 32) * ((100vw - 375px) / (1920 - 375)));
 }

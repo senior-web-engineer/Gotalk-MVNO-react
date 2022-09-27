@@ -196,7 +196,7 @@
 .payment-form__controls-container {
   margin-top: 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 
   @include below-breakpoint(xs) {
     flex-direction: column;
@@ -209,7 +209,12 @@
 }
 
 .payment-form__button-pay {
-  @include button-red($padding: 20px 48px)
+  @include button-red($padding: 20px 80px);
+  text-align: center;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 }
 
 .payment-form__card__trustbadge {
@@ -237,5 +242,26 @@
       width: auto;
       display: inline-block;
     }
+  }
+}
+
+.payment-form__trial {
+  font-size: 14px;
+  color: #333;
+  margin: 0 auto 15px;
+  max-width: 565px;
+  font-family: "Roboto-Regular", sans-serif;
+  text-align: center;
+}
+
+.payment-form__policy {
+  font-family: "Roboto-Regular", sans-serif;
+  font-size: 15px;
+  margin-top: 15px;
+  a {
+    text-decoration: underline;
+  }
+  @media (min-width: 768px) {
+    display: none;
   }
 }

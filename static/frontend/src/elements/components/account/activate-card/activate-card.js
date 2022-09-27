@@ -20,7 +20,7 @@ const ActivateCard = ({
   titleButtonQR,
   addClass,
   userSimPort,
-  onClickReSendPort
+  onClickReSendPort, isOuterSellingSim
 }) => {
 
   const isOnSimPort = useMemo(() => {
@@ -42,6 +42,7 @@ const ActivateCard = ({
           sms={sms}
           internet={internet}
           minute={minute}
+          isOuterSellingSim={isOuterSellingSim}
         />
         <p className="card-sim__type">{`SIM card type: ${typeSim}`}</p>
       </div>
@@ -56,7 +57,7 @@ const ActivateCard = ({
         {(isOnSimPort || isSimPortComplete) && (
           <div className="port-status">
             <span>
-              PORT: {userSimPort.status} 
+              PORT: {userSimPort.status}
               {(userSimPort.messageCode && userSimPort.status === 'RESOLUTION REQUIRED') && (
                 <>
                   <br />

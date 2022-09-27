@@ -62,6 +62,7 @@ NavigationMenu.defaultProps = {
     { title: 'FAQ', path: `${routes.faq}` },
     { title: 'Fraud Protection', path: `${routes.protect}` },
     { title: 'Blog', path: `${routes.blog}` },
+    { title: 'Linxdot', path: `${routes.linxdot}`}
   ],
   mapNav: false,
 };

@@ -39,7 +39,7 @@ function Post() {
 
     const resRelatedPosts = await fetchRelatedPosts(postRes[0].tags);
     setRelatedPosts(resRelatedPosts);
-    
+
     let words = postRes[0].content.rendered
       .replace(/(<([^>]+)>)/gi, '')
       .replace(/\s+/g, ' ')
@@ -94,7 +94,7 @@ function Post() {
           </div>
           {/* {media ? (
             <div className="single-post-banner">
-              <img src={media.source_url.replace('http://', 'https://')} />
+              <img src={media.source_url.replaceAll('http://', 'https://')} />
             </div>
           ) : (
             <div className="single-post-banner">
@@ -103,7 +103,7 @@ function Post() {
           )} */}
           <div
             className="single-post-content"
-            dangerouslySetInnerHTML={{ __html: post[0]?.content.rendered }}
+            dangerouslySetInnerHTML={{ __html: post[0]?.content.rendered.replaceAll('http://', 'https://') }}
           ></div>
         </article>
         <aside>
@@ -175,8 +175,7 @@ function Post() {
                       {post.featured_media ? (
                         <img
                           src={
-                            post._embedded['wp:featuredmedia'][0].media_details.sizes.medium
-                              .source_url.replace('http://', 'https://')
+                            post._embedded['wp:featuredmedia'][0].media_details.sizes.thumbnail?.source_url.replaceAll('http://', 'https://')
                           }
                         />
                       ) : (

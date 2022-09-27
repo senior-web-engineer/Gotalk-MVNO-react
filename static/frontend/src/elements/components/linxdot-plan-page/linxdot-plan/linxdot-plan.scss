@@ -73,6 +73,10 @@
   font-size: calc(28px + (44 - 28) * ((100vw - 375px) / (1920 - 375)));
   line-height: calc(36px + (56 - 36) * ((100vw - 375px) / (1920 - 375)));
   color: $label;
+
+  b {
+    margin-bottom: 10px;
+  }
 }
 
 .linxdot-plan-information__description {

@@ -11,6 +11,7 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import './edit-form.scss';
+import AccountEditBlockPort from "../../../../components/account/edit/block-port/block-port";
 
 const defaultValues = {
   firstName: '',
@@ -24,6 +25,9 @@ const defaultValues = {
   zip: '',
   emailFactor: false,
   yubicoFactor: false,
+  doBlockPortOut: false,
+  pinNumber: '',
+  accountNumber: ''
 };
 
 const AccountEditForm = () => {
@@ -36,7 +40,7 @@ const AccountEditForm = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    setValue, watch,
     formState: { errors },
   } = useForm({
     defaultValues,
@@ -54,6 +58,8 @@ const AccountEditForm = () => {
       street: get(data, 'street', ''),
       apartment: get(data, 'apartment', ''),
       zip: get(data, 'zip', ''),
+      doBlockPortOut: get(data, 'doBlockPortOut', false),
+      pinNumber: get(data, 'pinNumber', '')
     };
 
     dispatch({ type: accountTypes.PUT_ACCOUNT_DATA, data: params });
@@ -75,6 +81,10 @@ const AccountEditForm = () => {
     setValue('emailFactor', get(accountData, 'yubicoFactor.emailFactor', false));
     setValue('yubicoFactor', get(accountData, 'yubicoFactor.yubicoFactor', false));
 
+    setValue('doBlockPortOut', get(accountData, 'doBlockPortOut', false));
+    setValue('pinNumber', get(accountData, 'pinNumber', ''));
+    setValue('accountNumber', get(accountData, 'accountNumber', ''));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountData]);
 
@@ -83,6 +93,7 @@ const AccountEditForm = () => {
       <AccountEditPersonalData register={register} errors={errors} />
       <AccountEditContactDetails register={register} errors={errors} />
       <AccountEditChangePassword />
+      <AccountEditBlockPort register={register} errors={errors} watch={watch} setValue={setValue} />
       <AccountEditAuthentication />
 
       <Button type="submit" addClass="account-edit-form__save-btn" title="Save changes" />

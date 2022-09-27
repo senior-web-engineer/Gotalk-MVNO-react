@@ -21,3 +21,36 @@
     margin-bottom: 0;
   }
 }
+
+.plan-type-tabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+  }
+
+  .plan-type-tab-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 1px 1px #eee;
+    margin: 20px 20px;
+    font-family: 'Raleway-Bold', sans-serif;
+    width: 250px;
+    transition: background-color .3s, color .3s;
+
+    &.active {
+      background-color: #d75f5c;
+      color: #fff;
+    }
+
+    @include below-breakpoint(sm) {
+      margin: 10px 0px;
+    }
+  }
+}

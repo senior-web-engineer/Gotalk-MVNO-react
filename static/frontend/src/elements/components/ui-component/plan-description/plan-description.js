@@ -10,19 +10,21 @@ const PlanDescription = ({
   containerClass,
   internet,
   minute,
-  sms,
+  sms, isOuterSellingSim
 }) => {
   const container = classNames('plans-description', containerClass);
 
   return (
     <div className={container}>
-      <p className="plans-description__price-container">
-        <strong className="plans-description__price">
-          $
-          {price}
-        </strong>
-        Per month / per user
-      </p>
+      {!isOuterSellingSim ? (
+          <p className="plans-description__price-container">
+            <strong className="plans-description__price">
+              $
+              {price}
+            </strong>
+            Per month / per user
+          </p>
+      ) : null}
       <p className="plans-description__description">{description}</p>
       <p className="card__conditions-plan">
         <p>
@@ -49,7 +51,7 @@ const PlanDescription = ({
       <ul className="plans-description__list">
         {characteristics.info?.map((listItem) => (
           <li className="plans-description__list-item" key={listItem?.toString()}>
-            {listItem}
+            {listItem} {listItem.trim() === 'Use your phone overseas' ? <span>*</span> : ''}
           </li>
         ))}
       </ul>

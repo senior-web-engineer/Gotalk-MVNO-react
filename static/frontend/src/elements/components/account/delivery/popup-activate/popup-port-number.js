@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import * as yup from 'yup';
 
-const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort }) => {
+const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, port }) => {
   const schema = yup.object().shape({
     pmsisdn: yup.number().required('This field is required'),
     name: yup
@@ -38,15 +38,15 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort })
   } = useForm({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: reSendPort ? {
-      pmsisdn: reSendPort.phoneNumber,
-      osp_account_number: reSendPort.accountNumber,
-      name: reSendPort.firstName,
-      osp_account_password: reSendPort.pinNumber,
-      address_line: reSendPort.addressLine,
-      state: reSendPort.state,
-      city: reSendPort.addressLine2,
-      zip: reSendPort.zip
+    defaultValues: port ? {
+      pmsisdn: port.phoneNumber,
+      osp_account_number: port.accountNumber,
+      name: port.firstName,
+      osp_account_password: port.pinNumber,
+      address_line: port.addressLine,
+      state: port.state,
+      city: port.addressLine2,
+      zip: port.zip
     } : undefined
   });
   const { productId } = currentProduct;
@@ -133,13 +133,13 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort })
 
     data.state = findedState.short;
 
-    dispatch({ 
-      type: actionsTypes.LOAD_CHANGE_NUMBER, 
-      payload: { 
-        ...data, 
+    dispatch({
+      type: actionsTypes.LOAD_CHANGE_NUMBER,
+      payload: {
+        ...data,
         pmsisdn: data.pmsisdn.toString(),
-        productId 
-      } 
+        productId
+      }
     });
     if (onSubmit) {
       setIsOpen(false);
@@ -226,7 +226,7 @@ const PopupPortNumber = ({ addClass, setIsOpen, setOpenNumberTemp, reSendPort })
           />
         </div>
         <div className="port-number-buttons">
-          <Button title={reSendPort ? "Re-Send Port" : "Activate"} type="submit" addClass="popup-activate__button" />
+          <Button title={port?.id ? "Re-Send Port" : "Port your Number"} type="submit" addClass="popup-activate__button" />
         </div>
       </form>
     </div>
@@ -237,14 +237,14 @@ PopupPortNumber.defaultProps = {
   addClass: '',
   setIsOpen: () => {},
   setOpenNumber: () => {},
-  reSendPort: {}
+  port: {}
 };
 
 PopupPortNumber.propTypes = {
   addClass: PropTypes.string,
   setIsOpen: PropTypes.func,
   setOpenNumber: PropTypes.func,
-  reSendPort: PropTypes.object
+  port: PropTypes.object
 };
 
 export default PopupPortNumber;

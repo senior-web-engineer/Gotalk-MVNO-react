@@ -34,6 +34,7 @@ const Main = () => {
         {home.map(({ key, value }) => (
           <meta key={key} name={key} content={value} />
         ))}
+        <script id="shareasale" src="https://www.dwin1.com/19038.js" type="text/javascript" defer="defer"></script>
       </Helmet>
 
       <div>

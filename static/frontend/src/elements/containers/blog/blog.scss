@@ -463,11 +463,11 @@ a.sliderCard:hover {
 /* Extra large devices (large laptops and desktops, 1200px and up until 1600px) */
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   #nav {
-    max-width: 975px;
+    max-width: 1200px;
   }
 
   .slider-container, .catNav, .postsRow, .container {
-    max-width: 975px;
+    max-width: 1200px;
   }
 
   .slider-card-title h2 {

@@ -10,6 +10,7 @@ const AccountTariffInfoPlanCircle = ({
     { name: 'Group A', value: parseFloat(count) },
     { name: 'Group B', value: parseFloat(max) - parseFloat(count) },
   ];
+  console.log(count, unit, max, isUnlimited);
 
   return (
     <div className="account-tariff-info-plan-circle">
@@ -39,7 +40,7 @@ const AccountTariffInfoPlanCircle = ({
             </p>
             <p className="account-tariff-info-plan-circle__max-wrapper">
               <span className="account-tariff-info-plan-circle__from">from</span>
-              <span className="account-tariff-info-plan-circle__max">{max}</span>
+              <span className="account-tariff-info-plan-circle__max">{max} {unit}</span>
             </p>
           </>
         )}

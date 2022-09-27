@@ -9,15 +9,46 @@
 .present-main-content__information_text {
   font-family: 'Roboto-Regular';
   width: 100%;
-  font-size: calc(22px + (48 - 32) * ((100vw - 375px) / (1920 - 375)));
-  line-height: calc(34px + (64 - 40) * ((100vw - 375px) / (1920 - 375)));
+  font-size: 55px;
+  line-height: 60px;
   color: $label;
-  @media (max-width: 800px) {
-    width: 100%;
-  }
 
   b {
     font-family: 'Roboto-Bold';
+    color: #d75f5c;
+    font-size: 58px;
+  }
+
+  span.small {
+    font-size: 16px;
+    line-height: normal;
+  }
+
+  @media (max-width: 1400px) {
+    font-size: 50px;
+    line-height: 55px;
+
+    b {
+      font-size: 53px;
+    }
+  }
+
+  @media (max-width: 1250px) {
+    font-size: 40px;
+    line-height: 45px;
+
+    b {
+      font-size: 43px;
+    }
+  }
+
+  @media (max-width: 570px) {
+    font-size: 30px;
+    line-height: 35px;
+
+    b {
+      font-size: 33px;
+    }
   }
 }
 .button {
@@ -74,4 +105,81 @@
 
 .technologies_block-text {
   margin-top: 24px;
+}
+
+.present-main-protection {
+  padding: 15px 30px;
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fbfbfb;
+  white-space: nowrap;
+
+  @media (max-width: 1300px) {
+    font-size: 35px;
+  }
+  @media (max-width: 1160px) {
+    font-size: 30px;
+  }
+  @media (max-width: 1000px) {
+    font-size: 20px;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    font-size: 18px;
+    span {
+      margin-bottom: 5px;
+    }
+  }
+  @media (max-width: 400px) {
+    font-size: 16px;
+  }
+
+  &__orange {
+    color: #d75f5c;
+    margin-right: 15px;
+  }
+
+  &__black {
+    color: #09142f;
+    margin-right: 15px;
+  }
+
+  &__logo {
+    height: 40px;
+    width: auto;
+    display: inline-block;
+
+    @media (max-width: 1300px) {
+      height: 35px;
+    }
+    @media (max-width: 1160px) {
+      height: 30px;
+    }
+    @media (max-width: 1000px) {
+      height: 20px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.present-main-video {
+  display: none;
+  margin: 15px 20px 0;
+  iframe {
+    width:100%;
+    height: 300px;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }

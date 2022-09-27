@@ -43,9 +43,9 @@ const HowItWorks = () => (
           <p className="how-it-works__subtitle">
             Millions of dollars are stolen every year from SIM card fraud. GoTalk is a security
             conscious company that knows just how important your digital security it. With our
-            SafeSim (tm) technology, you’ll rest easy knowing your digital assets and data are
+            SafeSim&trade; technology, you’ll rest easy knowing your digital assets and data are
             protected from Sim Swap fraud. Not only that, we’ll never sell or share your data.
-            Don’t waste time, protect your wireless account with our SafeSim Two-Factor and Three-Factor Authentication today.
+            Don’t waste time, protect your wireless account with our SafeSim&trade; Two-Factor and Three-Factor Authentication today.
           </p>
         </article>
         <article className="how-it-works__article">

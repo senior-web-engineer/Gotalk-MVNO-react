@@ -8,7 +8,7 @@ import Popup from '../../../ui-component/popup/popup';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -25,10 +25,17 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
     register,
     formState: { errors },
     handleSubmit,
+      setValue
   } = useForm();
 
   const currentProduct = useSelector((state) => state.accountReducer.currentProduct);
   const productId = get(currentProduct, 'productId', '');
+
+  useEffect(() => {
+    if(currentProduct.isOuterSellingSim) {
+      setValue('codActivate', currentProduct.iccid);
+    }
+  }, [currentProduct.productId]);
 
   const onSubmit = (data) => {
     if (params.type === 'physical') {
@@ -117,7 +124,7 @@ const PopupActivate = ({ close, setIsOpen, setOpenNumber, setOpenNumberTemp }) =
           {isOpen && <PopupPortNumber setIsOpen={setIsOpen} setOpenNumberTemp={setOpenNumberTemp} />}
         </div>
       )}
-      
+
     </Popup>
   );
 };

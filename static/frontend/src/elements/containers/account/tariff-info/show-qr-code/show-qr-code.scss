@@ -1,0 +1,29 @@
+@import 'src/assets/styles/index.scss';
+
+.account-tariff-info-show-qr-wrapper {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-family: 'Raleway-Bold';
+    font-size: 18px;
+    color: $label-reverse;
+  }
+
+  &__code {
+    margin-top: 30px;
+  }
+
+  &__link-generate {
+    @include link-red();
+    margin-top: 30px;
+  }
+
+  &__img {
+    width: 300px;
+    height: 300px;
+  }
+}

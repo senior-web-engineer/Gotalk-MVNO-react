@@ -19,17 +19,19 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {getCouponFromLocalStorage} from "../../../shared/basketActions";
 import StripeTrustBadge from "../../../assets/images/payment/stripe-trust-badge.png";
 import authTypes from "../../../redux/workers/auth/auth-types";
+import {setCouponToLocalStorage} from "../../../shared/basketActions";
+import actionsTypes from "../../../redux/workers/account/account-types";
 
 const PaymentForm = ({checkout, isBasketEmpty}) => {
   const [showPopup, setShowPopup] = useState(false);
   const holderRef = useRef(null);
   const sendReceipt = useRef(false);
-  const { totalPrice, paymentStatus } = useSelector((state) => ({
+  const { totalPrice, paymentStatus, coupon } = useSelector((state) => ({
     totalPrice: state.basketReducer.totalPrice,
     paymentStatus: state.payment.paymentStatus,
+    coupon: state.basketReducer.coupon
   }));
   const elements = useElements();
   const stripe = useStripe();
@@ -48,13 +50,8 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
     }),
     [],
   );
-  const [coupon, setCoupon] = useState();
   const {checkoutDatas} =  useSelector(state => state.payment);
   const {isSignedIn, user} = useSelector(state => state.authReducer);
-
-  useEffect(() => {
-    setCoupon(getCouponFromLocalStorage());
-  }, []);
 
   const handleSubmit = () => {
     if (!holderRef.current?.value) {
@@ -118,6 +115,7 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
         break;
 
       case PAYMENT_STATUSES.SUCCESS:
+        setCouponToLocalStorage(null);
         if(!isSignedIn) {
           dispatch({
             type: authTypes.SIGN_IN,
@@ -126,43 +124,14 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
                 email: checkoutDatas.user.email,
                 password: checkoutDatas.user.password
               },
+              userSimPlanId: checkoutDatas.userSimPlanId,
+              simType: checkoutDatas.simType,
               redirect: navigate
             }
           });
         } else {
-          navigate(routes.account.base);
-        }
-        break;
-
-      default:
-        setShowPopup(false);
-    }
-  };
-
-  const handleSubmitPopup = () => {
-    switch (paymentStatus.status) {
-      case PAYMENT_STATUSES.ERROR_STRIPE:
-        setShowPopup(false);
-        break;
-
-      case PAYMENT_STATUSES.ERROR_SIM_CARD:
-        navigate(routes.plans);
-        break;
-
-      case PAYMENT_STATUSES.SUCCESS:
-        if(!isSignedIn) {
-          dispatch({
-            type: authTypes.SIGN_IN,
-            payload: {
-              userData: {
-                email: checkoutDatas.user.email,
-                password: checkoutDatas.user.password
-              },
-              redirect: navigate
-            }
-          });
-        } else {
-          navigate(routes.account.base);
+          dispatch({ type: actionsTypes.LOAD_CURRENT_PRODUCT, id: checkoutDatas.userSimPlanId });
+          navigate(`${routes.account.base}/${routes.account.tracker}/${checkoutDatas.simType}?id=${checkoutDatas.userSimPlanId}`);
         }
         break;
 
@@ -188,6 +157,8 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
 
       case PAYMENT_STATUSES.SUCCESS:
         setShowPopup(true);
+        addShareASaleScripts();
+        addGoogleSaleScripts();
         break;
 
       case PAYMENT_STATUSES.ERROR_SIM_CARD:
@@ -206,6 +177,42 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => resetPaymentStatus, []);
 
+  useEffect(() => {
+    removeShareASaleScripts();
+    removeGoogleSaleScripts();
+  }, []);
+
+  function addShareASaleScripts() {
+    const img = document.createElement("img");
+    img.src = `https://www.shareasale.com/sale.cfm?tracking=${getPayId()}&amount=${totalPrice - (discountAmount || 0)}&merchantID=127982&transtype=sale`;
+    img.width = "1";
+    img.height = "1";
+    img.id = "shareasaleImg";
+    document.getElementsByTagName("body")[0].appendChild(img);
+
+    const s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "https://www.dwin1.com/19038.js";
+    s.id = "shareasale";
+    document.getElementsByTagName("head")[0].appendChild(s);
+  }
+
+  function removeShareASaleScripts() {
+    document.getElementById("shareasale")?.remove();
+    document.getElementById("shareasaleImg")?.remove();
+  }
+
+  function addGoogleSaleScripts() {
+    const s = document.createElement("script");
+    s.id = "googlesale";
+    s.innerHTML = `gtag('event', 'conversion', { 'send_to': 'AW-10903290545/Y7XzCODKocMDELGFjM8o', 'transaction_id': '${getPayId()}' });`;
+    document.getElementsByTagName("head")[0].appendChild(s);
+  }
+
+  function removeGoogleSaleScripts() {
+    document.getElementById("googlesale")?.remove();
+  }
+
   const discountAmount = useMemo(() => {
     if(!coupon) {
       return 0;
@@ -216,7 +223,7 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
     }
 
     return coupon.discountAmount;
-  }, [coupon]);
+  }, [coupon, totalPrice]);
 
   function checkoutSubmitForms() {
     if(!checkoutDatas) {
@@ -247,10 +254,16 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
                     <h3 className="payment-form__header">Payment</h3>
                   </div>
                   <span className="payment-form__total-price-container">
-                <strong className="payment-form__total-price-text">Total</strong>
-                <strong className="payment-form__total-price-price">{`$${totalPrice - (discountAmount || 0)}`}</strong>
-              </span>
+                    <strong className="payment-form__total-price-text">Total</strong>
+                    <strong className="payment-form__total-price-price">{`$${totalPrice - (discountAmount || 0)}`}</strong>
+                  </span>
                 </>
+            )}
+            {totalPrice === 0 && (
+                <div className="payment-form__trial">
+                  Please enter your card details below to allow us to validate you are a real person.
+                  You will not be charged during the trial period.
+                </div>
             )}
             <div className="payment-form__card-container">
               <div className="payment-form__card-side front">
@@ -304,13 +317,6 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
               </span>
             </div>
             <div className="payment-form__controls-container">
-              <button
-                  type="button"
-                  className="payment-form__button-back"
-                  onClick={() => navigate(routes.billingDetails)}
-              >
-                BACK
-              </button>
               {checkout ? (
                   <button type="button" className="payment-form__button-pay" onClick={checkoutSubmitForms}>
                     PAY
@@ -321,18 +327,18 @@ const PaymentForm = ({checkout, isBasketEmpty}) => {
                   </button>
               )}
             </div>
+            <div className="payment-form__policy">
+              By placing your order, you agree to our <a href="/terms-conditions" target="_blank">Terms & Conditions</a>, <a href="/return-policy" target="_blank">Refund Policy</a> and <a href="/privacy-policy" target="_blank">Privacy Policy</a>
+            </div>
           </div>
       ) : null}
       {showPopup && (
         <PaymentPopup
           isSuccess={paymentStatus.status === PAYMENT_STATUSES.SUCCESS}
           close={handleClosePopup}
-          onSubmit={handleSubmitPopup}
+          onSubmit={handleClosePopup}
           message={paymentStatus.message}
         />
-      )}
-      {(showPopup && paymentStatus.status === PAYMENT_STATUSES.SUCCESS) && (
-          <img src={`https://www.shareasale.com/sale.cfm?tracking=${getPayId()}&amount=${totalPrice - (discountAmount || 0)}&merchantID=127982&transtype=sale`} width="1" height="1" />
       )}
     </form>
   );

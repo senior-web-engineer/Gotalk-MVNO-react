@@ -15,7 +15,7 @@ const BasketItem = ({
   id, className, item, onChange, onDelete, collapsible
 }) => {
   const containerClass = useClassnames('basket-item', className);
-  const [itemData, setItemData] = useState({ planId: id, count: item.count, isEsim: item.isEsim });
+  const [itemData, setItemData] = useState({ planId: id, count: item.count, isEsim: item.isEsim, isLinxdot: item.isLinxdot });
   const [collapsed, setCollapsed] = useState(collapsible ? true : false);
 
   const handleRemove = () => {
@@ -80,6 +80,9 @@ const BasketItem = ({
           </span>
         </div>
         <div className="basket-item__plan-description-container">
+          {item.isLinxdot && (
+              <div className="basket-item__header-highlight">*Free Linxdot Helium Hotspot Offer (12 Months)</div>
+          )}
           <PlanDescription
               containerClass="basket-item__plan-description"
               price={item.costBuyPlan}

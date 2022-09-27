@@ -27,6 +27,9 @@ export default function OuterActivationForm({parentName}) {
                         ICCID
                         <div className="outer-activation-form__info-button" onClick={() => setIccidPopupShow(true)}>
                             <img src={Info} alt="ICCID Info" />
+                            <span className="outer-activation-form__info-button-text">
+                                Click here for how to locate the ICCID
+                            </span>
                         </div>
                     </div>
                 )}
@@ -38,7 +41,7 @@ export default function OuterActivationForm({parentName}) {
                 containerClass="user-info-form__input"
                 placeholder="Enter Zip"
                 type="text"
-                label="Zip"
+                label="Delivery Zip Code of Sim Card"
             />
 
             {iccidPopupShow && (

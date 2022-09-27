@@ -12,7 +12,7 @@ const ReviewsBlock = () => (
         Real stories from
         {' '}
         <p className="reviews__title-customers">
-          Real Customers
+          <span>Real Customers</span>
           <img src={quotes} alt="quotes" className="reviews-quotes reviews-quotes--reversed" />
         </p>
       </h2>

@@ -7,7 +7,7 @@ import {
   countPrice,
   countTotalPlans,
   deleteFromBasket,
-  getBasketItems,
+  getBasketItems, getCouponFromLocalStorage,
   hasPlasticSim, setCouponToLocalStorage,
   updateBasket,
 } from '../../../shared/basketActions';
@@ -40,10 +40,9 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
   const totalLines = useSelector((state) => state.basketReducer.totalLines);
   const totalCount = useSelector((state) => state.basketReducer.totalCount);
   const hasDelivery = useSelector((state) => state.basketReducer.hasDelivery);
+  const coupon = useSelector((state) => state.basketReducer.coupon);
   const plans = useSelector((state) => state.mainReducer.plans);
   const { errors: paymentErrors } = useSelector((state) => state.payment);
-  const { isSignedIn, user } = useSelector((state) => state.authReducer);
-  const [coupon, setCoupon] = useState();
   const [couponLoading, setCouponLoading] = useState(false);
   const dispatch = useDispatch();
   const isSmallForBasketProps = useMediaQuery('(max-width: 768px)');
@@ -56,28 +55,11 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
 
   const handleNavigateToBillingForm = () => {
     if(checkout) {
-      window.scrollTo({
-        top: document.querySelector('.payment__form').offsetTop - 100,
-        behavior: "smooth"
-      });
+      document.querySelector('.payment-form__button-pay').click();
       return;
     }
+
     setCouponToLocalStorage(coupon);
-
-    if (isSignedIn && !hasDelivery) {
-      const userInfo = {
-        products: getBasketItems(),
-        coupon: coupon
-      };
-
-      dispatch({
-        type: paymentTypes.BUY_PLAN_AUTHORIZED,
-        payload: userInfo,
-        navigate,
-        user,
-      });
-    }
-
     navigate(routes.checkout, {
       state: {
         hasDelivery,
@@ -138,8 +120,10 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
 
     basketPlans.forEach((plan) => {
       const updatedPlan = plan;
+      const basketItem = basketItems.find((basketItem) => basketItem.planId === plan.id);
       updatedPlan.count = basketItemsObj[plan.id.toString()];
-      updatedPlan.isEsim = basketItems.find((basketItem) => basketItem.planId === plan.id).isEsim;
+      updatedPlan.isEsim = basketItem?.isEsim || false;
+      updatedPlan.isLinxdot = basketItem?.isLinxdot || false;
       return updatedPlan;
     });
 
@@ -156,6 +140,17 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
     ));
   };
 
+  const setCoupon = (c) => {
+    dispatch({
+      type: basketTypes.SET_COUPON,
+      payload: c
+    });
+  }
+
+  useEffect(() => {
+    setCoupon(getCouponFromLocalStorage());
+  }, []);
+
   const discountAmount = useMemo(() => {
     if(!coupon) {
       return 0;
@@ -166,7 +161,7 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
     }
 
     return coupon.discountAmount;
-  }, [coupon]);
+  }, [coupon, totalPrice]);
 
   const couponForm = () => {
     if(couponLoading) {
@@ -273,7 +268,7 @@ const Basket = ({ isBasketEmpty, setBasketEmpty, checkout }) => {
             {checkout && <BillingForm isBasketEmpty={isBasketEmpty} onSubmit={(data) => data} checkout={true} /> }
             {checkout && <PaymentForm isBasketEmpty={isBasketEmpty} checkout={true} /> }
           </div>
-          <div>
+          <div className={checkout ? 'basket__sticky' : ''}>
             {(!checkout || (checkout && !isSmallForBasketProps)) && !isBasketEmpty ? (
                 <div className="basket__price-container">
                   <div className="basket__price-col coupon">

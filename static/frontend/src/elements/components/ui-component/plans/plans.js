@@ -6,7 +6,7 @@ import { addToBasket, getBasketItems } from '../../../../shared/basketActions';
 import BasketSuccessPopup from '../basket-success-popup/basket-success-popup';
 import Card from '../card/card';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,6 +16,9 @@ const Plans = ({ wrapperClass }) => {
   const dispatch = useDispatch();
   const plans = useSelector((state) => state.mainReducer.plans);
   const navigate = useNavigate();
+  const [planType, setPlanType] = useState('DEFAULT');
+  const filteredPlans = useMemo(() => plans?.filter(m => m.planType === planType), [planType, plans]);
+
   useEffect(() => {
     dispatch({ type: actionsType.LOAD_PLANS });
   }, [dispatch]);
@@ -36,7 +39,7 @@ const Plans = ({ wrapperClass }) => {
     }
   };
 
-  const renderCards = () => plans?.map((plan) => (
+  const renderCards = () => (filteredPlans || []).map((plan) => (
     <Card
       key={plan?.id}
       title={plan?.name}
@@ -47,6 +50,7 @@ const Plans = ({ wrapperClass }) => {
       internet={plan?.internetCount}
       minute={plan?.minuteCount}
       sms={plan?.SMSCount}
+      planType={plan?.planType}
       clickCard={() => handleBasketAddition(plan?.id)}
       onClick={(e) => {
         e.stopPropagation();
@@ -65,6 +69,14 @@ const Plans = ({ wrapperClass }) => {
           }}
         />
       )}
+      <div className="plan-type-tabs">
+        <div className={`plan-type-tab-item ${planType === 'DEFAULT' ? 'active' : ''}`} onClick={() => setPlanType('DEFAULT')}>
+          SafeSim™
+        </div>
+        <div className={`plan-type-tab-item ${planType === 'ONLY_DATA' ? 'active' : ''}`} onClick={() => setPlanType('ONLY_DATA')}>
+          SafeSim™ Data/Tablet
+        </div>
+      </div>
       <div className={wrapper}>{renderCards()}</div>
     </>
   );

@@ -21,6 +21,7 @@ const AccountTariffInfoCard = ({ addClass }) => {
   );
   const isAccountLoading = useSelector((state) => state.loadingReducer.loadingAccountData);
 
+  const isOuterSellingSim = get(currentProduct, 'isOuterSellingSim', false);
   const plan = get(currentProduct, 'plan', {});
   const name = get(plan, 'name', '');
   const costPerMonth = get(plan, 'costPerMonth', 0);
@@ -48,7 +49,7 @@ const AccountTariffInfoCard = ({ addClass }) => {
         </div>
       ) : (
         <AccountTariffInfoPlanCard>
-          <AccountTariffInfoPlanHeader number={number} tariff={name} sum={costPerMonth} />
+          <AccountTariffInfoPlanHeader number={number} tariff={name} sum={costPerMonth} isOuterSellingSim={isOuterSellingSim} />
 
           <div className="account-tariff-info__container">
             <div className="account-tariff-info__circles-wrapper">
@@ -59,10 +60,10 @@ const AccountTariffInfoCard = ({ addClass }) => {
                 max={Number(minuteCount)}
               />
               <AccountTariffInfoPlanCircle
-                isUnlimited={internetCountValue > UNLIMITED_VALUE}
-                count={internetRemaining}
+                isUnlimited={Number(internetCountValue) > UNLIMITED_VALUE}
+                count={Number(internetRemaining)}
                 unit={internetCountUnit}
-                max={internetCountValue}
+                max={Number(internetCountValue)}
               />
               <AccountTariffInfoPlanCircle
                 isUnlimited={Number(SMSCount) > UNLIMITED_VALUE}

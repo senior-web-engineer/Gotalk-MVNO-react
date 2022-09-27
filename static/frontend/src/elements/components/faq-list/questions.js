@@ -46,7 +46,7 @@ const questions = [
   {
     summary: 'Why should I use GoTalk?',
     details:
-      'Millions of dollars are stolen every year from SIM card fraud. GoTalk is a security conscious company that knows just how important your digital security it. With our SafeSim (tm) technology, you’ll rest easy knowing your digital assets and data are protected from Sim Swap fraud. Not only that, we’ll never sell or share your data. Don’t waste time, protect your wireless account with our SafeSim Two-Factor and Three-Factor Authentication today.',
+      'Millions of dollars are stolen every year from SIM card fraud. GoTalk is a security conscious company that knows just how important your digital security it. With our SafeSim&trade; technology, you’ll rest easy knowing your digital assets and data are protected from Sim Swap fraud. Not only that, we’ll never sell or share your data. Don’t waste time, protect your wireless account with our SafeSim Two-Factor and Three-Factor Authentication today.',
   },
   {
     summary: 'Can I use my phone as a Hotspot with GoTalk?',

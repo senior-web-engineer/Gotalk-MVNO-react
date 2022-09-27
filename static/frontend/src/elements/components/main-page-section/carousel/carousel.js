@@ -7,12 +7,13 @@ function Carousel(props) {
   let settings = {
     dots: true,
     infinite: true,
+    adaptiveHeight: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1536,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
@@ -42,6 +43,7 @@ function Carousel(props) {
 
   return (
     <section className="instagram-section">
+      <h2 className="section-banner__title">Check out our Social Feed</h2>
       <Slider {...settings} className="container carousel-container margin-auto">
         {feeds
           ? feeds.map((slide, index) => {
@@ -54,9 +56,11 @@ function Carousel(props) {
                     <div className="carousel-card-title">
                       {/* <h2>{slide.media_type}</h2> */}
                     </div>
-                    <div className="carousel-card-excerpt">{slide.media_type}</div>
+                    <div className="carousel-card-excerpt">
+                      {/* {slide.media_type} */}
+                    </div>
                     <div className="carousel-card-date">
-                      <span>Gotalkwireless.com</span>
+                      {/* <span>Gotalkwireless.com</span> */}
                     </div>
                   </div>
                 </a>

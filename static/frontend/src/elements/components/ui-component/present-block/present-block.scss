@@ -21,9 +21,10 @@
 }
 
 .present-main-content__information {
-  width: 51%;
+  width: 42%;
+
   @media (max-width: 500px) {
-    width: 0;
+    width: 70%;
   }
 }
 
@@ -32,15 +33,15 @@
   z-index: 2;
   top: 50%;
   transform: translate(0, -50%);
-  padding: 0 calc(16px + (200 - 16) * ((100vw - 375px) / (1920)));
+  padding: 0 30px;
   @media (max-width: 1000px) {
     width: 100%;
-    padding: 65px 16px 0 calc(16px + (200 - 16) * ((100vw - 375px) / (1920 - 375)));
+    padding: 65px 20px;
   }
 }
 
 .present-main__image {
-  width: 50%;
+  width: 58%;
   padding-bottom: 38%;
   overflow: hidden;
   position: relative;
@@ -52,7 +53,7 @@
   }
   @media (max-width: 500px) {
     padding-bottom: 93%;
-    width: 100%;
+    width: 30%;
   }
 }
 
@@ -62,7 +63,8 @@
   object-fit: cover;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
+  display: none;
   @media (max-width: 800px) {
     display: none;
   }
@@ -87,5 +89,66 @@
   }
   @media (max-width: 500px) {
     width: 151%;
+  }
+}
+
+.main-closer-triangle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: none;
+
+  .arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 100vh solid transparent;
+    border-bottom: 0 solid transparent;
+    border-left: 120px solid #051431;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.banner-video-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+
+  .banner-video-title {
+    font-family: 'Roboto-Bold';
+    color: #d75f5c;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .banner-video {
+    width: 100%;
+    height: calc(100% - 30px);
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.linxdot-plan-image {
+  .present-main__image-item {
+    display: block;
+    @media (max-width: 800px) {
+      display: none;
+    }
+  }
+  .banner-video-container {
+    display: none!important;
+  }
+  .main-closer-triangle {
+    display: block!important;
   }
 }

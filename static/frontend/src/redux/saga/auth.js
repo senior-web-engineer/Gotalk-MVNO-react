@@ -9,6 +9,7 @@ import { startLoading, stopLoading } from '../workers/loading';
 import {
   call, takeLatest, put,
 } from 'redux-saga/effects';
+import actionsTypes from "../workers/account/account-types";
 
 const NOT_FOUND_STATUS_CODE = 404;
 const redirectUrl = 'restore-password/reset';
@@ -16,10 +17,28 @@ const redirectUrl = 'restore-password/reset';
 function* signUpSaga(params) {
   try {
     yield put(startLoading('signUpLoading'));
-    yield call(signUp, { ...params.payload.user, iccid: params.payload.iccid });
+    const signUpRes = yield call(signUp, { ...params.payload.user, iccid: params.payload.iccid });
     yield put({ type: authTypes.SIGN_UP_SUCCESS });
     yield put({ type: authTypes.SAVE_USER, payload: { ...params.payload.user } });
-    params.payload.redirect(routes.signIn.base);
+    const { data } = yield call(signIn, {
+      email: params.payload.user.email,
+      password: params.payload.user.password
+    });
+    window.localStorage.setItem('got-accessToken', data.token);
+    window.localStorage.setItem('got-user', JSON.stringify(data.user));
+
+    yield put({ type: authTypes.SIGN_IN_SUCCESS, payload: data.user });
+    yield put({ type: authTypes.SIGNED_IN });
+
+    const {redirect} = params.payload;
+    if(signUpRes?.data?.id > 0) {
+      const {id, simType} = signUpRes.data;
+      yield put({ type: actionsTypes.LOAD_CURRENT_PRODUCT, id });
+      redirect(`${routes.account.base}/${routes.account.tracker}/${simType}?id=${id}`);
+    }
+    else {
+      redirect(routes.account.base);
+    }
   } catch (error) {
     console.log(error);
 
@@ -37,7 +56,15 @@ function* signInSaga(params) {
     const { data } = yield call(signIn, { ...params.payload.userData });
     window.localStorage.setItem('got-accessToken', data.token);
 
-    if (data.emailFactor && data.yubicoFactor) {
+    if(params.payload.userSimPlanId) {
+      window.localStorage.setItem('got-user', JSON.stringify(data.user));
+
+      yield put({ type: authTypes.SIGN_IN_SUCCESS, payload: data.user });
+      yield put({ type: authTypes.SIGNED_IN });
+      yield put({ type: actionsTypes.LOAD_CURRENT_PRODUCT, id: params.payload.userSimPlanId });
+      params.payload.redirect(`${routes.account.base}/${routes.account.tracker}/${params.payload.simType}?id=${params.payload.userSimPlanId}`);
+    }
+    else if (data.emailFactor && data.yubicoFactor) {
       yield put({ type: accountTypes.SEND_VERIFICATION_EMAIL_CODE });
       params.payload.redirect(routes.signIn.combined, { state: { email: data.user.email } });
     } else if (data.emailFactor) {
@@ -51,7 +78,7 @@ function* signInSaga(params) {
       yield put({ type: authTypes.SIGN_IN_SUCCESS, payload: data.user });
       yield put({ type: authTypes.SIGNED_IN });
 
-      params.payload.redirect(routes.account.base)
+      params.payload.redirect(routes.account.base);
     }
   } catch (error) {
     console.log(error);
@@ -154,9 +181,14 @@ function* outerActivationSaga(params) {
   try {
     yield put(startLoading('outerActivationLoading'));
     const {iccid, zip} = params.payload.outerActivation;
-    yield call(sendOuterActivation, { iccid, zip });
+    const { data } = yield call(sendOuterActivation, { iccid, zip });
     yield put({ type: authTypes.OUTER_ACTIVATION_SUCCESS });
-    params.payload.redirect(`${routes.signUp}?iccid=${iccid}&zip=${zip}`);
+    if(data.goToActivate) {
+      yield put({ type: actionsTypes.LOAD_CURRENT_PRODUCT, id: data.id });
+      params.payload.redirect(`${routes.account.base}/${routes.account.tracker}/${data.simType}?id=${data.id}`);
+    } else {
+      params.payload.redirect(`${routes.signUp}?iccid=${iccid}&zip=${zip}`);
+    }
   } catch (error) {
     console.log(error);
 

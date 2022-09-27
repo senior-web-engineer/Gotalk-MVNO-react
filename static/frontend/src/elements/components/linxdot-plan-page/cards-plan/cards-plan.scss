@@ -30,7 +30,7 @@
   width: 78%;
 }
 .cards-item-paragraph__grid {
-  display: grid;
+  display: flex;
 }
 .cards-item {
   @include content-container-shadow();
@@ -38,6 +38,9 @@
   width: 32.35%;
   margin-top: 24px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   @media (max-width: 1600px) {
     width: 100%;
     margin: 24px auto 0px auto;

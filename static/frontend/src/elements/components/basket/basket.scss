@@ -155,7 +155,7 @@
   }
 
   &__coupon-form-wrapper {
-    height: 60px;
+    min-height: 60px;
     position: relative;
     margin-bottom: 20px;
   }
@@ -201,6 +201,7 @@
     }
 
     &-text {
+      font-family: "Roboto-Regular", sans-serif;
       b {
         font-family: "Raleway-Bold", sans-serif;
       }
@@ -282,5 +283,17 @@
 
   @include below-breakpoint(sm) {
     flex-direction: column;
+  }
+}
+
+.basket__sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 100px;
+  left: 0;
+  height: 750px;
+
+  @media (max-width: 768px) {
+    display: none;
   }
 }

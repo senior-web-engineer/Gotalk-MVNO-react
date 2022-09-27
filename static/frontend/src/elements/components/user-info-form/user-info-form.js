@@ -77,6 +77,15 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
   return (
     <div className="user-info-form__row">
       <div className="user-info-form__col">
+        <Input
+            {...register(getFieldName('firstName', parentName))}
+            description={errors.firstName?.message}
+            isInvalid={!!errors.firstName}
+            containerClass="user-info-form__input"
+            placeholder="Enter first name"
+            type="text"
+            label="First name"
+        />
         {!isBillingUserInfo && (
             <>
               <Input
@@ -108,21 +117,8 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
               />
             </>
         )}
-        <GooglePlaces
-            containerClass="user-info-form__input"
-            onChange={googleAddressChange}
-        />
         {isBillingUserInfo && (
             <>
-              <Input
-                  {...register(getFieldName('city', parentName))}
-                  description={errors.city?.message}
-                  isInvalid={!!errors.city}
-                  containerClass="user-info-form__input"
-                  placeholder="Enter town/city"
-                  type="text"
-                  label="Town / City"
-              />
               <Input
                   {...register(getFieldName('phone', parentName))}
                   description={errors.phone?.message}
@@ -131,6 +127,15 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
                   placeholder="Enter telephone number"
                   type="text"
                   label="Telephone number (Optional)"
+              />
+              <Input
+                  {...register(getFieldName('city', parentName))}
+                  description={errors.city?.message}
+                  isInvalid={!!errors.city}
+                  containerClass="user-info-form__input"
+                  placeholder="Enter town/city"
+                  type="text"
+                  label="Town / City"
               />
             </>
         )}
@@ -146,15 +151,6 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
       </div>
       <div className="user-info-form__col">
         <Input
-            {...register(getFieldName('firstName', parentName))}
-            description={errors.firstName?.message}
-            isInvalid={!!errors.firstName}
-            containerClass="user-info-form__input"
-            placeholder="Enter first name"
-            type="text"
-            label="First name"
-        />
-        <Input
             {...register(getFieldName('lastName', parentName))}
             description={errors.lastName?.message}
             isInvalid={!!errors.lastName}
@@ -162,6 +158,10 @@ const UserInfoForm = ({ parentName, isBillingUserInfo, onlyCreateAccount }) => {
             placeholder="Enter last name"
             type="text"
             label="Last name"
+        />
+        <GooglePlaces
+            containerClass="user-info-form__input"
+            onChange={googleAddressChange}
         />
         {!isBillingUserInfo && (
           <Input

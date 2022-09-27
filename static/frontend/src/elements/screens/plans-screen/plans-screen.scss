@@ -2,8 +2,21 @@
 @import 'src/assets/styles/mixins/container.scss';
 @import 'src/assets/styles/mixins/media.scss';
 
+.plans-screen-container {
+  margin-bottom: 100px;
+}
+
 .plans-screen {
   @include content-container();
+
+  &__oversea {
+    color: #bbb;
+    font-family: 'Roboto-Regular', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .plans-screen__nav-back {
@@ -14,7 +27,7 @@
   font-size: 4rem;
   text-align: center;
   margin-top: 48px;
-  margin-bottom: 80px;
+  margin-bottom: 10px;
 
   @include below-breakpoint(xs) {
     font-size: 2rem;
@@ -22,6 +35,35 @@
   }
 }
 
+.plans-screen__sub {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+
+.plans-screen__sub2 {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+  padding: 0 15px;
+  margin-bottom: 40px;
+}
+
 .plans-screen__cards-container {
-  margin-bottom: calc(40px + (250 - 40) * ((100vw - 375px) / (1920 - 375)));
+  margin-bottom: 0;
+}
+
+.plans-screen__video {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  iframe {
+    width: 600px;
+    height: 350px;
+    max-width: 100%;
+  }
 }

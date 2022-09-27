@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './cards-plan.scss';
 
-const CardsItem = ({ title, description, descriptionTwo, descriptionThree, value }) => (
+const CardsItem = ({ title, value }) => (
   <section className="cards-item">
     <div className="cards-item-paragraph__grid">
       <h3 className="cards-plan__head-three p-5">{title}</h3>
-      <span className="p-5">{description}</span>
-      <span className="p-5">{descriptionTwo}</span>
-      <span className="p-5">{descriptionThree}</span>
     </div>
     <div className="cards-item-paragraph">
       {title === 'Internet' && <span className="cards-item-paragraph__value">{value} GB</span>}

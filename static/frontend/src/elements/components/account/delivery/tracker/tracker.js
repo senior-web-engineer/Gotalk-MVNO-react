@@ -63,6 +63,10 @@ const Tracker = () => {
     <div className="tracker-stack" />
   )));
 
+  if(currentProduct?.isOuterSellingSim) {
+    return null;
+  }
+
   return (
     <section className="tracker">
       <h2 className="tracker-title">Path tracker</h2>

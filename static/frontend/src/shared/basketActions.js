@@ -1,4 +1,4 @@
-export const addToBasket = (itemId) => {
+export const addToBasket = (itemId, isLinxdot) => {
   if (!itemId) {
     return;
   }
@@ -15,6 +15,9 @@ export const addToBasket = (itemId) => {
 
     if (updatedItem.planId === itemId) {
       updatedItem.count += 1;
+      if(isLinxdot) {
+        updatedItem.isLinxdot = isLinxdot;
+      }
       itemNotInBasket = false;
     }
 
@@ -22,7 +25,7 @@ export const addToBasket = (itemId) => {
   });
 
   if (itemNotInBasket) {
-    currentBasketItems.push({ count: 1, planId: itemId, isEsim: true });
+    currentBasketItems.push({ count: 1, planId: itemId, isEsim: true, isLinxdot });
   }
 
   localStorage.setItem('basket', JSON.stringify(currentBasketItems));
@@ -90,7 +93,12 @@ export const countPrice = (plans, basketItems) => {
 
   const basketItemsIds = basketItems.map((item) => item.planId);
   basketItemsIds.forEach((id) => {
-    price += prices[id] * (getBasketItem(id)?.count || 0);
+    const basketItem = getBasketItem(id);
+    if(basketItem?.isLinxdot) {
+      price += prices[id] * basketItem.count * 12;
+    } else {
+      price += prices[id] * (basketItem?.count || 0);
+    }
   });
 
   return price || 0;
@@ -103,7 +111,11 @@ export const hasPlasticSim = () => getBasketItems().filter((item) => !item.isEsi
 
 export const setCouponToLocalStorage = (coupon) => {
   try {
-    localStorage.setItem('coupon', JSON.stringify(coupon));
+    if(!coupon) {
+      localStorage.removeItem('coupon');
+    } else {
+      localStorage.setItem('coupon', JSON.stringify(coupon));
+    }
   } catch {}
 }
 

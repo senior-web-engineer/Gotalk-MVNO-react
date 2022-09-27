@@ -2,7 +2,7 @@
 import './card.scss';
 import Button from '../button/button';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 
 const Card = ({
@@ -16,6 +16,7 @@ const Card = ({
   sms,
   internet,
   minute,
+  planType
 }) => {
   const getProps = (propsObj) => Object.values(propsObj || {});
   const isModeBusiness = useSelector((state) => state.mainReducer.isModeBusiness);
@@ -28,7 +29,7 @@ const Card = ({
   const getCharacteristics = () =>
     getProps(characteristics)?.filter(m => m).map((characteristic) => (
       <li className="card__characteristics-item" key={characteristic}>
-        {characteristic}
+        {characteristic} {characteristic.trim() === 'Use your phone overseas' ? <span>*</span> : ''}
       </li>
     ));
 
@@ -45,22 +46,26 @@ const Card = ({
                 <span className="card__conditions_item__value">{internet.value}{internet.unit}</span>
                 <span className="card__conditions_item__sub">4G / 5G Data</span>
               </p>
-              <p>
-                <span className="card__conditions_item__value">
-                  {minute === '9007199254740991' ?  'Unlimited' : minute}
-                </span>
-                <span className="card__conditions_item__sub">
-                  MIN
-                </span>
-              </p>
-              <p>
-                <span className="card__conditions_item__value">
-                  {sms === '9007199254740991' ?  'Unlimited' : sms}
-                </span>
-                <span className="card__conditions_item__sub">
-                  SMS
-                </span>
-              </p>
+              {planType !== 'ONLY_DATA' ? (
+                  <>
+                    <p>
+                      <span className="card__conditions_item__value">
+                        {minute === '9007199254740991' ?  'Unlimited' : minute}
+                      </span>
+                            <span className="card__conditions_item__sub">
+                        MIN
+                      </span>
+                          </p>
+                          <p>
+                      <span className="card__conditions_item__value">
+                        {sms === '9007199254740991' ?  'Unlimited' : sms}
+                      </span>
+                            <span className="card__conditions_item__sub">
+                        SMS
+                      </span>
+                    </p>
+                  </>
+              ) : null}
             </p>
             <ul className="card__characteristics">{getCharacteristics()}</ul>
           </div>

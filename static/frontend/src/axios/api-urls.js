@@ -13,7 +13,7 @@ export const AUTH = {
 export const USERS = {};
 
 export const MAIN = {
-  plans: '/v1/plans',
+  plans: '/v1/plans/acts',
 };
 
 export const PAYMENT = {

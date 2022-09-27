@@ -6,10 +6,10 @@ import Spinner from '../../../components/ui-component/spinner/spinner';
 import classNames from 'classnames';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import './accounts-select.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const AccountSelect = ({ addClass }) => {
   const [isOpen, setOpen] = useState(false);
@@ -35,10 +35,14 @@ const AccountSelect = ({ addClass }) => {
 
   const handleAccountSelect = () => setOpen(!isOpen);
 
+  const { search } = useLocation();
+  const id = useMemo(() => {
+    const query = new URLSearchParams(search);
+    return query.get('id') || 0;
+  }, [search]);
+
   const clickPlan = (id, simType, simStatus) => {
     handleAccountSelect();
-
-    dispatch({ type: actionsTypes.LOAD_CURRENT_PRODUCT, id });
 
     switch (simStatus) {
       case 'BLOCKED':
@@ -52,16 +56,6 @@ const AccountSelect = ({ addClass }) => {
     }
   };
 
-  const getActiveProducts = (products) => {
-    const result = products.filter((product) => {
-      const userSimPlanId = get(product, 'userSimPlanId', '');
-
-      return !!userSimPlanId;
-    });
-
-    return result;
-  };
-
   const buyMore = () => {
     navigate(routes.plans);
   };
@@ -73,19 +67,13 @@ const AccountSelect = ({ addClass }) => {
   };
 
   useEffect(() => {
-    if (!currentProduct?.productId && accountProduct[0]) {
-      const activeProducts = getActiveProducts(accountProduct);
-      const firstActiveProduct = get(activeProducts[0], 'userSimPlanId', '');
-
-      if (firstActiveProduct) {
-        dispatch({
-          type: actionsTypes.LOAD_CURRENT_PRODUCT,
-          id: firstActiveProduct,
-        });
-      }
+    if(id) {
+      dispatch({
+        type: actionsTypes.LOAD_CURRENT_PRODUCT,
+        id,
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentProduct?.productId, accountProduct]);
+  }, [id]);
 
   const classes = classNames('account-select', addClass, { 'account-select_active': isOpen });
   const classesReveal = classNames('account-select-user__reveal', {

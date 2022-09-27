@@ -51,6 +51,7 @@ const Tariffs = () => {
       internet={plan?.internetCount}
       minute={plan?.minuteCount}
       sms={plan?.SMSCount}
+      planType={plan?.planType}
       onClick={(e) => {
         e.stopPropagation();
         handleBasketAddition(plan?.id);
@@ -65,7 +66,7 @@ const Tariffs = () => {
 
   return (
     <div className="tariffs-container">
-      <h2 className="header-two">Popular tariffs</h2>
+      <h2 className="header-two">Popular SafeSim&trade; Plans</h2>
       <div className="tariffs__card">{renderCardPlan()}</div>
       <Button onClick={handleNavigation} title="VIEW ALL" addClass="tariffs__button" />
       {showPopup && (

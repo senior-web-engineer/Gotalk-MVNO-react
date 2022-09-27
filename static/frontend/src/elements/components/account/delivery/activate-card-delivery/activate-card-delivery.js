@@ -68,6 +68,7 @@ const ActivateCardDelivery = () => {
           onClick={() => setIsOpen(true)}
           onClickQR={() => clickQrScan()}
           onClickReSendPort={() => setIsOpenReSendPort(true)}
+          isOuterSellingSim={currentProduct?.isOuterSellingSim}
         />
       )}
       {isOpen && (
@@ -106,10 +107,10 @@ const ActivateCardDelivery = () => {
       )}
       {isOpenReSendPort && (
         <Popup close={() => setIsOpenReSendPort(false)}>
-          <PopupPortNumber 
-            setIsOpen={setIsOpenReSendPort} 
+          <PopupPortNumber
+            setIsOpen={setIsOpenReSendPort}
             setOpenNumberTemp={setOpenNumberTemp}
-            reSendPort={currentProduct?.userSimPort}
+            port={currentProduct?.userSimPort}
           />
         </Popup>
       )}

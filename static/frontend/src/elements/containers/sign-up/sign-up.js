@@ -27,7 +27,7 @@ const SignUp = () => {
     dispatch({ type: authTypes.SIGN_UP, payload: {
         ...data,
         redirect: navigate,
-        iccid: query?.iccid || '',
+        iccid: query?.get('iccid') || '',
       }
     });
   };
