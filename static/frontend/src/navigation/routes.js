@@ -49,5 +49,6 @@ export default {
   billingDetails: '/bag/billing-details',
   payment: '/bag/payment',
   checkout: '/bag/checkout',
-  blog: '/blog'
+  blog: '/blog',
+  linxdot: '/linxdot'
 };

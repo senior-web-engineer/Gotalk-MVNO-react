@@ -33,6 +33,7 @@ import AccountScreenHistory from '../elements/screens/account-screen/account-scr
 import AccountScreenMyPlan from '../elements/screens/account-screen/account-screen-my-plan/account-screen-my-plan';
 import AccountScreenTariffInfo from '../elements/screens/account-screen/account-screen-tarif-info/account-screen-tariff-info';
 import CardTariff from '../elements/screens/card-tariff/card-tariff';
+import Linxdot from '../elements/screens/card-linxdot/card-linxdot';
 import AcceptablePolicy from '../elements/screens/footer-pages/acceptable-policy';
 import PrivacyPolicy from '../elements/screens/footer-pages/privacy-policy';
 import ReturnPolicy from '../elements/screens/footer-pages/return-policy';
@@ -190,6 +191,7 @@ const AppRouter = ({ history }) => {
         <Route history={history} exact path={routes.outerActivation} element={<OuterActivation />}/>
         <Route history={history} path={`${routes.blog}/:slug`} element={<BlogDetail />} />
         <Route history={history} path={routes.blog} element={<Blog />} />
+        <Route history={history} path={routes.linxdot} element={<Linxdot />} />
       </Routes>
     </BaseLayout>
   );

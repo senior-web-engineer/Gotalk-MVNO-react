@@ -1,0 +1,92 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/text';
+@import 'src/assets/styles/mixins/heading';
+@import 'src/assets/styles/mixins/button.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/container.scss';
+
+.cards-plan {
+  @include content-container();
+  padding-top: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)));
+  padding-bottom: calc(48px + (125 - 48) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.cards-plan__head-two {
+  @include header-two();
+  text-align: center;
+  margin-bottom: calc(24px + (46 - 24) * ((100vw - 375px) / (1920 - 375)));
+}
+
+.cards-plan-block {
+  margin: 24px auto;
+  display: flex;
+  align-items: unset;
+  justify-content: space-between;
+  @media (max-width: 1600px) {
+    flex-wrap: wrap;
+  }
+}
+.cards-item-paragraph__item {
+  width: 78%;
+}
+.cards-item-paragraph__grid {
+  display: grid;
+}
+.cards-item {
+  @include content-container-shadow();
+  @include text-card();
+  width: 32.35%;
+  margin-top: 24px;
+  display: flex;
+  @media (max-width: 1600px) {
+    width: 100%;
+    margin: 24px auto 0px auto;
+  }
+}
+
+.cards-plan__head-three {
+  font-size: calc(24px + (36 - 24) * ((100vw - 375px) / (1920 - 375)));
+  font-family: 'Roboto-Bold';
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.cards-item-paragraph {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cards-item-paragraph__value {
+  font-family: 'Roboto-Bold';
+  font-weight: 700;
+  width: max-content;
+}
+
+.plan-buy {
+  @include button-red($padding: 18px 48px);
+  margin: 48px auto 0 auto;
+  @media (max-width: 650px) {
+    width: 100%;
+  }
+}
+
+.infinity-symbol{
+  font-size: 26px;
+}
+
+.p-5 {
+  padding: 5px 0;
+}
+
+.font-raleway-extra-bold {
+  font-family: 'Raleway-Extra-Bold';
+}
+
+.font-raleway-bold {
+  font-family: 'Raleway-Bold';
+}
+
+.font-white {
+  color: #fff !important;
+}
