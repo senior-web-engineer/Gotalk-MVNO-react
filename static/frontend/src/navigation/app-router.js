@@ -34,6 +34,7 @@ import AccountScreenMyPlan from '../elements/screens/account-screen/account-scre
 import AccountScreenTariffInfo from '../elements/screens/account-screen/account-screen-tarif-info/account-screen-tariff-info';
 import CardTariff from '../elements/screens/card-tariff/card-tariff';
 import Linxdot from '../elements/screens/card-linxdot/card-linxdot';
+import Test from '../elements/screens/test/test';
 import AcceptablePolicy from '../elements/screens/footer-pages/acceptable-policy';
 import PrivacyPolicy from '../elements/screens/footer-pages/privacy-policy';
 import ReturnPolicy from '../elements/screens/footer-pages/return-policy';
@@ -192,6 +193,7 @@ const AppRouter = ({ history }) => {
         <Route history={history} path={`${routes.blog}/:slug`} element={<BlogDetail />} />
         <Route history={history} path={routes.blog} element={<Blog />} />
         <Route history={history} path={routes.linxdot} element={<Linxdot />} />
+        <Route history={history} path={routes.test} element={<Test />} />
       </Routes>
     </BaseLayout>
   );

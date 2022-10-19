@@ -50,5 +50,6 @@ export default {
   payment: '/bag/payment',
   checkout: '/bag/checkout',
   blog: '/blog',
-  linxdot: '/linxdot'
+  linxdot: '/linxdot',
+  test:'/test'
 };

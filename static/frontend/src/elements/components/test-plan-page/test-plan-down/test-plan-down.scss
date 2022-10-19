@@ -1,0 +1,90 @@
+@import 'src/assets/styles/index.scss';
+@import 'src/assets/styles/mixins/container.scss';
+@import 'src/assets/styles/mixins/media.scss';
+@import 'src/assets/styles/mixins/button.scss';
+
+.test-form__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 130px;
+
+  &:not(:last-child) {
+    margin-bottom: 48px;
+  }
+
+  @include below-breakpoint(sm) {
+    flex-direction: column;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.test-form__row.submit {
+  justify-content: center;
+}
+
+.test-form__col {
+  width: 100%;
+  max-width: 362px;
+
+  &:not(:last-child) {
+    margin-right: 48px;
+  }
+
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+    margin-bottom: 44px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.test-form__input {
+  @include below-breakpoint(sm) {
+    max-width: 100%;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 68px;
+
+    @include below-breakpoint(sm) {
+      margin-bottom: 44px;
+    }
+  }
+}
+
+.test-form__signin_link {
+  font-family: 'Roboto-Regular', sans-serif;
+  font-size: 16px;
+
+  a {
+    text-decoration: underline;
+    color: #d75f5c;
+  }
+}
+
+.test-down-first__header {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 3.5rem;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  color: #d75f5c;
+  text-align: center;
+}
+
+.test-down-second__header {
+  font-family: "Raleway-Bold", sans-serif;
+  font-size: 3.5rem;
+  margin-bottom: 73px;
+  text-align: center;
+}
+
+.test__submit {
+  @include button-red($padding: 20px 100px);
+  margin: 0 auto;
+}
